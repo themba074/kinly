@@ -1,0 +1,33 @@
+name: Android verification
+
+on:
+  pull_request:
+    paths:
+      - "android/**"
+      - ".github/workflows/android.yml"
+  push:
+    branches: [main]
+    paths:
+      - "android/**"
+      - ".github/workflows/android.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+          cache: gradle
+      - uses: android-actions/setup-android@v3
+      - name: Verify Android shell
+        working-directory: android
+        run: |
+          chmod +x gradlew
+          ./gradlew testDebugUnitTest lintDebug assembleDebug assembleDebugAndroidTest assembleRelease --no-daemon

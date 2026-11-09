@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#f7f8f3" />
+  <meta name="description" content="Kinly — calm, consent-first family safety." />
+  <title>Kinly — Family Safety, Reimagined</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <a class="brand" href="#" aria-label="Kinly home"><span class="brand-mark"><i></i><i></i><i></i></span><span>kinly</span></a>
+      <div class="circle-switch"><span class="circle-dots"><i></i><i></i><i></i></span><span><small>Circle</small>The Mokoenas</span><button aria-label="Change circle">⌄</button></div>
+      <div class="top-actions"><button class="icon-btn" id="notificationBtn" aria-label="Notifications">♢<span class="notification-dot"></span></button><button class="avatar" id="profileBtn" aria-label="Profile">TM</button></div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div><p class="eyebrow">WEDNESDAY, 4 NOVEMBER</p><h1>Everyone’s okay.<br><span>That’s the whole point.</span></h1></div>
+        <div class="trust-badge"><span>◉</span><div><strong>Private by design</strong><small>Your circle controls its data</small></div></div>
+      </section>
+
+      <section class="dashboard-grid">
+        <article class="map-card">
+          <div class="map-toolbar"><div><p class="section-label">YOUR CIRCLE</p><h2>Close, even from afar</h2></div><button class="soft-btn" id="mapModeBtn"><span>⌖</span> Live map</button></div>
+          <div class="map" id="map">
+            <div class="road road-a"></div><div class="road road-b"></div><div class="road road-c"></div><div class="road road-d"></div>
+            <span class="map-label label-home">Waterkloof</span><span class="map-label label-park">Groenkloof</span><span class="map-label label-school">Menlyn</span>
+            <div class="place-pin home-pin"><span>⌂</span></div><div class="place-pin school-pin"><span>✦</span></div>
+            <button class="person-pin pin-me active" data-person="themba"><span class="pulse"></span><span class="photo peach">TM</span><b>You</b></button>
+            <button class="person-pin pin-nandi" data-person="nandi"><span class="photo coral">NM</span><b>Nandi</b></button>
+            <button class="person-pin pin-lwazi" data-person="lwazi"><span class="photo green">LM</span><b>Lwazi</b></button>
+            <button class="locate-btn" id="locateBtn" aria-label="Center map">⌖</button>
+            <div class="map-status"><span></span> Updated just now</div>
+          </div>
+        </article>
+
+        <aside class="members-card">
+          <div class="card-title"><div><p class="section-label">PEOPLE</p><h2>Your people</h2></div><button class="add-btn" id="inviteBtn" aria-label="Invite someone">＋</button></div>
+          <div class="members-list">
+            <button class="member selected" data-person="themba"><span class="member-avatar peach">TM<i class="online"></i></span><span><strong>Themba</strong><small><i class="status-icon moving">↗</i> Driving · 42 km/h</small></span><time>now</time></button>
+            <button class="member" data-person="nandi"><span class="member-avatar coral">NM<i class="online"></i></span><span><strong>Nandi</strong><small><i class="status-icon home">⌂</i> At home</small></span><time>2m</time></button>
+            <button class="member" data-person="lwazi"><span class="member-avatar green">LM<i class="online"></i></span><span><strong>Lwazi</strong><small><i class="status-icon school">✦</i> At school</small></span><time>6m</time></button>
+            <button class="member" data-person="zola"><span class="member-avatar purple">ZM</span><span><strong>Zola</strong><small><i class="status-icon battery">◒</i> Battery saver</small></span><time>18m</time></button>
+          </div>
+          <button class="checkin-btn" id="checkinBtn"><span>✓</span><span><strong>Send a gentle check-in</strong><small>No alarm. Just “Are you okay?”</small></span><i>→</i></button>
+        </aside>
+
+        <article class="journey-card"><div class="journey-icon">↗</div><div><p class="section-label">ACTIVE JOURNEY</p><h3>Themba is heading home</h3><p><span class="green-dot"></span> 8 min away · Traffic is light</p></div><div class="progress-wrap"><div class="route-dots"><span></span><i></i><span></span></div><div class="route-labels"><small>Brooklyn</small><small>Home</small></div></div><button class="plain-link" id="journeyBtn">View journey →</button></article>
+        <article class="day-card"><div class="card-title"><div><p class="section-label">TODAY</p><h3>The family pulse</h3></div><span class="calm-chip">All calm</span></div><div class="pulse-row"><span class="pulse-time">07:42</span><i class="timeline-dot home"></i><div><strong>Nandi arrived home</strong><small>Right on schedule</small></div></div><div class="pulse-row"><span class="pulse-time">08:16</span><i class="timeline-dot school"></i><div><strong>Lwazi arrived at school</strong><small>School-day place alert</small></div></div><div class="pulse-row muted"><span class="pulse-time">16:40</span><i class="timeline-dot future"></i><div><strong>Pickup reminder</strong><small>In about 45 minutes</small></div></div></article>
+      </section>
+
+      <section class="privacy-strip"><div class="privacy-icon">◉</div><div><p class="section-label">LOCATION THAT RESPECTS YOU</p><h2>Sharing should feel like care, not surveillance.</h2><p>Pause anytime, share for a set time, or choose approximate location. Every member gets the same controls.</p></div><div class="privacy-options"><button class="privacy-option active" data-mode="precise"><span>●</span><strong>Precise</strong><small>Until I pause</small></button><button class="privacy-option" data-mode="approx"><span>◌</span><strong>Approximate</strong><small>Neighbourhood only</small></button><button class="privacy-option" data-mode="paused"><span>Ⅱ</span><strong>Pause</strong><small>Private for 1 hour</small></button></div></section>
+    </main>
+
+    <nav class="bottom-nav" aria-label="Main navigation"><button class="active" data-tab="home"><span>⌂</span>Home</button><button data-tab="places"><span>⌖</span>Places</button><button class="sos" id="sosBtn"><span>＋</span><strong>SOS</strong></button><button data-tab="history"><span>↺</span>History</button><button data-tab="settings"><span>⚙</span>Settings</button></nav>
+  </div>
+
+  <div class="toast" id="toast" role="status"><span>✓</span><p><strong>Check-in sent</strong><small>We’ll let you know when they respond.</small></p></div>
+  <dialog id="modal"><button class="modal-close" id="modalClose" aria-label="Close">×</button><div class="modal-icon" id="modalIcon">✦</div><h2 id="modalTitle">Invite someone you trust</h2><p id="modalText">Add a person to your private circle. They’ll choose exactly what they share.</p><div class="modal-form" id="modalForm"><input id="inviteInput" type="email" placeholder="name@example.com" aria-label="Email address"><button id="modalAction">Send invite</button></div></dialog>
+  <script src="app.js"></script>
+</body>
+</html>

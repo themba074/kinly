@@ -1,0 +1,28 @@
+# Environment and secrets
+.env
+.env.*
+!.env.example
+
+# Java and Gradle
+.gradle/
+**/build/
+*.class
+
+# Android Studio and IntelliJ
+.idea/
+*.iml
+local.properties
+
+# macOS and Xcode
+.DS_Store
+DerivedData/
+*.xcuserstate
+xcuserdata/
+
+# Editors and operating systems
+.vscode/
+Thumbs.db
+
+# Local tooling
+.testcontainers.properties
+

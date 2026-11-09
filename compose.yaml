@@ -1,0 +1,36 @@
+name: kinly-local
+
+services:
+  postgres:
+    image: postgis/postgis:16-3.4-alpine
+    environment:
+      POSTGRES_DB: kinly
+      POSTGRES_USER: kinly
+      POSTGRES_PASSWORD: kinly-local-only
+    ports:
+      - "127.0.0.1:5433:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U kinly -d kinly"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    volumes:
+      - kinly-postgres-data:/var/lib/postgresql/data
+
+  redis:
+    image: redis:7.4-alpine
+    command: ["redis-server", "--appendonly", "yes"]
+    ports:
+      - "127.0.0.1:6380:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    volumes:
+      - kinly-redis-data:/data
+
+volumes:
+  kinly-postgres-data:
+  kinly-redis-data:
+
