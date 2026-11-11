@@ -22,7 +22,7 @@ application and do not determine the final architecture.
 5. Read [the agent guide](AGENTS.md) before asking an AI agent to change the
    project.
 
-## Proposed stack
+## Approved stack
 
 - Android: Kotlin, Jetpack Compose, Android location APIs
 - iOS: Swift, SwiftUI, Core Location
@@ -64,10 +64,10 @@ backend/local-services foundation and the native Android Ocean Sky shell with a
 truthful non-sensitive backend status, plus the accepted supported-platform and
 physical-device test-matrix ADR, a debug-only native UI showcase, its
 consent-aware synthetic Home preview, and adult-owned sharing-controls preview.
-The next feature has not been selected;
-executable iOS/SwiftUI work remains
-blocked by the lack of a macOS/Xcode environment. The detailed roadmap permits
-only one feature and one substep in progress;
+Feature UI3, a debug-only circle and membership preview, is proposed and awaits
+explicit approval. Executable iOS/SwiftUI work remains blocked by the lack of a
+macOS/Xcode environment. The detailed roadmap permits only one feature and one
+substep in progress;
 identity, circles, consent, location, notifications, safety behaviour, iOS
 implementation, and AWS remain unimplemented. Product name, commercial model,
 hosting region, data-retention defaults, and external providers remain team

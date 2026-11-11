@@ -2,7 +2,7 @@
 
 **Status:** Active delivery plan  
 **Last updated:** 11 November 2026
-**Current feature:** None - the next feature requires a proposal and approval
+**Current feature:** UI3 - circle and membership preview (Proposed; awaiting approval)
 **Rule:** One feature, and one substep within that feature, may be in progress.
 
 This is Kinly's single delivery-planning document. The PRD defines what the
@@ -12,7 +12,8 @@ and `AGENTS.md` defines how contributors work.
 ## 1. How features move through the roadmap
 
 Each feature is proposed, explicitly approved, implemented, verified, and then
-closed before the next feature begins. Approval does not carry forward.
+marked **Complete** before the next feature begins. Approval does not carry
+forward.
 
 Features group closely related work so routine backend, Android, and iOS tasks
 do not become dozens of artificial roadmap entries. Work inside an approved
@@ -38,9 +39,10 @@ Before implementation, every feature proposal must state:
 - decisions the team should sanity-check.
 
 Allowed states are **Planned**, **Proposed**, **Approved**, **In progress**,
-**Verified**, **Blocked**, and **Deferred**. Only one feature may be **In
-progress**. “Verified” requires the Definition of Done in `AGENTS.md`, not only
-a working happy path or polished UI.
+**Complete**, **Blocked**, and **Deferred**. Only one feature may be **In
+progress**. “Complete” requires the Definition of Done in `AGENTS.md`, including
+verification and close-out evidence; a working happy path or polished UI is not
+enough.
 
 ## 2. Roadmap
 
@@ -48,10 +50,10 @@ a working happy path or polished UI.
 
 | ID | Feature outcome | Completion gate | Status |
 |---|---|---|---|
-| 0A | Start the Java backend and local PostGIS/Redis foundation. | Backend tests, disposable database/cache integration tests, restricted health probes, correlation IDs, migration, and CI pass. | **Verified** |
-| 0B | Open the Android Ocean Sky shell and show truthful, non-sensitive backend availability. | Compose UI, offline/error/retry, accessibility, local health request, Android lint/test/build, and CI pass. No authentication, maps, push, or sensitive permission exists. | **Verified** |
-| 0C | Record supported Android/iOS versions and the physical-device test matrix. | ADR is approved before platform-specific background behaviour begins. | **Verified** |
-| 0D | View approved native Ocean Sky components and synthetic states without implying unfinished product behaviour. | Debug-only Android showcase, installable APK, accessibility tests, viewing instructions, and matching iOS component guidance pass. No product action, permission, or sensitive data is introduced. | **Verified** |
+| 0A | Start the Java backend and local PostGIS/Redis foundation. | Backend tests, disposable database/cache integration tests, restricted health probes, correlation IDs, migration, and CI pass. | **Complete** |
+| 0B | Open the Android Ocean Sky shell and show truthful, non-sensitive backend availability. | Compose UI, offline/error/retry, accessibility, local health request, Android lint/test/build, and CI pass. No authentication, maps, push, or sensitive permission exists. | **Complete** |
+| 0C | Record supported Android/iOS versions and the physical-device test matrix. | ADR is approved before platform-specific background behaviour begins. | **Complete** |
+| 0D | View approved native Ocean Sky components and synthetic states without implying unfinished product behaviour. | Debug-only Android showcase, installable APK, accessibility tests, viewing instructions, and matching iOS component guidance pass. No product action, permission, or sensitive data is introduced. | **Complete** |
 | 0E | Choose the development AWS region and recovery direction. | ADR covers POPIA, latency, service availability, recovery, and cost. | Planned |
 | 0F | Provision the minimal development environment. | Reviewed Terraform creates only the required development resources; health, rollback, secrets, observability, and cost controls are verified. | Planned |
 
@@ -59,8 +61,9 @@ a working happy path or polished UI.
 
 | ID | Feature outcome | Completion gate | Status |
 |---|---|---|---|
-| UI1 | Preview a truthful consent-aware Home experience before circle and location services exist. | Debug-only Compose states cover no circle, paused, approximate, fresh, stale/offline, and unavailable behaviour; accessibility tests, release exclusion, APK/screenshots, viewing guidance, and matching iOS guidance pass. No map, permission, real data, or product action exists. | **Verified** |
-| UI2 | Preview adult-owned sharing controls before consent services exist. | Debug-only Compose states cover paused, approximate, precise, timed, and unavailable behaviour; audience, expiry, consent ownership, accessibility, release exclusion, APK/screenshots, viewing guidance, and matching iOS guidance pass. No setting is saved and no permission, service, real data, or product action exists. | **Verified** |
+| UI1 | Preview a truthful consent-aware Home experience before circle and location services exist. | Debug-only Compose states cover no circle, paused, approximate, fresh, stale/offline, and unavailable behaviour; accessibility tests, release exclusion, APK/screenshots, viewing guidance, and matching iOS guidance pass. No map, permission, real data, or product action exists. | **Complete** |
+| UI2 | Preview adult-owned sharing controls before consent services exist. | Debug-only Compose states cover paused, approximate, precise, timed, and unavailable behaviour; audience, expiry, consent ownership, accessibility, release exclusion, APK/screenshots, viewing guidance, and matching iOS guidance pass. No setting is saved and no permission, service, real data, or product action exists. | **Complete** |
+| UI3 | Preview a private circle, adult membership roles, and invitation states before Circle services exist. | Debug-only Compose states cover no circle, circle overview, pending and expired invitations, and unavailable behaviour; role clarity, consent separation, accessibility, release exclusion, APK/screenshots, viewing guidance, and matching iOS guidance pass. No circle or membership mutation exists. | **Proposed** |
 
 ### Phase 1 - Identity and devices
 
@@ -199,6 +202,7 @@ manifest excludes all debug previews; and emulator screenshots were visually
 checked. Android viewing instructions and matching SwiftUI design guidance are
 documented. Executable iOS verification remains blocked by macOS/Xcode.
 
-The next feature has not been selected or approved. Executable SwiftUI
-remains blocked until a macOS/Xcode environment is available. Infrastructure
-features remain planned but are not the current priority.
+Feature UI3 is proposed but not approved. No UI3 implementation may begin until
+explicit approval. Executable SwiftUI remains blocked until a macOS/Xcode
+environment is available. Infrastructure features remain planned but are not
+the current priority.
