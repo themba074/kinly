@@ -1,8 +1,8 @@
 # Kinly Feature Roadmap
 
 **Status:** Active delivery plan  
-**Last updated:** 9 November 2026  
-**Current feature:** None - awaiting the next mobile UI proposal  
+**Last updated:** 11 November 2026
+**Current feature:** None - the next feature requires a proposal and approval
 **Rule:** One feature, and one substep within that feature, may be in progress.
 
 This is Kinly's single delivery-planning document. The PRD defines what the
@@ -54,6 +54,12 @@ a working happy path or polished UI.
 | 0D | View approved native Ocean Sky components and synthetic states without implying unfinished product behaviour. | Debug-only Android showcase, installable APK, accessibility tests, viewing instructions, and matching iOS component guidance pass. No product action, permission, or sensitive data is introduced. | **Verified** |
 | 0E | Choose the development AWS region and recovery direction. | ADR covers POPIA, latency, service availability, recovery, and cost. | Planned |
 | 0F | Provision the minimal development environment. | Reviewed Terraform creates only the required development resources; health, rollback, secrets, observability, and cost controls are verified. | Planned |
+
+### Native mobile UI exploration
+
+| ID | Feature outcome | Completion gate | Status |
+|---|---|---|---|
+| UI1 | Preview a truthful consent-aware Home experience before circle and location services exist. | Debug-only Compose states cover no circle, paused, approximate, fresh, stale/offline, and unavailable behaviour; accessibility tests, release exclusion, APK/screenshots, viewing guidance, and matching iOS guidance pass. No map, permission, real data, or product action exists. | **Verified** |
 
 ### Phase 1 - Identity and devices
 
@@ -140,7 +146,7 @@ must not be added to a nearby feature as “small extras”:
 
 ## 4. Current boundary and completed foundation
 
-Features 0A through 0D are complete and verified. The foundation now includes the
+Features 0A through 0D and UI1 are complete and verified. The foundation now includes the
 Java 21/Spring Boot backend, local PostgreSQL/PostGIS and Redis, Flyway `V1`,
 restricted health probes, correlation IDs, backend CI, and a native Android
 Kotlin/Compose Ocean Sky shell. The shell makes a real non-sensitive readiness
@@ -168,6 +174,18 @@ issues; debug, test, and release APKs built; and merged-manifest inspection
 proved the showcase is absent from release. The Android viewing workflow and
 matching iOS component guidance are documented.
 
-The next mobile UI slice has not been selected or approved. Executable SwiftUI
+Feature UI1 close-out evidence: the debug-only Android UI Showcase opens a
+selectable consent-aware Home preview with no-circle, circle, and unavailable
+states. Its synthetic circle state shows paused sharing without any last-known
+location, plus precise/fresh, approximate, and stale/offline member cards with
+plain-language timestamps and uncertainty. Six JVM tests and eleven Pixel 8
+Android 16 Compose tests passed, including large-text and privacy assertions;
+Android lint reported no issues; debug, test, and release APKs built; and the
+release merged manifest contains neither the showcase nor Home preview. Emulator
+screenshots were visually checked for all states. Viewing instructions and
+matching SwiftUI design guidance are documented; executable iOS verification
+remains blocked by the lack of macOS/Xcode.
+
+The next feature has not been selected or approved. Executable SwiftUI
 remains blocked until a macOS/Xcode environment is available. Infrastructure
 features remain planned but are not the current priority.

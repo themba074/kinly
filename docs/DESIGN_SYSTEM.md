@@ -166,3 +166,27 @@ must remain absent from release manifests. When the iOS project can be created
 on macOS/Xcode, it should provide equivalent SwiftUI previews using the same
 semantic labels and synthetic-state boundary; preview fixtures must not ship as
 convincing live behaviour.
+
+### Consent-aware Home preview
+
+The debug-only Home preview establishes the shared hierarchy for the future
+Home tab without selecting a map provider or implying that circle and location
+services exist:
+
+1. a persistent synthetic-data notice;
+2. the member's own sharing state and visible audience;
+3. member cards that state precision, freshness, and uncertainty in text; and
+4. the five-destination navigation with Home selected.
+
+A paused member shows no last-known place or position. Approximate sharing names
+an area and explicitly says that the exact position is hidden. Stale or offline
+data includes its source time and a warning not to treat it as live. These
+meanings must not rely on color alone.
+
+The matching iOS design should use a SwiftUI `ScrollView` or `LazyVStack`, a
+preview-only `Picker` for the three synthetic screen states, rounded native
+cards, and `TabView` navigation. Each card needs an accessibility label and
+value that includes sharing state, freshness, and uncertainty. Dynamic Type
+must reflow the cards without truncating consent or freshness copy. This is
+design guidance only until a macOS/Xcode environment can build and verify the
+native iOS project.

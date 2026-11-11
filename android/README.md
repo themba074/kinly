@@ -2,7 +2,9 @@
 
 Feature 0B established a native Kotlin and Jetpack Compose shell using the
 Ocean Sky design direction and a non-sensitive backend readiness state. Feature
-0D adds a debug-only native UI showcase and viewing workflow.
+0D adds a debug-only native UI showcase and viewing workflow. Feature UI1 adds
+a consent-aware Home preview inside that showcase; it remains synthetic and
+debug-only.
 
 ## Prerequisites
 
@@ -64,7 +66,10 @@ The debug build installs two launcher entries:
 
 - **Kinly** opens the walking-skeleton app and its real backend readiness state.
 - **Kinly UI Showcase** opens synthetic Ocean Sky components, state cards, and
-  navigation without performing product actions.
+  navigation without performing product actions. Select **Open Home preview**
+  to view no-circle, circle, and unavailable Home states. In the circle state,
+  the cards demonstrate paused, precise/fresh, approximate, and stale/offline
+  sharing language.
 
 The showcase can also be opened directly:
 
@@ -79,8 +84,9 @@ default readiness URL is emulator-specific, so the main Kinly entry may
 truthfully show `Unavailable` on a phone. The UI Showcase does not need a
 backend or network connection.
 
-The showcase activity and its synthetic fixtures exist only in debug builds.
-Release manifests do not contain a showcase launcher or activity.
+The showcase activity, Home preview, and their synthetic fixtures exist only in
+debug sources. Release manifests do not contain a showcase launcher or
+activity.
 
 ## Feature boundary
 

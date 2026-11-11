@@ -213,12 +213,13 @@ Create an ADR under `docs/decisions/` before changing any of the following:
 ## Current Phase
 
 Phase 1: walking skeleton, implemented one slice at a time. Features 0A through
-0D are complete: the Java/Spring Boot and local-services foundation, the
+0D and UI1 are complete: the Java/Spring Boot and local-services foundation, the
 native Android Kotlin/Compose Ocean Sky shell and non-sensitive backend-status
 client, the accepted supported-platform/device-matrix ADR, and the debug-only
-native UI showcase/viewing workflow. No identity, circle, consent, location,
-notification, or safety feature exists yet. The `dist/` directory remains a
-visual concept. The next mobile UI slice requires its own proposal and explicit
+native UI showcase/viewing workflow with a consent-aware synthetic Home preview.
+No identity, circle, consent, location, notification, or safety feature exists
+yet. The `dist/` directory remains a visual concept. The next feature requires
+its own proposal and explicit
 approval. Executable iOS/SwiftUI work remains blocked until macOS/Xcode is
 available; do not imply it has been verified.
 

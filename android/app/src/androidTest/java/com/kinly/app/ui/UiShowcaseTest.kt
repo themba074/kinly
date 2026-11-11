@@ -7,7 +7,6 @@ import androidx.compose.ui.test.junit4.v2.createComposeRule
 import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onNodeWithText
-import androidx.compose.ui.test.performScrollTo
 import androidx.compose.ui.test.performScrollToNode
 import com.kinly.app.ui.theme.KinlyTheme
 import org.junit.Rule
@@ -28,9 +27,9 @@ class UiShowcaseTest {
         composeRule.onNodeWithContentDescription(
             "Synthetic preview only. No live product actions.",
         ).assertIsDisplayed()
-        composeRule.onNodeWithText("Unavailable action")
-            .performScrollTo()
-            .assertIsNotEnabled()
+        composeRule.onNodeWithTag("ui_showcase_list")
+            .performScrollToNode(hasText("Unavailable action"))
+        composeRule.onNodeWithText("Unavailable action").assertIsNotEnabled()
         composeRule.onNodeWithText("SOS").assertDoesNotExist()
     }
 

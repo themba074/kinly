@@ -90,6 +90,12 @@ private val colorRoles = listOf(
 @OptIn(ExperimentalMaterial3Api::class)
 internal fun UiShowcaseScreen() {
     var destination by remember { mutableStateOf(Destination.Home) }
+    var showHomePreview by remember { mutableStateOf(false) }
+
+    if (showHomePreview) {
+        HomePreviewScreen(onBack = { showHomePreview = false })
+        return
+    }
 
     Scaffold(
         containerColor = MaterialTheme.colorScheme.background,
@@ -125,6 +131,21 @@ internal fun UiShowcaseScreen() {
             verticalArrangement = Arrangement.spacedBy(24.dp),
         ) {
             item { PreviewNotice() }
+
+            item {
+                ShowcaseSectionHeader(
+                    title = "Screen previews",
+                    description = "Explore consent and freshness states without live data or product actions.",
+                )
+            }
+            item {
+                Button(
+                    onClick = { showHomePreview = true },
+                    modifier = Modifier.fillMaxWidth(),
+                ) {
+                    Text("Open Home preview")
+                }
+            }
 
             item {
                 ShowcaseSectionHeader(
