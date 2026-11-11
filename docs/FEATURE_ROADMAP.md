@@ -100,8 +100,9 @@ before the next substep starts. Exact SOS recipients and delivery claims remain
 reserved for 6A; the preview may show only truthful unconfigured or unavailable
 states.
 
-UI4.1 proposes a debug-only Places preview with no-places, overview/detail,
-uncertain-or-delayed, offline, and unavailable states. Synthetic place cards
+UI4.1 proposes a debug-only Places preview with loading, no-places,
+overview/detail, uncertain-or-delayed, offline, and unavailable states.
+Synthetic place cards
 may show a name, radius, circle, and plain-language alert summary, but never a
 map, centre coordinate, real address, or recipient data. The hierarchy must
 state that each adult controls whether their location may power a place alert;
