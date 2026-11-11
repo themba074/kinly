@@ -91,9 +91,14 @@ private val colorRoles = listOf(
 internal fun UiShowcaseScreen() {
     var destination by remember { mutableStateOf(Destination.Home) }
     var showHomePreview by remember { mutableStateOf(false) }
+    var showSharingPreview by remember { mutableStateOf(false) }
 
     if (showHomePreview) {
         HomePreviewScreen(onBack = { showHomePreview = false })
+        return
+    }
+    if (showSharingPreview) {
+        SharingControlsPreviewScreen(onBack = { showSharingPreview = false })
         return
     }
 
@@ -144,6 +149,14 @@ internal fun UiShowcaseScreen() {
                     modifier = Modifier.fillMaxWidth(),
                 ) {
                     Text("Open Home preview")
+                }
+            }
+            item {
+                Button(
+                    onClick = { showSharingPreview = true },
+                    modifier = Modifier.fillMaxWidth(),
+                ) {
+                    Text("Open sharing controls preview")
                 }
             }
 

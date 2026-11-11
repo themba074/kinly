@@ -190,3 +190,24 @@ value that includes sharing state, freshness, and uncertainty. Dynamic Type
 must reflow the cards without truncating consent or freshness copy. This is
 design guidance only until a macOS/Xcode environment can build and verify the
 native iOS project.
+
+### Adult-owned sharing controls preview
+
+The debug-only sharing preview establishes how an adult can understand paused,
+approximate, precise, and timed sharing before consent services exist. The
+selected mode must explain the disclosure in text, keep the audience visible,
+and show an explicit timezone when sharing expires. Paused mode shows no
+current or last-known location. An unavailable state disables every mode and
+states that no setting changed. Preview controls never offer a convincing save
+action.
+
+Consent ownership is part of the visual hierarchy: the screen states that only
+the adult member can change their choice and that a circle administrator cannot
+override it. Color supplements this language but never replaces it.
+
+The matching iOS design should use a SwiftUI `ScrollView`, platform-native
+segmented or selection controls that retain 44 pt touch targets, and rounded
+state cards with accessibility labels and values. Dynamic Type must reflow the
+mode choices, audience, expiry, and consent-ownership wording without
+truncation. This remains design guidance only until it can be built and tested
+with macOS/Xcode.

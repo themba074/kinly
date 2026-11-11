@@ -59,11 +59,12 @@ does so. Emergency copy and flows must always state their real limitations.
 
 ## Status
 
-Phase 1 walking skeleton. Features 0A through 0D and UI1 are complete and verified: the
+Phase 1 walking skeleton. Features 0A through 0D, UI1, and UI2 are complete and verified: the
 backend/local-services foundation and the native Android Ocean Sky shell with a
 truthful non-sensitive backend status, plus the accepted supported-platform and
-physical-device test-matrix ADR, a debug-only native UI showcase, and its
-consent-aware synthetic Home preview. The next feature has not been selected;
+physical-device test-matrix ADR, a debug-only native UI showcase, its
+consent-aware synthetic Home preview, and adult-owned sharing-controls preview.
+The next feature has not been selected;
 executable iOS/SwiftUI work remains
 blocked by the lack of a macOS/Xcode environment. The detailed roadmap permits
 only one feature and one substep in progress;

@@ -213,10 +213,11 @@ Create an ADR under `docs/decisions/` before changing any of the following:
 ## Current Phase
 
 Phase 1: walking skeleton, implemented one slice at a time. Features 0A through
-0D and UI1 are complete: the Java/Spring Boot and local-services foundation, the
+0D, UI1, and UI2 are complete: the Java/Spring Boot and local-services foundation, the
 native Android Kotlin/Compose Ocean Sky shell and non-sensitive backend-status
 client, the accepted supported-platform/device-matrix ADR, and the debug-only
-native UI showcase/viewing workflow with a consent-aware synthetic Home preview.
+native UI showcase/viewing workflow with consent-aware synthetic Home and
+adult-owned sharing-controls previews.
 No identity, circle, consent, location, notification, or safety feature exists
 yet. The `dist/` directory remains a visual concept. The next feature requires
 its own proposal and explicit

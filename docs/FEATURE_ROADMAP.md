@@ -60,6 +60,7 @@ a working happy path or polished UI.
 | ID | Feature outcome | Completion gate | Status |
 |---|---|---|---|
 | UI1 | Preview a truthful consent-aware Home experience before circle and location services exist. | Debug-only Compose states cover no circle, paused, approximate, fresh, stale/offline, and unavailable behaviour; accessibility tests, release exclusion, APK/screenshots, viewing guidance, and matching iOS guidance pass. No map, permission, real data, or product action exists. | **Verified** |
+| UI2 | Preview adult-owned sharing controls before consent services exist. | Debug-only Compose states cover paused, approximate, precise, timed, and unavailable behaviour; audience, expiry, consent ownership, accessibility, release exclusion, APK/screenshots, viewing guidance, and matching iOS guidance pass. No setting is saved and no permission, service, real data, or product action exists. | **Verified** |
 
 ### Phase 1 - Identity and devices
 
@@ -146,7 +147,7 @@ must not be added to a nearby feature as “small extras”:
 
 ## 4. Current boundary and completed foundation
 
-Features 0A through 0D and UI1 are complete and verified. The foundation now includes the
+Features 0A through 0D, UI1, and UI2 are complete and verified. The foundation now includes the
 Java 21/Spring Boot backend, local PostgreSQL/PostGIS and Redis, Flyway `V1`,
 restricted health probes, correlation IDs, backend CI, and a native Android
 Kotlin/Compose Ocean Sky shell. The shell makes a real non-sensitive readiness
@@ -185,6 +186,18 @@ release merged manifest contains neither the showcase nor Home preview. Emulator
 screenshots were visually checked for all states. Viewing instructions and
 matching SwiftUI design guidance are documented; executable iOS verification
 remains blocked by the lack of macOS/Xcode.
+
+Feature UI2 close-out evidence: the debug-only UI Showcase opens adult-owned
+sharing controls with paused, approximate, precise, timed, and unavailable
+synthetic states. Audience, explicit SAST/UTC expiry, consent ownership, and the
+administrator limitation are visible; paused mode exposes no location; the
+unavailable state disables all modes; and no save action or service exists. Six
+JVM tests and nineteen Pixel 8 Android 16 Compose tests passed, including 48 dp
+touch targets, large text, disabled controls, privacy wording, and navigation.
+Android lint reported no issues; debug, test, and release APKs built; the release
+manifest excludes all debug previews; and emulator screenshots were visually
+checked. Android viewing instructions and matching SwiftUI design guidance are
+documented. Executable iOS verification remains blocked by macOS/Xcode.
 
 The next feature has not been selected or approved. Executable SwiftUI
 remains blocked until a macOS/Xcode environment is available. Infrastructure

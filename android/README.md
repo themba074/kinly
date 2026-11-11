@@ -3,8 +3,8 @@
 Feature 0B established a native Kotlin and Jetpack Compose shell using the
 Ocean Sky design direction and a non-sensitive backend readiness state. Feature
 0D adds a debug-only native UI showcase and viewing workflow. Feature UI1 adds
-a consent-aware Home preview inside that showcase; it remains synthetic and
-debug-only.
+a consent-aware Home preview inside that showcase. UI2 adds adult-owned
+sharing-mode states; both remain synthetic and debug-only.
 
 ## Prerequisites
 
@@ -70,6 +70,9 @@ The debug build installs two launcher entries:
   to view no-circle, circle, and unavailable Home states. In the circle state,
   the cards demonstrate paused, precise/fresh, approximate, and stale/offline
   sharing language.
+- Select **Open sharing controls preview** to compare paused, approximate,
+  precise, timed, and unavailable consent states. The controls change only
+  synthetic preview state and never save a setting.
 
 The showcase can also be opened directly:
 
@@ -84,9 +87,9 @@ default readiness URL is emulator-specific, so the main Kinly entry may
 truthfully show `Unavailable` on a phone. The UI Showcase does not need a
 backend or network connection.
 
-The showcase activity, Home preview, and their synthetic fixtures exist only in
-debug sources. Release manifests do not contain a showcase launcher or
-activity.
+The showcase activity, Home and sharing previews, and their synthetic fixtures
+exist only in debug sources. Release manifests do not contain a showcase
+launcher or activity.
 
 ## Feature boundary
 
