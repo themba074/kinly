@@ -232,3 +232,23 @@ selection controls with 44 pt touch targets, member rows with accessibility
 labels and values, and invitation cards whose status and expiry remain readable
 with Dynamic Type. This remains design guidance only until macOS/Xcode can build
 and verify it.
+
+### Places preview
+
+The debug-only Places preview establishes the Places-tab hierarchy before map,
+location, consent, and notification services exist. It covers loading, empty,
+overview/detail, uncertain or delayed, offline, and unavailable states using
+visibly synthetic place names and radii. It never displays a map, address,
+centre coordinate, live member position, or convincing place-management action.
+
+Place-alert consent is part of the primary hierarchy: each adult controls
+whether their location may power a place alert, and neither circle membership
+nor an administrator role enables it. When uncertainty overlaps a place
+boundary, the UI says that arrival is not confirmed and makes no alert-delivery
+claim. Offline and unavailable states distinguish missing current information
+from a failed mutation.
+
+The matching iOS design should use a SwiftUI `ScrollView` or `List`, platform
+selection controls with 44 pt touch targets, semantic place cards, and status
+copy that reflows with Dynamic Type. This remains design guidance only until
+macOS/Xcode can build and verify it.

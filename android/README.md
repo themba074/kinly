@@ -6,6 +6,8 @@ Ocean Sky design direction and a non-sensitive backend readiness state. Feature
 a consent-aware Home preview inside that showcase. UI2 adds adult-owned
 sharing-mode states, and UI3 adds circle and adult-membership states. All remain
 synthetic and debug-only.
+UI4.1 adds synthetic Places states without maps, coordinates, permissions,
+notifications, or saved place behaviour.
 
 ## Prerequisites
 
@@ -77,6 +79,9 @@ The debug build installs two launcher entries:
 - Select **Open circle and membership preview** to compare no-circle, private
   circle, pending/expired invitation, and unavailable states. It performs no
   circle, invitation, role, or membership action.
+- Select **Open Places preview** to compare loading, no-places, overview,
+  uncertain/delayed, offline, and unavailable states. It uses no map, address,
+  coordinate, location permission, network service, or alert delivery.
 
 The showcase can also be opened directly:
 
@@ -91,9 +96,9 @@ default readiness URL is emulator-specific, so the main Kinly entry may
 truthfully show `Unavailable` on a phone. The UI Showcase does not need a
 backend or network connection.
 
-The showcase activity, Home, sharing, and circle previews, and their synthetic
-fixtures exist only in debug sources. Release manifests do not contain a
-showcase launcher or activity.
+The showcase activity, Home, sharing, circle, and Places previews, and their
+synthetic fixtures exist only in debug sources. Release manifests do not
+contain a showcase launcher or activity.
 
 ## Feature boundary
 
