@@ -219,11 +219,21 @@ client, the accepted supported-platform/device-matrix ADR, and the debug-only
 native UI showcase/viewing workflow with consent-aware synthetic Home,
 adult-owned sharing-controls, and read-only circle and adult-membership previews.
 No identity, circle, consent, location, notification, or safety feature exists
-yet. The `dist/` directory remains a visual concept. No next feature is selected
-or approved. Executable iOS/SwiftUI work remains blocked until macOS/Xcode is
-available; do not imply it has been verified.
+yet. The `dist/` directory remains a visual concept. UI4 is the next planned
+feature but is not proposed, approved, or in progress. Executable iOS/SwiftUI
+work remains blocked until macOS/Xcode is available; do not imply it has been
+verified.
 
 `docs/FEATURE_ROADMAP.md` is the single delivery plan. Keep only one feature and
 one sequential substep in progress. Each feature needs its own proposal and
 explicit approval; completing one feature does not approve the next. Update its
 state and close-out evidence in the same change that finishes it.
+
+Treat the roadmap's **Next planned feature** and execution order as binding. Do
+not invent or start an unlisted feature, infer a new feature from “next
+feature,” or skip an incomplete feature because another task is easier. Any new
+ID, reordering, split, merge, bypass, or scope expansion requires an explicit
+user-approved amendment to `docs/FEATURE_ROADMAP.md` first. A roadmap amendment
+does not approve implementation; the amended feature still needs its own
+proposal and explicit approval. Follow this rule unless the user explicitly
+instructs otherwise.

@@ -458,5 +458,8 @@ supported-platform/device-test decision, plus a debug-only Android UI showcase
 and consent-aware synthetic Home, sharing-controls, and read-only circle and
 adult-membership previews. Provider, retention, identity, region, and emergency
 decisions remain open. Work follows `docs/FEATURE_ROADMAP.md`, with no more than
-one approved feature and one substep in progress. No next feature is selected or
-approved; executable iOS work remains blocked by the macOS/Xcode environment.
+one approved feature and one substep in progress. No feature is currently
+approved for implementation. UI4 is the next planned roadmap feature; the
+remaining foundation and production features follow the roadmap's explicit
+dependency order. Executable iOS work remains blocked by the macOS/Xcode
+environment.

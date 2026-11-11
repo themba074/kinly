@@ -25,7 +25,7 @@ was accepted.
 
 For iOS, a deployment target of iOS 17 balances older-device access with a
 maintainable SwiftUI baseline and physical-device support in current Xcode
-tooling. The iOS application does not exist yet, so Feature 0D must apply this
+tooling. The iOS application does not exist yet, so Feature 0G must apply this
 decision when creating it.
 
 Primary platform references:
@@ -98,8 +98,8 @@ risk represented by the class. Replacing A3 with a Pixel or replacing I1 with a
 current iPhone is not equivalent.
 
 Availability of A1-A4 is a prerequisite for approving implementation of
-Feature 3E. Availability of I1-I2 and a macOS/Xcode environment is a prerequisite
-for approving implementation of Feature 3F. Cloud device services may add
+Feature 3G. Availability of I1-I2 and a macOS/Xcode environment is a prerequisite
+for approving implementation of Feature 3H. Cloud device services may add
 coverage but do not satisfy these prerequisites.
 
 ### Verification cadence and evidence
@@ -164,7 +164,7 @@ reason each device is in the matrix.
 ## Consequences
 
 - Android keeps its existing API 26 minimum and API 36 compile/target values.
-- Feature 0D must create the iOS project with an iOS 17 deployment target.
+- Feature 0G must create the iOS project with an iOS 17 deployment target.
 - The team must obtain or identify up to six qualifying physical devices before
   background-location implementation can be approved.
 - CI and scheduled testing will grow as the iOS project and sensitive mobile
@@ -182,8 +182,8 @@ Feature 0C is validated when:
 - this ADR is accepted by the team;
 - the existing Android configuration is confirmed as `minSdk` 26 and
   `compileSdk`/`targetSdk` 36;
-- Feature 0D applies iOS 17 when an iOS project can be created on macOS/Xcode;
-- future Features 3E and 3F refuse approval until their physical-device
+- Feature 0G applies iOS 17 when an iOS project can be created on macOS/Xcode;
+- future Features 3G and 3H refuse approval until their physical-device
   prerequisites are available; and
 - the roadmap and contributor guidance reference this decision.
 

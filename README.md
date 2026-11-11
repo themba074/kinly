@@ -67,8 +67,9 @@ consent-aware synthetic Home preview, adult-owned sharing-controls preview, and
 read-only circle and adult-membership preview. Executable iOS/SwiftUI work
 remains blocked by the lack of a
 macOS/Xcode environment. The detailed roadmap permits only one feature and one
-substep in progress; no next feature is selected or approved.
-identity, circles, consent, location, notifications, safety behaviour, iOS
+substep in progress. UI4 is the next planned feature but is not proposed or
+approved for implementation; later work must follow the roadmap's explicit
+order. Identity, circles, consent, location, notifications, safety behaviour, iOS
 implementation, and AWS remain unimplemented. Product name, commercial model,
 hosting region, data-retention defaults, and external providers remain team
 decisions.

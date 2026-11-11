@@ -388,11 +388,13 @@ and one sequential substep within it may be in progress at a time.
 Phase 1 walking skeleton. Features 0A through 0D and UI1 through UI3 are complete.
 They establish the backend/local-services foundation, native Android Ocean Sky
 shell, supported-platform decision, debug-only UI Showcase, and synthetic Home
-adult-owned sharing-controls preview, and read-only circle and adult-membership
-preview. They do not implement identity, circles, consent services, location,
-notifications, or safety behaviour.
+preview, adult-owned sharing-controls preview, and read-only circle and
+adult-membership preview. They do not implement identity, circles, consent
+services, location, notifications, or safety behaviour.
 
-No next feature is selected or approved in `docs/FEATURE_ROADMAP.md`. The
-`dist/` directory remains a disposable visual concept. This document does not
-authorise later slices and does not resolve the open product decisions above.
-Executable iOS work remains blocked until macOS/Xcode is available.
+The amended `docs/FEATURE_ROADMAP.md` names UI4 as the next planned feature and
+records the complete dependency order through an adult-only pilot. UI4 is not
+yet proposed or approved for implementation. The `dist/` directory remains a
+disposable visual concept. This document does not authorise later slices and
+does not resolve the open product decisions above. Executable iOS work remains
+blocked until macOS/Xcode is available.
