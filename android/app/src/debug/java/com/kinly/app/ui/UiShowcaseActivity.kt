@@ -92,6 +92,7 @@ internal fun UiShowcaseScreen() {
     var destination by remember { mutableStateOf(Destination.Home) }
     var showHomePreview by remember { mutableStateOf(false) }
     var showSharingPreview by remember { mutableStateOf(false) }
+    var showCirclePreview by remember { mutableStateOf(false) }
 
     if (showHomePreview) {
         HomePreviewScreen(onBack = { showHomePreview = false })
@@ -99,6 +100,10 @@ internal fun UiShowcaseScreen() {
     }
     if (showSharingPreview) {
         SharingControlsPreviewScreen(onBack = { showSharingPreview = false })
+        return
+    }
+    if (showCirclePreview) {
+        CircleMembershipPreviewScreen(onBack = { showCirclePreview = false })
         return
     }
 
@@ -157,6 +162,14 @@ internal fun UiShowcaseScreen() {
                     modifier = Modifier.fillMaxWidth(),
                 ) {
                     Text("Open sharing controls preview")
+                }
+            }
+            item {
+                Button(
+                    onClick = { showCirclePreview = true },
+                    modifier = Modifier.fillMaxWidth(),
+                ) {
+                    Text("Open circle and membership preview")
                 }
             }
 

@@ -2,7 +2,8 @@
 
 **Status:** Active delivery plan  
 **Last updated:** 11 November 2026
-**Current feature:** UI3 - circle and membership preview (Proposed; awaiting approval)
+**Current feature:** None - the next feature requires its own proposal and
+explicit approval
 **Rule:** One feature, and one substep within that feature, may be in progress.
 
 This is Kinly's single delivery-planning document. The PRD defines what the
@@ -63,7 +64,7 @@ enough.
 |---|---|---|---|
 | UI1 | Preview a truthful consent-aware Home experience before circle and location services exist. | Debug-only Compose states cover no circle, paused, approximate, fresh, stale/offline, and unavailable behaviour; accessibility tests, release exclusion, APK/screenshots, viewing guidance, and matching iOS guidance pass. No map, permission, real data, or product action exists. | **Complete** |
 | UI2 | Preview adult-owned sharing controls before consent services exist. | Debug-only Compose states cover paused, approximate, precise, timed, and unavailable behaviour; audience, expiry, consent ownership, accessibility, release exclusion, APK/screenshots, viewing guidance, and matching iOS guidance pass. No setting is saved and no permission, service, real data, or product action exists. | **Complete** |
-| UI3 | Preview a private circle, adult membership roles, and invitation states before Circle services exist. | Debug-only Compose states cover no circle, circle overview, pending and expired invitations, and unavailable behaviour; role clarity, consent separation, accessibility, release exclusion, APK/screenshots, viewing guidance, and matching iOS guidance pass. No circle or membership mutation exists. | **Proposed** |
+| UI3 | Preview a private circle, adult membership roles, and invitation states before Circle services exist. | Debug-only Compose states cover no circle, circle overview, pending and expired invitations, and unavailable behaviour; role clarity, consent separation, accessibility, release exclusion, APK/screenshots, viewing guidance, and matching iOS guidance pass. No circle or membership mutation exists. | **Complete** |
 
 ### Phase 1 - Identity and devices
 
@@ -150,7 +151,7 @@ must not be added to a nearby feature as “small extras”:
 
 ## 4. Current boundary and completed foundation
 
-Features 0A through 0D, UI1, and UI2 are complete and verified. The foundation now includes the
+Features 0A through 0D and UI1 through UI3 are complete and verified. The foundation now includes the
 Java 21/Spring Boot backend, local PostgreSQL/PostGIS and Redis, Flyway `V1`,
 restricted health probes, correlation IDs, backend CI, and a native Android
 Kotlin/Compose Ocean Sky shell. The shell makes a real non-sensitive readiness
@@ -202,7 +203,18 @@ manifest excludes all debug previews; and emulator screenshots were visually
 checked. Android viewing instructions and matching SwiftUI design guidance are
 documented. Executable iOS verification remains blocked by macOS/Xcode.
 
-Feature UI3 is proposed but not approved. No UI3 implementation may begin until
-explicit approval. Executable SwiftUI remains blocked until a macOS/Xcode
-environment is available. Infrastructure features remain planned but are not
-the current priority.
+Feature UI3 close-out evidence: the debug-only UI Showcase opens a synthetic,
+read-only circle and adult-membership preview with no-circle, overview, and
+unavailable states. The overview distinguishes Owner, Administrator, and Member
+roles; separates active membership from location-sharing consent; and shows
+pending and expired invitation examples without tokens or actions. Six JVM
+tests and twenty-seven Pixel 8 Android 16 Compose tests passed, including 48 dp
+touch targets, large text, consent wording, invitation states, unavailable
+behaviour, and showcase navigation. Android lint reported no issues; debug,
+test, and release APKs built; the release manifest excludes all debug previews;
+and emulator screenshots were visually checked. Android viewing instructions
+and matching SwiftUI design guidance are documented. Executable iOS
+verification remains blocked by macOS/Xcode.
+
+No next feature is selected or approved. Infrastructure features remain planned
+but are not the current priority.

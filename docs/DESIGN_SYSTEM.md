@@ -211,3 +211,24 @@ state cards with accessibility labels and values. Dynamic Type must reflow the
 mode choices, audience, expiry, and consent-ownership wording without
 truncation. This remains design guidance only until it can be built and tested
 with macOS/Xcode.
+
+### Circle and adult membership preview
+
+The debug-only circle preview establishes a read-only hierarchy for a private
+circle before identity and Circle services exist. It distinguishes Owner,
+Administrator, and Member roles; labels membership separately from location
+sharing; and shows pending and expired invitations without tokens, links, or
+real recipient data. Pending and expired states must use explicit text and
+timing rather than color alone.
+
+The no-circle state explains that joining never enables location sharing. The
+overview states that each adult controls their own sharing and that owners or
+administrators cannot override that choice. The unavailable state makes no
+claim that a membership mutation was attempted. Child or dependent roles are
+outside this preview.
+
+The matching iOS design should use a SwiftUI `ScrollView` or `List`, native
+selection controls with 44 pt touch targets, member rows with accessibility
+labels and values, and invitation cards whose status and expiry remain readable
+with Dynamic Type. This remains design guidance only until macOS/Xcode can build
+and verify it.

@@ -59,15 +59,15 @@ does so. Emergency copy and flows must always state their real limitations.
 
 ## Status
 
-Phase 1 walking skeleton. Features 0A through 0D, UI1, and UI2 are complete and verified: the
+Phase 1 walking skeleton. Features 0A through 0D and UI1 through UI3 are complete and verified: the
 backend/local-services foundation and the native Android Ocean Sky shell with a
 truthful non-sensitive backend status, plus the accepted supported-platform and
 physical-device test-matrix ADR, a debug-only native UI showcase, its
-consent-aware synthetic Home preview, and adult-owned sharing-controls preview.
-Feature UI3, a debug-only circle and membership preview, is proposed and awaits
-explicit approval. Executable iOS/SwiftUI work remains blocked by the lack of a
+consent-aware synthetic Home preview, adult-owned sharing-controls preview, and
+read-only circle and adult-membership preview. Executable iOS/SwiftUI work
+remains blocked by the lack of a
 macOS/Xcode environment. The detailed roadmap permits only one feature and one
-substep in progress;
+substep in progress; no next feature is selected or approved.
 identity, circles, consent, location, notifications, safety behaviour, iOS
 implementation, and AWS remain unimplemented. Product name, commercial model,
 hosting region, data-retention defaults, and external providers remain team

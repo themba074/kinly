@@ -452,12 +452,11 @@ ADR 0001 resolves the supported Android/iOS versions and device-test matrix.
 
 ## 20. Current status
 
-Phase 1 walking skeleton. Features 0A through 0D, UI1, and UI2 established the backend and
+Phase 1 walking skeleton. Features 0A through 0D and UI1 through UI3 established the backend and
 local-services foundation, the Android Ocean Sky shell, and the accepted
 supported-platform/device-test decision, plus a debug-only Android UI showcase
-and consent-aware synthetic Home and sharing-controls previews. Provider,
-retention, identity, region, and emergency decisions remain open. Work follows
-`docs/FEATURE_ROADMAP.md`, with no more than one approved feature and one
-substep in progress. Feature UI3, a debug-only circle and membership preview,
-is proposed but not approved; executable iOS work remains blocked by the
-macOS/Xcode environment.
+and consent-aware synthetic Home, sharing-controls, and read-only circle and
+adult-membership previews. Provider, retention, identity, region, and emergency
+decisions remain open. Work follows `docs/FEATURE_ROADMAP.md`, with no more than
+one approved feature and one substep in progress. No next feature is selected or
+approved; executable iOS work remains blocked by the macOS/Xcode environment.
