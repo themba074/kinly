@@ -219,10 +219,10 @@ client, the accepted supported-platform/device-matrix ADR, and the debug-only
 native UI showcase/viewing workflow with consent-aware synthetic Home,
 adult-owned sharing-controls, and read-only circle and adult-membership previews.
 No identity, circle, consent, location, notification, or safety feature exists
-yet. The `dist/` directory remains a visual concept. UI4 is the next planned
-feature but is not proposed, approved, or in progress. Executable iOS/SwiftUI
-work remains blocked until macOS/Xcode is available; do not imply it has been
-verified.
+yet. The `dist/` directory remains a visual concept. UI4 and its first
+sequential substep, UI4.1 Places, are proposed but not approved or in progress.
+Executable iOS/SwiftUI work remains blocked until macOS/Xcode is available; do
+not imply it has been verified.
 
 `docs/FEATURE_ROADMAP.md` is the single delivery plan. Keep only one feature and
 one sequential substep in progress. Each feature needs its own proposal and

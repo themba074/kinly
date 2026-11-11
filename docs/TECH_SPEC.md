@@ -459,7 +459,7 @@ and consent-aware synthetic Home, sharing-controls, and read-only circle and
 adult-membership previews. Provider, retention, identity, region, and emergency
 decisions remain open. Work follows `docs/FEATURE_ROADMAP.md`, with no more than
 one approved feature and one substep in progress. No feature is currently
-approved for implementation. UI4 is the next planned roadmap feature; the
-remaining foundation and production features follow the roadmap's explicit
-dependency order. Executable iOS work remains blocked by the macOS/Xcode
-environment.
+approved for implementation. UI4 and UI4.1 Places are proposed but not
+approved; the remaining foundation and production features follow the
+roadmap's explicit dependency order. Executable iOS work remains blocked by the
+macOS/Xcode environment.

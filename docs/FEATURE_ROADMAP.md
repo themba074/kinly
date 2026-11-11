@@ -2,8 +2,9 @@
 
 **Status:** Active delivery plan  
 **Last updated:** 12 November 2026
-**Current feature:** None - the next feature requires its own proposal and
-explicit approval
+**Current feature:** UI4 - remaining primary-tab experience preview (Proposed;
+not approved)
+**Current substep:** UI4.1 - Places (Proposed; not approved)
 **Next planned feature:** UI4 - remaining primary-tab experience preview
 **Rule:** One feature, and one substep within that feature, may be in progress.
 
@@ -89,7 +90,7 @@ blocker until macOS/Xcode is available, but it must not be silently skipped.
 | UI1 | Preview a truthful consent-aware Home experience before circle and location services exist. | Debug-only Compose states cover no circle, paused, approximate, fresh, stale/offline, and unavailable behaviour; accessibility tests, release exclusion, APK/screenshots, viewing guidance, and matching iOS guidance pass. No map, permission, real data, or product action exists. | **Complete** |
 | UI2 | Preview adult-owned sharing controls before consent services exist. | Debug-only Compose states cover paused, approximate, precise, timed, and unavailable behaviour; audience, expiry, consent ownership, accessibility, release exclusion, APK/screenshots, viewing guidance, and matching iOS guidance pass. No setting is saved and no permission, service, real data, or product action exists. | **Complete** |
 | UI3 | Preview a private circle, adult membership roles, and invitation states before Circle services exist. | Debug-only Compose states cover no circle, circle overview, pending and expired invitations, and unavailable behaviour; role clarity, consent separation, accessibility, release exclusion, APK/screenshots, viewing guidance, and matching iOS guidance pass. No circle or membership mutation exists. | **Complete** |
-| UI4 | Complete the remaining primary-tab experience blueprint without pretending the underlying product features exist. | Sequential debug-only substeps cover Places; care and Safety states for check-ins and journeys with honest emergency limitations; and History/privacy states. Empty, populated, loading, offline/stale, unavailable, and relevant expired/failed states use synthetic data. Accessibility, release exclusion, APK/screenshots, viewing guidance, and matching iOS guidance pass. No map, coordinate, permission, notification, provider, backend, saved mutation, or emergency dispatch exists. | Planned |
+| UI4 | Complete the remaining primary-tab experience blueprint without pretending the underlying product features exist. | Sequential debug-only substeps cover Places; care and Safety states for check-ins and journeys with honest emergency limitations; and History/privacy states. Empty, populated, loading, offline/stale, unavailable, and relevant expired/failed states use synthetic data. Accessibility, release exclusion, APK/screenshots, viewing guidance, and matching iOS guidance pass. No map, coordinate, permission, notification, provider, backend, saved mutation, or emergency dispatch exists. | **Proposed** |
 
 UI4 is one grouped feature, not permission to implement every screen at once.
 Its substeps must run sequentially: **UI4.1 Places**, **UI4.2 care and Safety**,
@@ -98,6 +99,16 @@ within the approved UI4 boundary, a small implementation, tests, and review
 before the next substep starts. Exact SOS recipients and delivery claims remain
 reserved for 6A; the preview may show only truthful unconfigured or unavailable
 states.
+
+UI4.1 proposes a debug-only Places preview with no-places, overview/detail,
+uncertain-or-delayed, offline, and unavailable states. Synthetic place cards
+may show a name, radius, circle, and plain-language alert summary, but never a
+map, centre coordinate, real address, or recipient data. The hierarchy must
+state that each adult controls whether their location may power a place alert;
+uncertain input must never be presented as a confirmed arrival or departure.
+There is no create, edit, delete, save, retry, permission, or notification
+action. UI4.2 and UI4.3 remain out of scope until UI4.1 is separately completed
+and the next substep is proposed and approved.
 
 ### Phase 1 - Identity and devices
 
@@ -268,6 +279,6 @@ and emulator screenshots were visually checked. Android viewing instructions
 and matching SwiftUI design guidance are documented. Executable iOS
 verification remains blocked by macOS/Xcode.
 
-UI4 is the next planned feature but is not proposed, approved, or in progress.
-After UI4, work returns to 0E and then follows the execution order in section
-1.1. No implementation begins from this roadmap amendment alone.
+UI4 and UI4.1 are proposed but not approved or in progress. After UI4 is
+complete, work returns to 0E and then follows the execution order in section
+1.1. No implementation begins from this proposal alone.
