@@ -2,9 +2,9 @@
 
 **Status:** Active delivery plan  
 **Last updated:** 13 November 2026
-**Current feature:** UI4 - remaining primary-tab experience preview (In progress)
-**Current substep:** None; UI4.2 is complete and UI4.3 is not yet proposed or approved
-**Next planned feature:** UI4 - remaining primary-tab experience preview
+**Current feature:** None; UI4 is complete
+**Current substep:** None
+**Next planned feature:** 0E - product and adult-only pilot guardrails
 **Rule:** One feature, and one substep within that feature, may be in progress.
 
 This is Kinly's single delivery-planning document. The PRD defines what the
@@ -58,9 +58,8 @@ enough.
 
 The remaining default order is:
 
-1. UI4;
-2. 0E, 0F, and 0G;
-3. Phase 1 through Phase 8 in feature-ID order.
+1. 0E, 0F, and 0G;
+2. Phase 1 through Phase 8 in feature-ID order.
 
 No later feature may bypass an earlier incomplete feature merely because it is
 easier or more visually interesting. If an earlier feature is genuinely
@@ -89,7 +88,7 @@ blocker until macOS/Xcode is available, but it must not be silently skipped.
 | UI1 | Preview a truthful consent-aware Home experience before circle and location services exist. | Debug-only Compose states cover no circle, paused, approximate, fresh, stale/offline, and unavailable behaviour; accessibility tests, release exclusion, APK/screenshots, viewing guidance, and matching iOS guidance pass. No map, permission, real data, or product action exists. | **Complete** |
 | UI2 | Preview adult-owned sharing controls before consent services exist. | Debug-only Compose states cover paused, approximate, precise, timed, and unavailable behaviour; audience, expiry, consent ownership, accessibility, release exclusion, APK/screenshots, viewing guidance, and matching iOS guidance pass. No setting is saved and no permission, service, real data, or product action exists. | **Complete** |
 | UI3 | Preview a private circle, adult membership roles, and invitation states before Circle services exist. | Debug-only Compose states cover no circle, circle overview, pending and expired invitations, and unavailable behaviour; role clarity, consent separation, accessibility, release exclusion, APK/screenshots, viewing guidance, and matching iOS guidance pass. No circle or membership mutation exists. | **Complete** |
-| UI4 | Complete the remaining primary-tab experience blueprint without pretending the underlying product features exist. | Sequential debug-only substeps cover Places; care and Safety states for check-ins and journeys with honest emergency limitations; and History/privacy states. Empty, populated, loading, offline/stale, unavailable, and relevant expired/failed states use synthetic data. Accessibility, release exclusion, APK/screenshots, viewing guidance, and matching iOS guidance pass. No map, coordinate, permission, notification, provider, backend, saved mutation, or emergency dispatch exists. | **In progress** |
+| UI4 | Complete the remaining primary-tab experience blueprint without pretending the underlying product features exist. | Sequential debug-only substeps cover Places; care and Safety states for check-ins and journeys with honest emergency limitations; and History/privacy states. Empty, populated, loading, offline/stale, unavailable, and relevant expired/failed states use synthetic data. Accessibility, release exclusion, APK/screenshots, viewing guidance, and matching iOS guidance pass. No map, coordinate, permission, notification, provider, backend, saved mutation, or emergency dispatch exists. | **Complete** |
 
 UI4 is one grouped feature, not permission to implement every screen at once.
 Its substeps must run sequentially: **UI4.1 Places**, **UI4.2 care and Safety**,
@@ -99,30 +98,31 @@ before the next substep starts. Exact SOS recipients and delivery claims remain
 reserved for 6A; the preview may show only truthful unconfigured or unavailable
 states.
 
-UI4.1 completed a debug-only Places preview with loading, no-places,
-overview/detail, uncertain-or-delayed, offline, and unavailable states.
-Synthetic place cards
-may show a name, radius, circle, and plain-language alert summary, but never a
-map, centre coordinate, real address, or recipient data. The hierarchy must
-state that each adult controls whether their location may power a place alert;
-uncertain input must never be presented as a confirmed arrival or departure.
-There is no create, edit, delete, save, retry, permission, or notification
-action. UI4.2 and UI4.3 were outside UI4.1's approved implementation boundary.
+Completed UI4 substeps:
 
-UI4.2 completed a debug-only Safety-tab preview with no-activity, overview,
-check-in, journey, offline, and unavailable states. Check-in examples distinguish
-sent, delivered where known, responded, expired, failed, and unknown; possible
-responses are read-only examples, and non-response is never labelled as danger.
-Journey examples keep audience, maximum duration, expiry, ETA estimation,
-freshness, and confidence visible without a map, route, coordinate, or live
-location. Offline states make check-in delivery unknown and journey estimates
-stale rather than asserting safety or arrival. Emergency tools are labelled
-unconfigured: no circle contact, phone number, emergency service, or responder
-is notified or called, and no dispatch is implied. There is no send, respond,
-start, stop, call, SOS, retry, permission, notification, or saved action. Exact
-SOS recipients, channels, activation, cancellation, and delivery semantics stay
-reserved for 6A. UI4.3 remains out of scope until its proposal is reviewed and
-explicitly approved.
+- **UI4.1 Places:** synthetic loading, empty, overview, uncertain, offline, and
+  unavailable states; no map, address, coordinate, alert claim, or action.
+- **UI4.2 Care and Safety:** truthful synthetic check-in and journey states;
+  emergency tools explicitly unconfigured; no live location, action, call,
+  notification, help, or dispatch claim.
+
+**UI4.3 completed:** a debug-only History-tab preview provides
+loading, no-history, overview, privacy/access, offline, and unavailable states.
+Synthetic history may show dates, gaps, precision, and freshness in text, but
+never a map, route, address, coordinate, or real movement data. Approximate
+history stays approximate. Privacy examples distinguish own history, no grant,
+and revoked access; membership or an administrator role never grants history
+access.
+
+The retention default remains undecided, so the preview states that no policy
+is configured and shows no invented duration. Export and deletion are described
+as future workflows, with no button or request simulation. There is no storage,
+backend, permission, network, provider, save, export, deletion, retry, or other
+product action. Verification covered truthful empty/offline/unavailable and
+revoked states, negative data/action assertions, accessibility, 48 dp targets,
+large text, release exclusion, APKs, screenshots, and matching iOS guidance.
+Map timelines and interactive export/deletion controls remain excluded because
+they would imply unapproved providers, retention, and backend behaviour.
 
 ### Phase 1 - Identity and devices
 
@@ -228,101 +228,23 @@ must not be added to a nearby feature as “small extras”:
 
 ## 5. Current boundary and completed foundation
 
-Features 0A through 0D and UI1 through UI3 are complete and verified. The foundation now includes the
-Java 21/Spring Boot backend, local PostgreSQL/PostGIS and Redis, Flyway `V1`,
-restricted health probes, correlation IDs, backend CI, and a native Android
-Kotlin/Compose Ocean Sky shell. The shell makes a real non-sensitive readiness
-request and handles checking, available, unavailable, and retry states. It has
-no authentication, sensitive permissions, member data, map, push, location, or
-safety behaviour.
+The production boundary is still the Java/Spring Boot and local-services
+foundation plus the native Android readiness shell. It has no authentication,
+sensitive permission, member data, map, push, location, or safety behaviour.
 
-Feature 0B close-out evidence: six JVM tests and three Pixel 8 Android 16
-Compose tests passed; Android lint reported no issues; debug app and test APKs
-built; and the emulator rendered `Available` after reaching the local backend
-with healthy PostGIS and Redis dependencies. Android CI compiles the
-instrumentation tests in addition to running unit tests, lint, and the app
-build.
+| Feature | Close-out evidence |
+|---|---|
+| 0A | Backend tests and CI verified PostGIS/Redis integration, Flyway, restricted health probes, and correlation IDs. |
+| 0B | Six JVM and three Pixel 8/API 36 Compose tests passed; lint and APK builds passed; local readiness was verified. |
+| 0C | ADR 0001 accepted Android API 26+, API 36 compile/target, iOS 17+, and the physical-device matrix. |
+| 0D | Six JVM and five cumulative Compose tests passed; showcase viewing, release exclusion, APKs, lint, and iOS guidance verified. |
+| UI1 | Six JVM and eleven cumulative Compose tests passed; Home privacy states, large text, screenshots, release exclusion, and guidance verified. |
+| UI2 | Six JVM and nineteen cumulative Compose tests passed; sharing consent, touch targets, large text, screenshots, release exclusion, and guidance verified. |
+| UI3 | Six JVM and twenty-seven cumulative Compose tests passed; roles, invitations, consent separation, accessibility, screenshots, and release exclusion verified. |
+| UI4.1 | Ten new and thirty-seven cumulative Compose tests passed; Places states, negative claims, accessibility, screenshots, builds, lint, and release exclusion verified. |
+| UI4.2 | Eleven new and forty-eight cumulative Compose tests passed; Care and Safety truthfulness, accessibility, screenshots, builds, lint, release exclusion, and CI verified. |
+| UI4.3 | Twelve targeted Compose tests passed; History/privacy truthfulness, grant and revocation boundaries, accessibility, all six screenshots, builds, lint, and release exclusion verified. |
 
-Feature 0C accepted
-`docs/decisions/0001-supported-platforms-and-device-matrix.md`: Android remains
-API 26+ with API 36 compile/target at acceptance, iOS begins at iOS 17, and six
-risk-based physical-device classes gate later background-location work.
-
-Feature 0D close-out evidence: the debug-only Android UI Showcase renders the
-real status component, typography, generic action states, semantic colors, and
-the five-destination navigation using visibly labelled synthetic data. Six JVM
-tests and five Pixel 8 Android 16 Compose tests passed; Android lint reported no
-issues; debug, test, and release APKs built; and merged-manifest inspection
-proved the showcase is absent from release. The Android viewing workflow and
-matching iOS component guidance are documented.
-
-Feature UI1 close-out evidence: the debug-only Android UI Showcase opens a
-selectable consent-aware Home preview with no-circle, circle, and unavailable
-states. Its synthetic circle state shows paused sharing without any last-known
-location, plus precise/fresh, approximate, and stale/offline member cards with
-plain-language timestamps and uncertainty. Six JVM tests and eleven Pixel 8
-Android 16 Compose tests passed, including large-text and privacy assertions;
-Android lint reported no issues; debug, test, and release APKs built; and the
-release merged manifest contains neither the showcase nor Home preview. Emulator
-screenshots were visually checked for all states. Viewing instructions and
-matching SwiftUI design guidance are documented; executable iOS verification
-remains blocked by the lack of macOS/Xcode.
-
-Feature UI2 close-out evidence: the debug-only UI Showcase opens adult-owned
-sharing controls with paused, approximate, precise, timed, and unavailable
-synthetic states. Audience, explicit SAST/UTC expiry, consent ownership, and the
-administrator limitation are visible; paused mode exposes no location; the
-unavailable state disables all modes; and no save action or service exists. Six
-JVM tests and nineteen Pixel 8 Android 16 Compose tests passed, including 48 dp
-touch targets, large text, disabled controls, privacy wording, and navigation.
-Android lint reported no issues; debug, test, and release APKs built; the release
-manifest excludes all debug previews; and emulator screenshots were visually
-checked. Android viewing instructions and matching SwiftUI design guidance are
-documented. Executable iOS verification remains blocked by macOS/Xcode.
-
-Feature UI3 close-out evidence: the debug-only UI Showcase opens a synthetic,
-read-only circle and adult-membership preview with no-circle, overview, and
-unavailable states. The overview distinguishes Owner, Administrator, and Member
-roles; separates active membership from location-sharing consent; and shows
-pending and expired invitation examples without tokens or actions. Six JVM
-tests and twenty-seven Pixel 8 Android 16 Compose tests passed, including 48 dp
-touch targets, large text, consent wording, invitation states, unavailable
-behaviour, and showcase navigation. Android lint reported no issues; debug,
-test, and release APKs built; the release manifest excludes all debug previews;
-and emulator screenshots were visually checked. Android viewing instructions
-and matching SwiftUI design guidance are documented. Executable iOS
-verification remains blocked by macOS/Xcode.
-
-UI4.1 close-out evidence: the debug-only UI Showcase opens a synthetic Places
-preview with loading, no-places, overview/detail, uncertain/delayed, offline,
-and unavailable states. It shows synthetic place names and radii, makes adult
-place-alert consent explicit, never converts uncertainty into a confirmed
-arrival, and exposes no map, address, coordinate, product action, permission,
-network, or notification behaviour. Six JVM tests and thirty-seven Pixel 8
-Android 16 Compose tests passed, including ten UI4.1 tests for truthful state
-copy, negative action/data assertions, 48 dp touch targets, large text, and
-showcase navigation. Android lint reported no issues; debug, test, and release
-APKs built; the release manifest excludes every debug preview; and emulator
-screenshots were visually checked for all states and the full place-card list.
-Android viewing instructions and matching SwiftUI design guidance are
-documented. Executable iOS verification remains blocked by macOS/Xcode.
-
-UI4.2 close-out evidence: the debug-only UI Showcase opens synthetic
-no-activity, overview, check-in, journey, offline, and unavailable Care and
-Safety states. Check-in cards distinguish delivery and response outcomes
-without treating non-response as danger. Journey cards keep audience, maximum
-duration, expiry, estimate, freshness, and confidence visible without a map,
-route, coordinate, or live location. Emergency tools explicitly state that no
-contact, phone number, emergency service, responder, help, or dispatch is
-configured or claimed. Eleven UI4.2 tests and all forty-eight Pixel 8 Android
-16 Compose tests passed, including truthful delivery and emergency boundaries,
-negative action/data assertions, 48 dp touch targets, large text, and showcase
-navigation. Android lint reported no issues; debug, test, and release APKs
-built; the release manifest excludes the debug showcase; and emulator
-screenshots for all six states were visually checked. Android viewing
-instructions and matching SwiftUI design guidance are documented. Executable
-iOS verification remains blocked by macOS/Xcode.
-
-UI4 remains **In progress**. UI4.1 and UI4.2 are complete. UI4.3 is next but
-has not been proposed or approved. After UI4 is complete, work
-returns to 0E and then follows the execution order in section 1.1.
+UI4 is **Complete**. No feature is active. Feature 0E is next but is not
+proposed or approved. Executable iOS verification remains blocked by
+macOS/Xcode.

@@ -382,20 +382,3 @@ and one sequential substep within it may be in progress at a time.
 6. Define the exact MVP SOS recipients, channels, retry window, and copy.
 7. Select maps/geocoding and SMS/email providers after a cost/privacy review.
 8. Approve measurable battery, location, and alert-quality release gates.
-
-## 13. Product status
-
-Phase 1 walking skeleton. Features 0A through 0D, UI1 through UI3, UI4.1, and UI4.2 are complete.
-They establish the backend/local-services foundation, native Android Ocean Sky
-shell, supported-platform decision, debug-only UI Showcase, and synthetic Home
-preview, adult-owned sharing-controls preview, and read-only circle and
-adult-membership preview. They do not implement identity, circles, consent
-services, location, notifications, or safety behaviour.
-
-The amended `docs/FEATURE_ROADMAP.md` names UI4 as the current feature and
-records the complete dependency order through an adult-only pilot. UI4 remains
-in progress; UI4.1 Places and UI4.2 care and Safety are complete. UI4.3 is next
-but is not proposed or approved. The `dist/` directory
-remains a disposable visual concept. This document does not authorise later
-slices and does not resolve the open product decisions above. Executable iOS
-work remains blocked until macOS/Xcode is available.

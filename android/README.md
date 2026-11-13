@@ -1,14 +1,8 @@
 # Kinly Android
 
-Feature 0B established a native Kotlin and Jetpack Compose shell using the
-Ocean Sky design direction and a non-sensitive backend readiness state. Feature
-0D adds a debug-only native UI showcase and viewing workflow. Feature UI1 adds
-a consent-aware Home preview inside that showcase. UI2 adds adult-owned
-sharing-mode states, and UI3 adds circle and adult-membership states. All remain
-synthetic and debug-only. UI4.1 adds synthetic Places states without maps,
-coordinates, permissions, notifications, or saved place behaviour. UI4.2 adds
-truthful synthetic check-in and journey states with emergency tools explicitly
-unconfigured and no safety action.
+The native Kotlin/Compose shell shows a non-sensitive backend readiness state.
+Debug builds also include the synthetic Ocean Sky UI showcase; it performs no
+product, location, notification, or safety action.
 
 ## Prerequisites
 
@@ -86,6 +80,9 @@ The debug build installs two launcher entries:
 - Select **Open Care and Safety preview** to compare no-activity, overview,
   check-in, journey, offline, and unavailable states. It performs no send,
   response, journey, call, notification, or emergency action.
+- Select **Open History and privacy preview** to compare loading, no-history,
+  overview, access, offline, and unavailable states. It uses no map, movement
+  data, retention policy, export, deletion, or access-changing action.
 
 The showcase can also be opened directly:
 

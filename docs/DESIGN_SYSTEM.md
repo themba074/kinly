@@ -167,112 +167,21 @@ on macOS/Xcode, it should provide equivalent SwiftUI previews using the same
 semantic labels and synthetic-state boundary; preview fixtures must not ship as
 convincing live behaviour.
 
-### Consent-aware Home preview
+### Debug preview rules
 
-The debug-only Home preview establishes the shared hierarchy for the future
-Home tab without selecting a map provider or implying that circle and location
-services exist:
+All previews use synthetic data, expose no product action, remain absent from
+release builds, and communicate state in text rather than color alone.
 
-1. a persistent synthetic-data notice;
-2. the member's own sharing state and visible audience;
-3. member cards that state precision, freshness, and uncertainty in text; and
-4. the five-destination navigation with Home selected.
+| Preview | Required meaning | Must not imply or expose |
+|---|---|---|
+| Home | Own sharing choice, audience, precision, freshness, and uncertainty; paused hides location. | A map provider, live data, or a position while paused. |
+| Sharing controls | Adult-owned paused, approximate, precise, timed, and unavailable states with audience and explicit expiry timezone. | Administrator override, automatic sharing, or a saved change. |
+| Circle | Owner, Administrator, and Member roles; membership separate from consent; pending and expired invitations. | Child roles, invitation secrets, or a membership mutation. |
+| Places | Loading, empty, overview, uncertain, offline, and unavailable states; adult place-alert consent. | A map, address, coordinate, confirmed boundary event from uncertain input, or alert delivery. |
+| Care and Safety | Check-in delivery/response truth; journey audience, expiry, ETA freshness/confidence; emergency tools unconfigured. | Danger from non-response, arrival from expiry, live location, calling, notification, help, or dispatch. |
+| History and privacy | Own history, gaps, precision, freshness, explicit grants, revocation, and an undecided retention policy. | A map, route, coordinate, inferred movement, administrator access, retention duration, export, or deletion action. |
 
-A paused member shows no last-known place or position. Approximate sharing names
-an area and explicitly says that the exact position is hidden. Stale or offline
-data includes its source time and a warning not to treat it as live. These
-meanings must not rely on color alone.
-
-The matching iOS design should use a SwiftUI `ScrollView` or `LazyVStack`, a
-preview-only `Picker` for the three synthetic screen states, rounded native
-cards, and `TabView` navigation. Each card needs an accessibility label and
-value that includes sharing state, freshness, and uncertainty. Dynamic Type
-must reflow the cards without truncating consent or freshness copy. This is
-design guidance only until a macOS/Xcode environment can build and verify the
-native iOS project.
-
-### Adult-owned sharing controls preview
-
-The debug-only sharing preview establishes how an adult can understand paused,
-approximate, precise, and timed sharing before consent services exist. The
-selected mode must explain the disclosure in text, keep the audience visible,
-and show an explicit timezone when sharing expires. Paused mode shows no
-current or last-known location. An unavailable state disables every mode and
-states that no setting changed. Preview controls never offer a convincing save
-action.
-
-Consent ownership is part of the visual hierarchy: the screen states that only
-the adult member can change their choice and that a circle administrator cannot
-override it. Color supplements this language but never replaces it.
-
-The matching iOS design should use a SwiftUI `ScrollView`, platform-native
-segmented or selection controls that retain 44 pt touch targets, and rounded
-state cards with accessibility labels and values. Dynamic Type must reflow the
-mode choices, audience, expiry, and consent-ownership wording without
-truncation. This remains design guidance only until it can be built and tested
-with macOS/Xcode.
-
-### Circle and adult membership preview
-
-The debug-only circle preview establishes a read-only hierarchy for a private
-circle before identity and Circle services exist. It distinguishes Owner,
-Administrator, and Member roles; labels membership separately from location
-sharing; and shows pending and expired invitations without tokens, links, or
-real recipient data. Pending and expired states must use explicit text and
-timing rather than color alone.
-
-The no-circle state explains that joining never enables location sharing. The
-overview states that each adult controls their own sharing and that owners or
-administrators cannot override that choice. The unavailable state makes no
-claim that a membership mutation was attempted. Child or dependent roles are
-outside this preview.
-
-The matching iOS design should use a SwiftUI `ScrollView` or `List`, native
-selection controls with 44 pt touch targets, member rows with accessibility
-labels and values, and invitation cards whose status and expiry remain readable
-with Dynamic Type. This remains design guidance only until macOS/Xcode can build
-and verify it.
-
-### Places preview
-
-The debug-only Places preview establishes the Places-tab hierarchy before map,
-location, consent, and notification services exist. It covers loading, empty,
-overview/detail, uncertain or delayed, offline, and unavailable states using
-visibly synthetic place names and radii. It never displays a map, address,
-centre coordinate, live member position, or convincing place-management action.
-
-Place-alert consent is part of the primary hierarchy: each adult controls
-whether their location may power a place alert, and neither circle membership
-nor an administrator role enables it. When uncertainty overlaps a place
-boundary, the UI says that arrival is not confirmed and makes no alert-delivery
-claim. Offline and unavailable states distinguish missing current information
-from a failed mutation.
-
-The matching iOS design should use a SwiftUI `ScrollView` or `List`, platform
-selection controls with 44 pt touch targets, semantic place cards, and status
-copy that reflows with Dynamic Type. This remains design guidance only until
-macOS/Xcode can build and verify it.
-
-### Care and Safety preview
-
-The debug-only Care and Safety preview establishes truthful Safety-tab states
-before check-in, journey, notification, or emergency services exist. It covers
-no activity, overview, check-in lifecycle, journey lifecycle, offline, and
-unavailable states with visibly synthetic data and no product actions.
-
-Check-ins distinguish sent, confirmed delivery, response, expiry, failure, and
-unknown delivery. A missing response is never labelled as danger. Journeys keep
-their selected audience, maximum duration and explicit expiry, estimated ETA,
-freshness, and confidence visible; ended or expired journeys are no longer
-shared and never imply arrival. No map, route, coordinate, or live location is
-shown.
-
-Emergency tools remain explicitly unconfigured. The preview does not claim
-that a circle contact, phone number, emergency service, or responder was
-notified or called, and it makes no dispatch promise. Danger red is therefore
-not used as decoration. Exact SOS behaviour remains reserved for Feature 6A.
-
-The matching iOS design should use a SwiftUI `ScrollView` or `List`, selection
-controls with 44 pt touch targets, and semantic cards whose delivery, expiry,
-freshness, and uncertainty copy reflows with Dynamic Type. This remains design
-guidance only until macOS/Xcode can build and verify it.
+iOS should use native SwiftUI scrolling, selection, cards, and `TabView`, with
+44 pt controls, accessibility labels and values, and Dynamic Type reflow. This
+is guidance only until macOS/Xcode can build and verify the native iOS project.
+Exact SOS behaviour remains reserved for Feature 6A.
