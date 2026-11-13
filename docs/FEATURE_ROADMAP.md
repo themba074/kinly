@@ -1,10 +1,9 @@
 # Kinly Feature Roadmap
 
 **Status:** Active delivery plan  
-**Last updated:** 12 November 2026
+**Last updated:** 13 November 2026
 **Current feature:** UI4 - remaining primary-tab experience preview (In progress)
-**Current substep:** None - UI4.1 Places is complete; UI4.2 requires its own
-proposal and explicit approval
+**Current substep:** UI4.2 - care and Safety (Proposed; not approved)
 **Next planned feature:** UI4 - remaining primary-tab experience preview
 **Rule:** One feature, and one substep within that feature, may be in progress.
 
@@ -108,8 +107,22 @@ map, centre coordinate, real address, or recipient data. The hierarchy must
 state that each adult controls whether their location may power a place alert;
 uncertain input must never be presented as a confirmed arrival or departure.
 There is no create, edit, delete, save, retry, permission, or notification
-action. UI4.2 and UI4.3 remain out of scope until the next substep is proposed
-and approved.
+action. UI4.2 and UI4.3 were outside UI4.1's approved implementation boundary.
+
+UI4.2 proposes a debug-only Safety-tab preview with no-activity, overview,
+check-in, journey, offline, and unavailable states. Check-in examples distinguish
+sent, delivered where known, responded, expired, failed, and unknown; possible
+responses are read-only examples, and non-response is never labelled as danger.
+Journey examples keep audience, maximum duration, expiry, ETA estimation,
+freshness, and confidence visible without a map, route, coordinate, or live
+location. Offline states make check-in delivery unknown and journey estimates
+stale rather than asserting safety or arrival. Emergency tools are labelled
+unconfigured: no circle contact, phone number, emergency service, or responder
+is notified or called, and no dispatch is implied. There is no send, respond,
+start, stop, call, SOS, retry, permission, notification, or saved action. Exact
+SOS recipients, channels, activation, cancellation, and delivery semantics stay
+reserved for 6A. UI4.3 remains out of scope until UI4.2 is complete and the next
+substep is proposed and approved.
 
 ### Phase 1 - Identity and devices
 
@@ -294,7 +307,6 @@ screenshots were visually checked for all states and the full place-card list.
 Android viewing instructions and matching SwiftUI design guidance are
 documented. Executable iOS verification remains blocked by macOS/Xcode.
 
-UI4 remains **In progress**, but no substep is currently active. UI4.1 is
-complete. UI4.2 is the next planned substep but is not proposed or approved;
-UI4.3 also remains unapproved. After UI4 is complete, work returns to 0E and
-then follows the execution order in section 1.1.
+UI4 remains **In progress**. UI4.1 is complete. UI4.2 is proposed but not
+approved or in progress; UI4.3 remains unapproved. After UI4 is complete, work
+returns to 0E and then follows the execution order in section 1.1.
