@@ -213,15 +213,15 @@ Create an ADR under `docs/decisions/` before changing any of the following:
 ## Current Phase
 
 Phase 1: walking skeleton, implemented one slice at a time. Features 0A through
-0D and UI1 through UI3 are complete: the Java/Spring Boot and local-services foundation, the
+0D, UI1 through UI3, UI4.1, and UI4.2 are complete: the Java/Spring Boot and local-services foundation, the
 native Android Kotlin/Compose Ocean Sky shell and non-sensitive backend-status
 client, the accepted supported-platform/device-matrix ADR, and the debug-only
 native UI showcase/viewing workflow with consent-aware synthetic Home,
 adult-owned sharing-controls, and read-only circle and adult-membership previews.
 No identity, circle, consent, location, notification, or safety feature exists
 yet. The `dist/` directory remains a visual concept. UI4 remains in progress;
-UI4.1 Places is complete. UI4.2 care and Safety is proposed but not approved or
-in progress, and UI4.3 remains unapproved. Executable iOS/SwiftUI work remains
+UI4.1 Places and UI4.2 care and Safety are complete. No substep is currently
+active; UI4.3 is next but is not proposed or approved. Executable iOS/SwiftUI work remains
 blocked until macOS/Xcode is available; do not imply it has been verified.
 
 `docs/FEATURE_ROADMAP.md` is the single delivery plan. Keep only one feature and

@@ -94,6 +94,7 @@ internal fun UiShowcaseScreen() {
     var showSharingPreview by remember { mutableStateOf(false) }
     var showCirclePreview by remember { mutableStateOf(false) }
     var showPlacesPreview by remember { mutableStateOf(false) }
+    var showCareSafetyPreview by remember { mutableStateOf(false) }
 
     if (showHomePreview) {
         HomePreviewScreen(onBack = { showHomePreview = false })
@@ -109,6 +110,10 @@ internal fun UiShowcaseScreen() {
     }
     if (showPlacesPreview) {
         PlacesPreviewScreen(onBack = { showPlacesPreview = false })
+        return
+    }
+    if (showCareSafetyPreview) {
+        CareSafetyPreviewScreen(onBack = { showCareSafetyPreview = false })
         return
     }
 
@@ -183,6 +188,14 @@ internal fun UiShowcaseScreen() {
                     modifier = Modifier.fillMaxWidth(),
                 ) {
                     Text("Open Places preview")
+                }
+            }
+            item {
+                Button(
+                    onClick = { showCareSafetyPreview = true },
+                    modifier = Modifier.fillMaxWidth(),
+                ) {
+                    Text("Open Care and Safety preview")
                 }
             }
 

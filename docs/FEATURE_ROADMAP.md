@@ -3,7 +3,7 @@
 **Status:** Active delivery plan  
 **Last updated:** 13 November 2026
 **Current feature:** UI4 - remaining primary-tab experience preview (In progress)
-**Current substep:** UI4.2 - care and Safety (Proposed; not approved)
+**Current substep:** None; UI4.2 is complete and UI4.3 is not yet proposed or approved
 **Next planned feature:** UI4 - remaining primary-tab experience preview
 **Rule:** One feature, and one substep within that feature, may be in progress.
 
@@ -109,7 +109,7 @@ uncertain input must never be presented as a confirmed arrival or departure.
 There is no create, edit, delete, save, retry, permission, or notification
 action. UI4.2 and UI4.3 were outside UI4.1's approved implementation boundary.
 
-UI4.2 proposes a debug-only Safety-tab preview with no-activity, overview,
+UI4.2 completed a debug-only Safety-tab preview with no-activity, overview,
 check-in, journey, offline, and unavailable states. Check-in examples distinguish
 sent, delivered where known, responded, expired, failed, and unknown; possible
 responses are read-only examples, and non-response is never labelled as danger.
@@ -121,8 +121,8 @@ unconfigured: no circle contact, phone number, emergency service, or responder
 is notified or called, and no dispatch is implied. There is no send, respond,
 start, stop, call, SOS, retry, permission, notification, or saved action. Exact
 SOS recipients, channels, activation, cancellation, and delivery semantics stay
-reserved for 6A. UI4.3 remains out of scope until UI4.2 is complete and the next
-substep is proposed and approved.
+reserved for 6A. UI4.3 remains out of scope until its proposal is reviewed and
+explicitly approved.
 
 ### Phase 1 - Identity and devices
 
@@ -307,6 +307,22 @@ screenshots were visually checked for all states and the full place-card list.
 Android viewing instructions and matching SwiftUI design guidance are
 documented. Executable iOS verification remains blocked by macOS/Xcode.
 
-UI4 remains **In progress**. UI4.1 is complete. UI4.2 is proposed but not
-approved or in progress; UI4.3 remains unapproved. After UI4 is complete, work
+UI4.2 close-out evidence: the debug-only UI Showcase opens synthetic
+no-activity, overview, check-in, journey, offline, and unavailable Care and
+Safety states. Check-in cards distinguish delivery and response outcomes
+without treating non-response as danger. Journey cards keep audience, maximum
+duration, expiry, estimate, freshness, and confidence visible without a map,
+route, coordinate, or live location. Emergency tools explicitly state that no
+contact, phone number, emergency service, responder, help, or dispatch is
+configured or claimed. Eleven UI4.2 tests and all forty-eight Pixel 8 Android
+16 Compose tests passed, including truthful delivery and emergency boundaries,
+negative action/data assertions, 48 dp touch targets, large text, and showcase
+navigation. Android lint reported no issues; debug, test, and release APKs
+built; the release manifest excludes the debug showcase; and emulator
+screenshots for all six states were visually checked. Android viewing
+instructions and matching SwiftUI design guidance are documented. Executable
+iOS verification remains blocked by macOS/Xcode.
+
+UI4 remains **In progress**. UI4.1 and UI4.2 are complete. UI4.3 is next but
+has not been proposed or approved. After UI4 is complete, work
 returns to 0E and then follows the execution order in section 1.1.

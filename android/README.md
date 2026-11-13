@@ -5,9 +5,10 @@ Ocean Sky design direction and a non-sensitive backend readiness state. Feature
 0D adds a debug-only native UI showcase and viewing workflow. Feature UI1 adds
 a consent-aware Home preview inside that showcase. UI2 adds adult-owned
 sharing-mode states, and UI3 adds circle and adult-membership states. All remain
-synthetic and debug-only.
-UI4.1 adds synthetic Places states without maps, coordinates, permissions,
-notifications, or saved place behaviour.
+synthetic and debug-only. UI4.1 adds synthetic Places states without maps,
+coordinates, permissions, notifications, or saved place behaviour. UI4.2 adds
+truthful synthetic check-in and journey states with emergency tools explicitly
+unconfigured and no safety action.
 
 ## Prerequisites
 
@@ -82,6 +83,9 @@ The debug build installs two launcher entries:
 - Select **Open Places preview** to compare loading, no-places, overview,
   uncertain/delayed, offline, and unavailable states. It uses no map, address,
   coordinate, location permission, network service, or alert delivery.
+- Select **Open Care and Safety preview** to compare no-activity, overview,
+  check-in, journey, offline, and unavailable states. It performs no send,
+  response, journey, call, notification, or emergency action.
 
 The showcase can also be opened directly:
 
@@ -96,9 +100,8 @@ default readiness URL is emulator-specific, so the main Kinly entry may
 truthfully show `Unavailable` on a phone. The UI Showcase does not need a
 backend or network connection.
 
-The showcase activity, Home, sharing, circle, and Places previews, and their
-synthetic fixtures exist only in debug sources. Release manifests do not
-contain a showcase launcher or activity.
+The showcase activity and all synthetic screen previews exist only in debug
+sources. Release manifests do not contain a showcase launcher or activity.
 
 ## Feature boundary
 

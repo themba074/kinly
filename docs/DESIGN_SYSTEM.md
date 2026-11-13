@@ -252,3 +252,27 @@ The matching iOS design should use a SwiftUI `ScrollView` or `List`, platform
 selection controls with 44 pt touch targets, semantic place cards, and status
 copy that reflows with Dynamic Type. This remains design guidance only until
 macOS/Xcode can build and verify it.
+
+### Care and Safety preview
+
+The debug-only Care and Safety preview establishes truthful Safety-tab states
+before check-in, journey, notification, or emergency services exist. It covers
+no activity, overview, check-in lifecycle, journey lifecycle, offline, and
+unavailable states with visibly synthetic data and no product actions.
+
+Check-ins distinguish sent, confirmed delivery, response, expiry, failure, and
+unknown delivery. A missing response is never labelled as danger. Journeys keep
+their selected audience, maximum duration and explicit expiry, estimated ETA,
+freshness, and confidence visible; ended or expired journeys are no longer
+shared and never imply arrival. No map, route, coordinate, or live location is
+shown.
+
+Emergency tools remain explicitly unconfigured. The preview does not claim
+that a circle contact, phone number, emergency service, or responder was
+notified or called, and it makes no dispatch promise. Danger red is therefore
+not used as decoration. Exact SOS behaviour remains reserved for Feature 6A.
+
+The matching iOS design should use a SwiftUI `ScrollView` or `List`, selection
+controls with 44 pt touch targets, and semantic cards whose delivery, expiry,
+freshness, and uncertainty copy reflows with Dynamic Type. This remains design
+guidance only until macOS/Xcode can build and verify it.
