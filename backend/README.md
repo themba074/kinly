@@ -41,6 +41,15 @@ docker compose down
 Do not add `--volumes` unless you intentionally want to delete local database
 and Redis data.
 
+## Recover the local environment
+
+The local environment is disposable: source control, Gradle locks, Compose,
+and Flyway migrations are the recovery source. Stop the backend, run
+`docker compose down`, then start PostgreSQL and Redis again with the command
+above. Run `./gradlew.bat test` from `backend/` to verify migrations, health,
+and service connectivity. Deleting Compose volumes destroys local data and
+requires the explicit destructive-action approval described in `AGENTS.md`.
+
 ## Test
 
 Docker must be running because the integration test uses disposable PostGIS and

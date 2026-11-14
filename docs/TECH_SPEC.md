@@ -41,6 +41,11 @@ and testable. Shared API contracts and domain language provide consistency;
 forcing UI or background services through one cross-platform abstraction does
 not.
 
+ADR 0002 sets the current spending ceiling to ZAR 0. AWS and Terraform remain
+the future direction, but current work must use local services, synthetic data,
+and already-available no-charge tooling. No cloud resource or billable trial is
+authorised.
+
 ### Why Java for the backend
 
 Java and Spring Boot support explicit application boundaries, transactional
@@ -260,7 +265,13 @@ the way" unless a verified responder integration provides that state.
 ## 10. API and real-time conventions
 
 - Base path `/api/v1`; JSON over TLS.
-- OpenAPI is the contract source for REST APIs.
+- `contracts/openapi.json` is the OpenAPI source for product REST APIs. Its
+  `paths` remain empty until an implemented operation and its required tests are
+  approved; actuator endpoints are operational and stay outside the product
+  contract.
+- Additive changes may remain in v1 only when existing clients continue to
+  work. Breaking request or response changes require a new major base path and
+  an approved migration plan.
 - Use problem-details error responses with stable machine codes.
 - Require idempotency keys for invitations, sharing mutations, check-ins, and
   safety incidents where a retry could duplicate an effect.
@@ -323,7 +334,7 @@ subprocessors, retention, pricing, rate limits, delivery semantics, and exit
 cost. Provider SDKs must not receive background location unless the approved
 feature requires it.
 
-## 13. AWS deployment
+## 13. Future AWS deployment
 
 The initial production shape is deliberately modest:
 
@@ -339,10 +350,12 @@ The initial production shape is deliberately modest:
 - separate development, staging, and production accounts or strongly isolated
   environments.
 
-The AWS region is not yet approved. Choose it only after service availability,
-POPIA/cross-border transfer, latency, recovery, and cost review. Terraform plans
-must be reviewed in CI; production apply and destructive actions require
-explicit human approval.
+Cloud deployment is deferred under ADR 0002. Africa (Cape Town), `af-south-1`,
+is a candidate rather than an approved target. Choose a region only after the
+ZAR 0 boundary is explicitly amended and service availability, POPIA and
+cross-border transfer, latency, recovery, and cost are reviewed again.
+Terraform plans must be reviewed before any future apply; production apply and
+destructive actions require explicit human approval.
 
 ## 14. Security, privacy, and abuse resistance
 
@@ -413,10 +426,19 @@ integration tests, migration validation, OpenAPI compatibility checks, secret
 scanning, and dependency scanning for affected projects. Mobile builds and
 platform tests should run on appropriate hosted runners or approved services.
 
-Deploy to development automatically after main passes. Promote an immutable
-artifact to staging, run smoke tests, and require approval for production.
-Database migrations are forward-compatible and applied once; never edit an
-applied migration. Risky changes use expand/migrate/contract steps.
+While ADR 0002 is active, verification runs locally and through already
+available no-charge CI; no environment is deployed. Future deployment may
+promote immutable artifacts through development and staging only after a
+separately approved funded plan. Database migrations are forward-compatible and
+applied once; never edit an applied migration. Risky changes use
+expand/migrate/contract steps.
+
+The current zero-spend foundation locks resolved backend and shipped Android
+release dependencies, runs repository and sensitive-data guardrails locally,
+and scans both lockfiles with the pinned OSV Scanner image. GitHub jobs run only
+for a public repository; when they are unavailable, the documented local
+commands are authoritative. Local recovery rebuilds disposable services from
+Compose and Flyway migrations rather than relying on a hosted backup.
 
 ## 18. Walking-skeleton plan
 
@@ -425,7 +447,7 @@ delivery path:
 
 1. initialise Android, iOS, backend, contracts, and infrastructure projects;
 2. establish formatting, test, build, and secret-scanning CI;
-3. deploy a health/readiness endpoint and PostgreSQL migration to development;
+3. verify a health/readiness endpoint and PostgreSQL migration locally;
 4. integrate one approved sign-in path on both mobile platforms;
 5. call one authenticated `/api/v1/me` endpoint;
 6. register a device and synthetic push token in non-production;
@@ -441,7 +463,8 @@ tests.
 Create ADRs before implementation for:
 
 - managed identity provider and sign-in/recovery methods;
-- AWS region and recovery-region strategy;
+- funded AWS region, recovery objectives, and deployment strategy (ADR 0002
+  records the current deferral and candidate region);
 - maps/geocoding/routing provider;
 - location-history retention and backup expiry;
 - exact server-side approximation algorithm;

@@ -57,10 +57,32 @@ situations. It must never claim to guarantee safety, prevent crime, detect every
 crash, or dispatch emergency services unless a verified integration actually
 does so. Emergency copy and flows must always state their real limitations.
 
+## Local guardrails
+
+Run the repository safety/formatting check from the repository root:
+
+```powershell
+.\scripts\verify-repository.ps1
+```
+
+With Docker running, scan the resolved backend and shipped Android release
+dependencies using the immutable OSV Scanner image:
+
+```powershell
+.\scripts\scan-dependencies.ps1
+```
+
+The GitHub workflows run only for a public repository, where standard hosted
+runners are available at no charge. A private repository skips those jobs; the
+local commands remain authoritative.
+
 ## Status
 
 The backend/local-services foundation, Android Ocean Sky shell, and debug UI
-exploration through UI4 are complete. No feature is active; 0E is next but is
-not proposed or approved. Identity, real product features, iOS, and AWS remain
-unimplemented. See `docs/FEATURE_ROADMAP.md` for the single current status and
-delivery order.
+exploration through UI4 and delivery foundations through 0F are complete. No
+feature is active; 0G is next in the roadmap but has not been proposed or
+approved, and executable iOS work remains blocked until macOS/Xcode is
+available. Identity, real product features, iOS, and AWS remain unimplemented.
+The spending ceiling is ZAR 0; cloud resources, paid services, and trials that
+can become billable are outside the approved boundary. See
+`docs/FEATURE_ROADMAP.md` for the single current status and delivery order.

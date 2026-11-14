@@ -87,6 +87,18 @@ over what is shared and an auditable view of who can access it.
 Exact service-level targets must be baselined with real devices before they are
 treated as contractual promises.
 
+### 4.3 First-pilot and funding boundary
+
+Kinly is the working name pending affordable brand, domain, and legal checks.
+The future first pilot is limited to consenting South African adults aged 18 or
+older in private trusted circles. Child, dependent, vulnerable-person, and
+guardianship use remains deferred.
+
+The current spending ceiling is ZAR 0. Development is local and synthetic-only;
+no cloud resource, paid provider, billable trial, domain, developer membership,
+or real-user pilot is authorised. These restrictions and the conditional future
+AWS direction are recorded in ADR 0002.
+
 ## 5. Users and roles
 
 ### 5.1 Primary users
@@ -373,11 +385,12 @@ and one sequential substep within it may be in progress at a time.
 
 ## 12. Decisions required before implementation
 
-1. Confirm Kinly as the product name or mark it temporary.
-2. Confirm the first pilot audience and whether all members are adults.
+1. Revisit Kinly's working-name status before public launch (ADR 0002).
+2. Revisit the approved adult-only South African pilot boundary before pilot
+   recruitment (ADR 0002).
 3. Select the managed identity provider and primary sign-in method.
-4. Choose AWS region(s) after POPIA, latency, service availability, and cost
-   review.
+4. Choose AWS region(s) only after the ZAR 0 boundary is explicitly amended and
+   POPIA, latency, service availability, recovery, and cost are reviewed.
 5. Approve a location-history retention default through an ADR.
 6. Define the exact MVP SOS recipients, channels, retry window, and copy.
 7. Select maps/geocoding and SMS/email providers after a cost/privacy review.

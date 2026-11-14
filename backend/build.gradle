@@ -12,13 +12,17 @@ java {
     }
 }
 
+dependencyLocking {
+    lockAllConfigurations()
+}
+
 repositories {
     mavenLocal()
     mavenCentral()
 }
 
 dependencies {
-    implementation platform('org.springframework.boot:spring-boot-dependencies:4.1.0')
+    implementation platform('org.springframework.boot:spring-boot-dependencies:4.1.2')
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
     implementation 'org.springframework.boot:spring-boot-starter-data-redis'
     implementation 'org.springframework.boot:spring-boot-starter-jdbc'
@@ -28,7 +32,7 @@ dependencies {
     runtimeOnly 'org.flywaydb:flyway-database-postgresql'
     runtimeOnly 'org.postgresql:postgresql'
 
-    testImplementation platform('org.springframework.boot:spring-boot-dependencies:4.1.0')
+    testImplementation platform('org.springframework.boot:spring-boot-dependencies:4.1.2')
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation platform('org.testcontainers:testcontainers-bom:2.0.5')
     testImplementation 'org.testcontainers:testcontainers-junit-jupiter'

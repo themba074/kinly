@@ -206,17 +206,21 @@ Create an ADR under `docs/decisions/` before changing any of the following:
 - Do not weaken consent or authorization "temporarily."
 - Do not commit `.env` files, credentials, real family data, or production
   coordinates.
+- Do not create cloud resources, start trials that can become billable, use
+  paid providers, or make any purchase while the project spending ceiling is
+  ZAR 0. A free tier is not permission to create an account or resource. Any
+  non-zero spend requires an explicit roadmap amendment and user approval.
 - Do not run destructive database or infrastructure operations without naming
   the exact target, explaining recovery, and receiving explicit approval.
 - Do not claim completion when required tests were skipped or could not run.
 
 ## Current Phase
 
-Phase 1 is a walking skeleton built one approved slice at a time. Features 0A
-through 0D and UI1 through UI4 are complete. No feature is active; 0E is next
-but is not proposed or approved. No real identity, circle, consent, location,
-notification, or safety feature exists. Executable iOS work remains blocked
-until macOS/Xcode is available.
+Kinly is a walking skeleton built one approved slice at a time. Features 0A
+through 0F and UI1 through UI4 are complete. No feature is active; 0G is next
+but has not been proposed or approved. No cloud deployment or real identity,
+circle, consent, location, notification, or safety feature exists. Executable
+iOS work remains blocked until macOS/Xcode is available.
 
 `docs/FEATURE_ROADMAP.md` is the single delivery plan. Keep only one feature and
 one sequential substep in progress. Each feature needs its own proposal and

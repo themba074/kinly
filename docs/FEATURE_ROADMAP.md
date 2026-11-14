@@ -1,10 +1,10 @@
 # Kinly Feature Roadmap
 
 **Status:** Active delivery plan  
-**Last updated:** 13 November 2026
-**Current feature:** None; UI4 is complete
+**Last updated:** 14 November 2026
+**Current feature:** None; 0F is complete
 **Current substep:** None
-**Next planned feature:** 0E - product and adult-only pilot guardrails
+**Next planned feature:** 0G - executable native iOS foundation
 **Rule:** One feature, and one substep within that feature, may be in progress.
 
 This is Kinly's single delivery-planning document. The PRD defines what the
@@ -77,9 +77,71 @@ blocker until macOS/Xcode is available, but it must not be silently skipped.
 | 0B | Open the Android Ocean Sky shell and show truthful, non-sensitive backend availability. | Compose UI, offline/error/retry, accessibility, local health request, Android lint/test/build, and CI pass. No authentication, maps, push, or sensitive permission exists. | **Complete** |
 | 0C | Record supported Android/iOS versions and the physical-device test matrix. | ADR is approved before platform-specific background behaviour begins. | **Complete** |
 | 0D | View approved native Ocean Sky components and synthetic states without implying unfinished product behaviour. | Debug-only Android showcase, installable APK, accessibility tests, viewing instructions, and matching iOS component guidance pass. No product action, permission, or sensitive data is introduced. | **Complete** |
-| 0E | Confirm the product and adult-only pilot guardrails, development AWS region, and recovery direction. | The working product-name decision, first-pilot audience, provisional quality gates, POPIA/cross-border assumptions, regional service availability, latency, recovery, and cost are recorded and approved before real-user data or cloud deployment. | Planned |
-| 0F | Complete the development delivery foundation. | Reviewed Terraform provisions only the approved development resources; OpenAPI/versioning, formatting, secret and dependency scanning, migration checks, privacy-safe observability, health, rollback, environment isolation, and cost controls pass in CI. | Planned |
+| 0E | Confirm the product, adult-only pilot, zero-spend boundary, and future cloud direction. | The working product-name decision, first-pilot audience, provisional quality gates, POPIA/cross-border assumptions, local recovery direction, and zero-cost boundary are recorded and approved before real-user data or any cloud deployment. | **Complete** |
+| 0F | Complete the zero-spend local delivery foundation. | OpenAPI/versioning, formatting, secret and dependency scanning, migration checks, privacy-safe observability, health, local recovery, and environment isolation pass locally and through available no-charge CI. No cloud resource, Terraform apply, paid provider, or other billable service is introduced. | **Complete** |
 | 0G | Establish an executable native iOS foundation. | A macOS/Xcode build path runs the Swift/SwiftUI Ocean Sky shell, non-sensitive backend status, debug showcase equivalents, accessibility checks, tests, and CI without claiming unimplemented product behaviour. | Planned |
+
+#### 0E decision summary
+
+ADR 0002 keeps Kinly as the working name, limits the future first pilot to
+consenting South African adults, and sets a ZAR 0 spending ceiling. Development
+is local and synthetic-only, with recovery by rebuilding from source,
+containers, and migrations. AWS Cape Town is only a future candidate and must
+be reassessed through an approved roadmap amendment before any cloud or paid
+action. The PRD and technical specification carry the matching boundaries.
+
+#### 0F proposal - local delivery checks only
+
+**Outcome and scope:** Make the existing local backend and Android foundation
+repeatably verifiable without deploying anything. Add a minimal valid OpenAPI
+v1 contract foundation that describes only implemented behavior, keep API
+versioning guidance with that contract, and extend the existing Gradle and
+workflow checks for formatting/static analysis, secrets, dependencies,
+migrations, health, and privacy-safe logs. Keep local startup and recovery
+instructions in the existing READMEs. Existing GitHub Actions may run only when
+they are available at no charge; the equivalent local commands remain the
+canonical fallback.
+
+Work proceeds sequentially inside this single feature: contract and versioning;
+local/CI guardrails; then one close-out verification and documentation pass. It
+does not add a product endpoint, identity, permission, map, location, provider,
+Terraform, deployment environment, new programming language, or real data.
+
+**Acceptance and negative checks:** The OpenAPI document validates and contains
+no invented product operation. Backend formatting/static checks, targeted unit
+and PostGIS/Redis/Flyway integration tests, Android unit/lint/build checks,
+secret-pattern checks, and a no-charge dependency-vulnerability check have
+documented local commands and pass once in the final affected scope. Health and
+correlation behavior stays non-sensitive, logs contain no secret, token,
+request body, or coordinate, and local services remain bound to loopback with
+development-only credentials. No cloud resource, hosted deployment, paid
+minute, trial, credential, real account, production coordinate, application
+permission, or feature simulation is introduced.
+
+**Design, alternatives, and rollback:** Reuse Gradle, Docker Compose, the two
+existing workflows, and existing READMEs; pin any no-charge third-party CI
+action to an immutable revision and provide a local alternative. A paid quality
+platform, Terraform plan/apply, and a new umbrella build system are rejected as
+costly or unnecessary. Duplicated policy documents and broad test reruns are
+also excluded. Repository-only changes are reversible by reverting the affected
+contract, build, workflow, and README edits; there is no external state to
+recover.
+
+**Effects and sanity-check:** Privacy and security improve through contract,
+secret, dependency, and safe-log checks. Reliability improves only for local
+build and migration repeatability; cloud latency, backups, recovery, and iOS
+remain unverified. There is no mobile permission, battery, consent,
+accessibility, or runtime product behavior change. Cost remains ZAR 0. Approval
+should confirm that an empty or foundation-only v1 contract is preferable to
+inventing future endpoints, and that hosted CI must be skipped whenever it is
+not demonstrably free.
+
+**Close-out:** The validated `contracts/openapi.json` foundation has an
+intentionally empty product path set, a local `/api/v1` base, and explicit
+additive/breaking-change rules. Resolved dependencies are locked, the shipped
+dependency set has no OSV findings, repository/secret/safe-log/isolation checks
+pass, and public-only CI uses immutable action and scanner revisions. Local
+recovery is documented without adding a hosted environment or backup.
 
 ### Native mobile UI exploration
 
@@ -238,6 +300,8 @@ sensitive permission, member data, map, push, location, or safety behaviour.
 | 0B | Six JVM and three Pixel 8/API 36 Compose tests passed; lint and APK builds passed; local readiness was verified. |
 | 0C | ADR 0001 accepted Android API 26+, API 36 compile/target, iOS 17+, and the physical-device matrix. |
 | 0D | Six JVM and five cumulative Compose tests passed; showcase viewing, release exclusion, APKs, lint, and iOS guidance verified. |
+| 0E | ADR 0002 records the working name, adult-only South African pilot, synthetic local recovery, ZAR 0 ceiling, and conditional future cloud direction; the PRD, technical specification, roadmap, README, and agent boundary agree. No cloud or billable action occurred. |
+| 0F | OpenAPI/versioning, locked dependencies, repository and OSV scans, backend tests, Android release assembly, Compose isolation, recovery guidance, and public-only CI guardrails were verified. No cloud resource, paid service, trial, real data, or product behavior was added. |
 | UI1 | Six JVM and eleven cumulative Compose tests passed; Home privacy states, large text, screenshots, release exclusion, and guidance verified. |
 | UI2 | Six JVM and nineteen cumulative Compose tests passed; sharing consent, touch targets, large text, screenshots, release exclusion, and guidance verified. |
 | UI3 | Six JVM and twenty-seven cumulative Compose tests passed; roles, invitations, consent separation, accessibility, screenshots, and release exclusion verified. |
@@ -245,6 +309,6 @@ sensitive permission, member data, map, push, location, or safety behaviour.
 | UI4.2 | Eleven new and forty-eight cumulative Compose tests passed; Care and Safety truthfulness, accessibility, screenshots, builds, lint, release exclusion, and CI verified. |
 | UI4.3 | Twelve targeted Compose tests passed; History/privacy truthfulness, grant and revocation boundaries, accessibility, all six screenshots, builds, lint, and release exclusion verified. |
 
-UI4 is **Complete**. No feature is active. Feature 0E is next but is not
-proposed or approved. Executable iOS verification remains blocked by
-macOS/Xcode.
+Feature 0F is **Complete** and no feature is active. Feature 0G is next but has
+not been proposed or approved; executable iOS verification remains blocked by
+macOS/Xcode. No cloud resource or real-user data is authorised.

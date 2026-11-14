@@ -1,0 +1,24 @@
+name: Repository guardrails
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    if: github.event.repository.private == false
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      - name: Verify repository safety and formatting
+        shell: pwsh
+        run: ./scripts/verify-repository.ps1
+      - name: Scan locked dependencies with OSV
+        shell: pwsh
+        run: ./scripts/scan-dependencies.ps1
+
