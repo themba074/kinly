@@ -219,9 +219,10 @@ Create an ADR under `docs/decisions/` before changing any of the following:
 
 Kinly is a walking skeleton built one approved slice at a time. Features 0A
 through 0F and UI1 through UI4 are complete. Feature 0G is in progress; its
-Xcode project, Ocean Sky shell, and backend-status substep is complete. No 0G
-substep is active; debug showcase equivalents are next. Public standard macOS
-CI provides the executable Xcode path at no charge, but interactive iOS viewing
+Xcode project, four-tab Ocean Sky shell, backend-status, and debug-showcase
+navigation substeps are complete. No 0G substep is active; final
+accessibility/UI verification and close-out are next. Public standard macOS CI
+provides the executable Xcode path at no charge, but interactive iOS viewing
 remains unavailable on this Windows machine. No cloud deployment or real
 identity, circle, consent, location, notification, or safety feature exists.
 

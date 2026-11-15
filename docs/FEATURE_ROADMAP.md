@@ -3,7 +3,7 @@
 **Status:** Active delivery plan  
 **Last updated:** 15 November 2026
 **Current feature:** 0G - executable native iOS foundation (**In progress**)
-**Current substep:** Debug-showcase equivalents and four-tab navigation
+**Current substep:** None; debug-showcase/navigation substep is complete
 **Next planned feature:** 0G - executable native iOS foundation
 **Rule:** One feature, and one substep within that feature, may be in progress.
 
@@ -200,16 +200,23 @@ five-tab Ocean Sky shell, and backend-status substep is complete. Xcode 26.6
 built the Debug test host and Release app on a public standard macOS runner;
 all seven parser/model tests passed on an iPhone 17 Pro simulator. A
 documentation-only amendment subsequently approved the four-tab map-first
-direction and nested Places navigation. Debug showcase equivalents and the
-navigation refinement are now in progress; executable macOS CI and final
-accessibility/UI verification remain pending. No map was started.
+direction and nested Places navigation. The debug showcase equivalents and
+navigation refinement are complete; final accessibility/UI verification and
+0G close-out remain pending. No map was started.
 
-**Active substep:** The debug-showcase equivalents and four-tab navigation
-substep was approved and started on 15 November 2026. It is limited to native
-SwiftUI synthetic states, nested unavailable Places navigation, compile-time
-Debug isolation, accessibility, tests, and documentation. It adds no map,
+**Completed debug-showcase/navigation substep:** Approved, started, and
+completed on 15 November 2026. The primary shell now has Home, Safety, History,
+and Settings tabs, with a labelled Home control opening the unavailable Places
+screen. Debug-only SwiftUI states cover Home, sharing, circles, Places, care and
+Safety, and history/privacy without live product behaviour. Thirteen unit/UI
+tests passed on public macOS CI, including all showcase routes, nested Places,
+privacy-critical copy, and accessibility text size. Debug and Release builds
+passed, and the Release-binary guard found no synthetic-showcase copy. The
+repository guardrails also passed. The runner verified the iOS 17 deployment
+target but used its current available simulator; execution on an iOS 17
+simulator remains explicit final-close-out evidence when available. No map,
 coordinate, permission, account, storage, notification, product mutation, or
-emergency action.
+emergency action was added. Evidence: GitHub Actions run `43712102836`.
 
 ### Native mobile UI exploration
 
@@ -427,9 +434,10 @@ sensitive permission, member data, map, push, location, or safety behaviour.
 | UI4.2 | Eleven new and forty-eight cumulative Compose tests passed; Care and Safety truthfulness, accessibility, screenshots, builds, lint, release exclusion, and CI verified. |
 | UI4.3 | Twelve targeted Compose tests passed; History/privacy truthfulness, grant and revocation boundaries, accessibility, all six screenshots, builds, lint, and release exclusion verified. |
 
-Feature 0F is **Complete**. Feature 0G is **In progress**, with only its Xcode
-project, shell, and backend-status substep complete. No 0G substep is currently
-active; debug showcase equivalents are next and require a separate start.
-Public standard macOS CI is the executable Xcode path; interactive iOS viewing
-remains unavailable on this Windows machine. No cloud resource or real-user
-data is authorised.
+Feature 0F is **Complete**. Feature 0G is **In progress**; its Xcode project,
+four-tab Ocean Sky shell, backend-status, and debug-showcase/navigation
+substeps are complete. No 0G substep is currently active. Final
+accessibility/UI verification and 0G close-out are next and require a separate
+start. Public standard macOS CI is the executable Xcode path; interactive iOS
+viewing remains unavailable on this Windows machine. No cloud resource or
+real-user data is authorised.

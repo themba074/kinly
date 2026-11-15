@@ -84,10 +84,11 @@ local commands remain authoritative.
 The backend/local-services foundation, Android Ocean Sky shell, and debug UI
 exploration through UI4 and delivery foundations through 0F are complete. No
 other feature is active; 0G is in progress one substep at a time. Its iOS 17
-Xcode project, Ocean Sky shell, and backend status are complete; debug showcase
-equivalents are next but have not started. Public standard macOS CI is its
-executable path, while interactive iOS viewing remains unavailable on this
-Windows machine. Identity, real product features, and AWS remain unimplemented.
+Xcode project, four-tab Ocean Sky shell, backend status, and debug-showcase
+navigation are complete. Final accessibility/UI verification and close-out are
+next. Public standard macOS CI is its executable path, while interactive iOS
+viewing remains unavailable on this Windows machine. Identity, real product
+features, and AWS remain unimplemented.
 The spending ceiling is ZAR 0; cloud resources, paid services, and trials that
 can become billable are outside the approved boundary. See
 `docs/FEATURE_ROADMAP.md` for the single current status and delivery order.
