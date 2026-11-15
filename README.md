@@ -82,15 +82,13 @@ local commands remain authoritative.
 ## Status
 
 The backend/local-services foundation, Android Ocean Sky shell, and debug UI
-exploration through UI4 and delivery foundations through 0F are complete. No
-other feature is active; 0G is in progress one substep at a time. Its iOS 17
-Xcode project, four-tab Ocean Sky shell, backend status, and debug-showcase
-navigation are complete. Expanded accessibility, UI, Release-boundary, and
-current-simulator CI checks pass with retained screenshot evidence. Final
-close-out remains blocked on actual iOS 17 runtime execution because GitHub
-retired the standard macOS runner that supplied it; interactive VoiceOver and
-visual review also remain unavailable on this Windows machine. Identity, real
-product features, and AWS remain unimplemented.
+exploration through UI4 and delivery foundations through 0G are complete. No
+feature is active. The iOS 17 Xcode project, four-tab Ocean Sky shell, backend
+status, and debug showcase pass accessibility, UI, Release, and actual iOS
+17.5 simulator checks with retained screenshot evidence. Interactive VoiceOver
+and physical-device review remain unverified. Feature 1A is next and requires
+its own proposal and approval. Identity, real product features, and AWS remain
+unimplemented.
 The spending ceiling is ZAR 0; cloud resources, paid services, and trials that
 can become billable are outside the approved boundary. See
 `docs/FEATURE_ROADMAP.md` for the single current status and delivery order.

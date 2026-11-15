@@ -218,14 +218,12 @@ Create an ADR under `docs/decisions/` before changing any of the following:
 ## Current Phase
 
 Kinly is a walking skeleton built one approved slice at a time. Features 0A
-through 0F and UI1 through UI4 are complete. Feature 0G is in progress; its
-Xcode project, four-tab Ocean Sky shell, backend-status, and debug-showcase
-navigation substeps are complete. Final accessibility/UI verification is
-active: its current-runner checks pass, but close-out is blocked on actual iOS
-17 runtime execution after retirement of the standard macOS runner that
-provided it. Interactive VoiceOver and visual review remain unavailable on
-this Windows machine. No cloud deployment or real identity, circle, consent,
-location, notification, or safety feature exists.
+through 0G and UI1 through UI4 are complete. No feature or substep is active.
+The four-tab Ocean Sky iOS foundation passed its current and iOS 17.5 simulator
+CI checks. Interactive VoiceOver and physical-device review remain unverified.
+Feature 1A is next and requires its own proposal and explicit approval. No
+cloud deployment or real identity, circle, consent, location, notification,
+or safety feature exists.
 
 `docs/FEATURE_ROADMAP.md` is the single delivery plan. Keep only one feature and
 one sequential substep in progress. Each feature needs its own proposal and

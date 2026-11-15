@@ -2,9 +2,9 @@
 
 **Status:** Active delivery plan  
 **Last updated:** 15 November 2026
-**Current feature:** 0G - executable native iOS foundation (**In progress**)
-**Current substep:** Final accessibility/UI verification - blocked on iOS 17 runtime execution
-**Next planned feature:** 0G - executable native iOS foundation
+**Current feature:** None; 0G is **Complete**
+**Current substep:** None
+**Next planned feature:** 1A - identity provider, sign-in, recovery, and key-management boundary
 **Rule:** One feature, and one substep within that feature, may be in progress.
 
 This is Kinly's single delivery-planning document. The PRD defines what the
@@ -79,7 +79,7 @@ blocker until macOS/Xcode is available, but it must not be silently skipped.
 | 0D | View approved native Ocean Sky components and synthetic states without implying unfinished product behaviour. | Debug-only Android showcase, installable APK, accessibility tests, viewing instructions, and matching iOS component guidance pass. No product action, permission, or sensitive data is introduced. | **Complete** |
 | 0E | Confirm the product, adult-only pilot, zero-spend boundary, and future cloud direction. | The working product-name decision, first-pilot audience, provisional quality gates, POPIA/cross-border assumptions, local recovery direction, and zero-cost boundary are recorded and approved before real-user data or any cloud deployment. | **Complete** |
 | 0F | Complete the zero-spend local delivery foundation. | OpenAPI/versioning, formatting, secret and dependency scanning, migration checks, privacy-safe observability, health, local recovery, and environment isolation pass locally and through available no-charge CI. No cloud resource, Terraform apply, paid provider, or other billable service is introduced. | **Complete** |
-| 0G | Establish an executable native iOS foundation. | A macOS/Xcode build path runs the Swift/SwiftUI Ocean Sky shell, non-sensitive backend status, debug showcase equivalents, accessibility checks, tests, and CI without claiming unimplemented product behaviour. | **In progress** |
+| 0G | Establish an executable native iOS foundation. | A macOS/Xcode build path runs the Swift/SwiftUI Ocean Sky shell, non-sensitive backend status, debug showcase equivalents, accessibility checks, tests, and CI without claiming unimplemented product behaviour. | **Complete** |
 
 #### 0E decision summary
 
@@ -201,8 +201,8 @@ built the Debug test host and Release app on a public standard macOS runner;
 all seven parser/model tests passed on an iPhone 17 Pro simulator. A
 documentation-only amendment subsequently approved the four-tab map-first
 direction and nested Places navigation. The debug showcase equivalents and
-navigation refinement are complete; final accessibility/UI verification and
-0G close-out remain pending. No map was started.
+navigation refinement were complete before the final verification below. No
+map was started.
 
 **Completed debug-showcase/navigation substep:** Approved, started, and
 completed on 15 November 2026. The primary shell now has Home, Safety, History,
@@ -218,7 +218,7 @@ simulator remains explicit final-close-out evidence when available. No map,
 coordinate, permission, account, storage, notification, product mutation, or
 emergency action was added. Evidence: GitHub Actions run `43712102836`.
 
-**Active final substep:** Final accessibility/UI verification and 0G close-out
+**Final substep record:** Final accessibility/UI verification and 0G close-out
 were approved and started on 15 November 2026. The scope is limited to
 executable accessibility, target-size, Dynamic Type, orientation, navigation,
 synthetic screenshot, Release-boundary, CI, and documentation evidence. It
@@ -237,15 +237,24 @@ automated guards found no showcase copy in Release, Release cleartext
 exception, location permission string, entitlement file, or unreviewed app
 logging call. Repository guardrails passed in run `43737492482`.
 
-The attempted iOS 17.5 boundary job was cancelled before setup with no runner
+The initial iOS 17.5 boundary job was cancelled before setup with no runner
 allocated because GitHub has retired the standard `macos-14` label that
 provided Xcode 15.4 and iOS 17.5. The unallocatable job was removed rather than
-leave CI permanently unhealthy. This is an environment-availability blocker,
-not a passing runtime test: feature 0G remains **In progress**, the final
-substep remains active, and no later feature may start. Run `43737492458`, job
-`132883205742`, records the cancellation. Interactive VoiceOver and visual
-review also remain unverified on this Windows machine; XCUITest covers the
-accessibility contract and layout proxies only.
+leave CI permanently unhealthy. Run `43737492458`, job `132883205742`,
+records the cancellation. This was superseded by the following verification.
+
+**0G close-out:** The approved final substep completed on 15 November 2026.
+Apple's official component command installed iOS 17.5 on a public `macos-15`
+runner after Xcode first-launch and CoreSimulator initialization. A Swift 6
+main-actor correction to the UI test methods allowed the same thirteen test
+methods to pass on the actual iOS 17.5 simulator and on the current `macos-26`
+simulator. Both jobs and their `.xcresult` uploads passed in GitHub Actions run
+`43741876218`; repository guardrails passed in run `43741876184`. The current
+job also passed Debug/Release builds and the Release privacy/isolation guards.
+No product data, location permission, map, notification, or emergency action
+was added. Manual VoiceOver speech and visual review on a physical device or
+interactive Mac remain unverified; automated tests cover accessibility labels,
+values, target geometry, large text, rotation, and retained screenshots.
 
 ### Native mobile UI exploration
 
@@ -463,10 +472,7 @@ sensitive permission, member data, map, push, location, or safety behaviour.
 | UI4.2 | Eleven new and forty-eight cumulative Compose tests passed; Care and Safety truthfulness, accessibility, screenshots, builds, lint, release exclusion, and CI verified. |
 | UI4.3 | Twelve targeted Compose tests passed; History/privacy truthfulness, grant and revocation boundaries, accessibility, all six screenshots, builds, lint, and release exclusion verified. |
 
-Feature 0F is **Complete**. Feature 0G is **In progress**; its Xcode project,
-four-tab Ocean Sky shell, backend-status, and debug-showcase/navigation
-substeps are complete. Final accessibility/UI verification is active and its
-current-runner checks pass, but close-out is blocked on actual iOS 17 runtime
-execution after retirement of the standard `macos-14` runner. Interactive
-VoiceOver and visual review also remain unavailable on this Windows machine.
-No cloud resource or real-user data is authorised.
+Features 0A through 0G and UI1 through UI4 are **Complete**. No feature or
+substep is active. Feature 1A is next and requires its own proposal and explicit
+approval. Interactive VoiceOver and physical-device review remain future
+verification work. No cloud resource or real-user data is authorised.
