@@ -27,6 +27,7 @@ jobs:
           set -euo pipefail
           xcodebuild -version
           derived_data="$RUNNER_TEMP/KinlyDerivedData"
+          result_bundle="$RUNNER_TEMP/KinlyTests.xcresult"
 
           xcodebuild \
             -project ios/Kinly.xcodeproj \
@@ -52,6 +53,7 @@ jobs:
             -configuration Debug \
             -destination "platform=iOS Simulator,id=${simulator_id}" \
             -derivedDataPath "$derived_data" \
+            -resultBundlePath "$result_bundle" \
             CODE_SIGNING_ALLOWED=NO
 
           xcodebuild build \
@@ -68,3 +70,80 @@ jobs:
             echo "Debug showcase copy leaked into the Release binary" >&2
             exit 1
           fi
+
+          release_plist="$derived_data/Build/Products/Release-iphonesimulator/Kinly.app/Info.plist"
+          test -f "$release_plist"
+          if /usr/libexec/PlistBuddy -c "Print :NSAppTransportSecurity" "$release_plist" >/dev/null 2>&1; then
+            echo "Release contains an App Transport Security exception" >&2
+            exit 1
+          fi
+          if /usr/libexec/PlistBuddy -c "Print :NSLocationWhenInUseUsageDescription" "$release_plist" >/dev/null 2>&1; then
+            echo "Release contains an unapproved location permission description" >&2
+            exit 1
+          fi
+          if find ios -name "*.entitlements" -print -quit | grep -q .; then
+            echo "An unreviewed entitlement file exists" >&2
+            exit 1
+          fi
+          if grep -R -E "print\\(|os_log\\(|Logger\\(" ios/Kinly --include="*.swift"; then
+            echo "App source contains an unreviewed logging call" >&2
+            exit 1
+          fi
+
+      - name: Upload iOS UI evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: kinly-ios-ui-evidence
+          path: ${{ runner.temp }}/KinlyTests.xcresult
+          if-no-files-found: warn
+          retention-days: 14
+
+  ios-17-boundary:
+    if: github.event.repository.private == false
+    runs-on: macos-14
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: Verify on the iOS 17.5 deployment boundary
+        shell: bash
+        run: |
+          set -euo pipefail
+          export DEVELOPER_DIR=/Applications/Xcode_15.4.app/Contents/Developer
+          xcodebuild -version
+          xcrun simctl list runtimes
+          derived_data="$RUNNER_TEMP/KinlyIOS17DerivedData"
+          result_bundle="$RUNNER_TEMP/KinlyIOS17Tests.xcresult"
+
+          simulator_id="$(
+            xcrun simctl list devices available --json \
+              | ruby -rjson -e '
+                  devices_by_runtime = JSON.parse(STDIN.read).fetch("devices")
+                  runtime = devices_by_runtime.keys.find { |key| key.end_with?("iOS-17-5") }
+                  abort "iOS 17.5 simulator runtime is unavailable" unless runtime
+                  phone = devices_by_runtime.fetch(runtime).find do |device|
+                    device["isAvailable"] && device["name"] == "iPhone 15"
+                  end
+                  abort "No available iPhone 15 on iOS 17.5" unless phone
+                  puts phone.fetch("udid")
+                '
+          )"
+
+          xcodebuild test \
+            -project ios/Kinly.xcodeproj \
+            -scheme Kinly \
+            -configuration Debug \
+            -destination "platform=iOS Simulator,id=${simulator_id}" \
+            -derivedDataPath "$derived_data" \
+            -resultBundlePath "$result_bundle" \
+            SWIFT_VERSION=5.0 \
+            CODE_SIGNING_ALLOWED=NO
+
+      - name: Upload iOS 17 UI evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: kinly-ios-17-ui-evidence
+          path: ${{ runner.temp }}/KinlyIOS17Tests.xcresult
+          if-no-files-found: warn
+          retention-days: 14

@@ -61,6 +61,8 @@ private struct HomeView: View {
                     Text("Care starts with connection")
                         .font(.title.bold())
                         .foregroundStyle(Color.kinlyOcean900)
+                        .accessibilityAddTraits(.isHeader)
+                        .accessibilityIdentifier("home_heading")
                     Text(
                         "This early build checks only whether Kinly's development service is ready."
                     )
@@ -94,6 +96,7 @@ private struct HomeView: View {
                 )
                 .font(.subheadline)
                 .foregroundStyle(Color.kinlyInk600)
+                .accessibilityIdentifier("home_privacy_note")
             }
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding(24)
@@ -139,6 +142,7 @@ struct BackendStatusCard: View {
         .accessibilityElement(children: .contain)
         .accessibilityLabel("Kinly service status")
         .accessibilityValue(statusModel.status.accessibilityValue)
+        .accessibilityIdentifier("backend_status_card")
     }
 
     @ViewBuilder

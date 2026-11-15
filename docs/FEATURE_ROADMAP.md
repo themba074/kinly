@@ -3,7 +3,7 @@
 **Status:** Active delivery plan  
 **Last updated:** 15 November 2026
 **Current feature:** 0G - executable native iOS foundation (**In progress**)
-**Current substep:** None; debug-showcase/navigation substep is complete
+**Current substep:** Final accessibility/UI verification and 0G close-out
 **Next planned feature:** 0G - executable native iOS foundation
 **Rule:** One feature, and one substep within that feature, may be in progress.
 
@@ -217,6 +217,14 @@ target but used its current available simulator; execution on an iOS 17
 simulator remains explicit final-close-out evidence when available. No map,
 coordinate, permission, account, storage, notification, product mutation, or
 emergency action was added. Evidence: GitHub Actions run `43712102836`.
+
+**Active final substep:** Final accessibility/UI verification and 0G close-out
+were approved and started on 15 November 2026. The scope is limited to
+executable accessibility, target-size, Dynamic Type, orientation, navigation,
+synthetic screenshot, Release-boundary, CI, and documentation evidence. It
+adds no product behaviour or sensitive permission. Feature 0G may close only
+if every gate passes; unavailable iOS 17 simulator execution remains an
+explicit blocker rather than an inferred pass.
 
 ### Native mobile UI exploration
 
