@@ -109,8 +109,10 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          export DEVELOPER_DIR=/Applications/Xcode_16.2.app/Contents/Developer
+          sudo xcode-select -s /Applications/Xcode_16.2.app/Contents/Developer
+          sudo xcodebuild -runFirstLaunch
           xcodebuild -version
+          xcrun simctl list >/dev/null
           download_log="$RUNNER_TEMP/ios-17-download.log"
           set +e
           xcodebuild -downloadPlatform iOS -buildVersion 17.5 2>&1 | tee "$download_log"
