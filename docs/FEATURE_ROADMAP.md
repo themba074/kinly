@@ -3,7 +3,7 @@
 **Status:** Active delivery plan  
 **Last updated:** 15 November 2026
 **Current feature:** 0G - executable native iOS foundation (**In progress**)
-**Current substep:** Xcode project, shell, and backend status
+**Current substep:** None; shell/backend-status substep is complete
 **Next planned feature:** 0G - executable native iOS foundation
 **Rule:** One feature, and one substep within that feature, may be in progress.
 
@@ -188,9 +188,12 @@ Xcode path and that CI-first development is acceptable while interactive iOS
 viewing remains unavailable on this Windows machine. Approval confirmed both
 points on 15 November 2026.
 
-**Progress:** Approved on 15 November 2026. The Xcode project, Ocean Sky shell,
-and backend-status substep is in progress. Debug showcase equivalents and final
-accessibility/UI verification have not started.
+**Progress:** Approved on 15 November 2026. The iOS 17 Xcode project, Ocean Sky
+five-tab shell, and backend-status substep is complete. Xcode 26.6 built the
+Debug test host and Release app on a public standard macOS runner; all seven
+parser/model tests passed on an iPhone 17 Pro simulator. Debug showcase
+equivalents are next but have not started; final accessibility/UI verification
+also remains pending.
 
 ### Native mobile UI exploration
 
@@ -359,6 +362,8 @@ sensitive permission, member data, map, push, location, or safety behaviour.
 | UI4.3 | Twelve targeted Compose tests passed; History/privacy truthfulness, grant and revocation boundaries, accessibility, all six screenshots, builds, lint, and release exclusion verified. |
 
 Feature 0F is **Complete**. Feature 0G is **In progress**, with only its Xcode
-project, shell, and backend-status substep active. Public standard macOS CI is
-the executable Xcode path; interactive iOS viewing remains unavailable on this
-Windows machine. No cloud resource or real-user data is authorised.
+project, shell, and backend-status substep complete. No 0G substep is currently
+active; debug showcase equivalents are next and require a separate start.
+Public standard macOS CI is the executable Xcode path; interactive iOS viewing
+remains unavailable on this Windows machine. No cloud resource or real-user
+data is authorised.
