@@ -3,7 +3,7 @@
 **Status:** Active delivery plan  
 **Last updated:** 15 November 2026
 **Current feature:** 0G - executable native iOS foundation (**In progress**)
-**Current substep:** Final accessibility/UI verification and 0G close-out
+**Current substep:** Final accessibility/UI verification - blocked on iOS 17 runtime execution
 **Next planned feature:** 0G - executable native iOS foundation
 **Rule:** One feature, and one substep within that feature, may be in progress.
 
@@ -226,6 +226,27 @@ adds no product behaviour or sensitive permission. Feature 0G may close only
 if every gate passes; unavailable iOS 17 simulator execution remains an
 explicit blocker rather than an inferred pass.
 
+**Verification progress and blocker:** Public GitHub Actions run `43737492458`
+passed the expanded Swift 6 verification job on `macos-26`. All thirteen
+unit/UI test methods passed, including accessibility-tree labels and values,
+focus-order geometry, 44-point controls, accessibility XXXL reflow,
+portrait/landscape rotation, all four primary destinations, nested Places,
+and every synthetic showcase topic. Fourteen retained screenshots are stored
+in `.xcresult` artifact `14171007875`. Debug and Release builds passed, and
+automated guards found no showcase copy in Release, Release cleartext
+exception, location permission string, entitlement file, or unreviewed app
+logging call. Repository guardrails passed in run `43737492482`.
+
+The attempted iOS 17.5 boundary job was cancelled before setup with no runner
+allocated because GitHub has retired the standard `macos-14` label that
+provided Xcode 15.4 and iOS 17.5. The unallocatable job was removed rather than
+leave CI permanently unhealthy. This is an environment-availability blocker,
+not a passing runtime test: feature 0G remains **In progress**, the final
+substep remains active, and no later feature may start. Run `43737492458`, job
+`132883205742`, records the cancellation. Interactive VoiceOver and visual
+review also remain unverified on this Windows machine; XCUITest covers the
+accessibility contract and layout proxies only.
+
 ### Native mobile UI exploration
 
 | ID | Feature outcome | Completion gate | Status |
@@ -444,8 +465,8 @@ sensitive permission, member data, map, push, location, or safety behaviour.
 
 Feature 0F is **Complete**. Feature 0G is **In progress**; its Xcode project,
 four-tab Ocean Sky shell, backend-status, and debug-showcase/navigation
-substeps are complete. No 0G substep is currently active. Final
-accessibility/UI verification and 0G close-out are next and require a separate
-start. Public standard macOS CI is the executable Xcode path; interactive iOS
-viewing remains unavailable on this Windows machine. No cloud resource or
-real-user data is authorised.
+substeps are complete. Final accessibility/UI verification is active and its
+current-runner checks pass, but close-out is blocked on actual iOS 17 runtime
+execution after retirement of the standard `macos-14` runner. Interactive
+VoiceOver and visual review also remain unavailable on this Windows machine.
+No cloud resource or real-user data is authorised.
