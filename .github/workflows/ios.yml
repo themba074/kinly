@@ -111,7 +111,16 @@ jobs:
           set -euo pipefail
           export DEVELOPER_DIR=/Applications/Xcode_16.2.app/Contents/Developer
           xcodebuild -version
-          xcodebuild -downloadPlatform iOS -buildVersion 17.5
+          download_log="$RUNNER_TEMP/ios-17-download.log"
+          set +e
+          xcodebuild -downloadPlatform iOS -buildVersion 17.5 2>&1 | tee "$download_log"
+          download_status="${PIPESTATUS[0]}"
+          set -e
+          if [[ "$download_status" -ne 0 ]]; then
+            error_summary="$(tail -n 12 "$download_log" | tr '\n' ' ' | sed 's/%/%25/g; s/\r/%0D/g')"
+            echo "::error title=Official iOS 17.5 runtime download failed::${error_summary}"
+            exit "$download_status"
+          fi
           xcrun simctl list runtimes
 
       - name: Verify on the iOS 17.5 deployment boundary
