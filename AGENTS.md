@@ -217,10 +217,12 @@ Create an ADR under `docs/decisions/` before changing any of the following:
 ## Current Phase
 
 Kinly is a walking skeleton built one approved slice at a time. Features 0A
-through 0F and UI1 through UI4 are complete. No feature is active; 0G is next
-but has not been proposed or approved. No cloud deployment or real identity,
-circle, consent, location, notification, or safety feature exists. Executable
-iOS work remains blocked until macOS/Xcode is available.
+through 0F and UI1 through UI4 are complete. Feature 0G is in progress; only its
+Xcode project, Ocean Sky shell, and backend-status substep is active. Public
+standard macOS CI provides the executable Xcode path at no charge, but
+interactive iOS viewing remains unavailable on this Windows machine. No cloud
+deployment or real identity, circle, consent, location, notification, or safety
+feature exists.
 
 `docs/FEATURE_ROADMAP.md` is the single delivery plan. Keep only one feature and
 one sequential substep in progress. Each feature needs its own proposal and

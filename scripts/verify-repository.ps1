@@ -15,11 +15,12 @@ if ($LASTEXITCODE -ne 0) {
 $errors = [System.Collections.Generic.List[string]]::new()
 $textExtensions = @(
     ".gradle", ".groovy", ".java", ".json", ".kt", ".kts", ".md",
-    ".properties", ".ps1", ".sql", ".xml", ".yaml", ".yml"
+    ".pbxproj", ".plist", ".properties", ".ps1", ".sql", ".swift",
+    ".xml", ".xcscheme", ".yaml", ".yml"
 )
 $spaceIndentedExtensions = @(
     ".gradle", ".groovy", ".java", ".json", ".kt", ".kts", ".ps1",
-    ".sql", ".xml", ".yaml", ".yml"
+    ".plist", ".sql", ".swift", ".xml", ".xcscheme", ".yaml", ".yml"
 )
 $forbiddenExtensions = @(".jks", ".keystore", ".p12", ".pfx", ".pem")
 $secretPatterns = [ordered]@{
@@ -81,7 +82,8 @@ foreach ($relativePath in $trackedAndNew) {
         }
     }
 
-    if (($extension -eq ".java" -or $extension -eq ".kt" -or $extension -eq ".kts") -and
+    if (($extension -eq ".java" -or $extension -eq ".kt" -or
+        $extension -eq ".kts" -or $extension -eq ".swift") -and
         $content -match "(?im)(?:log(?:ger)?[.](?:trace|debug|info|warn|error)|System[.]out|printStackTrace).*?(?:authorization|password|token|latitude|longitude|coordinate|request.?body)") {
         $errors.Add("Sensitive field appears in a logging statement: $normalized")
     }

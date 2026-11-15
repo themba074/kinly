@@ -1,9 +1,9 @@
 # Kinly Feature Roadmap
 
 **Status:** Active delivery plan  
-**Last updated:** 14 November 2026
-**Current feature:** None; 0F is complete
-**Current substep:** None
+**Last updated:** 15 November 2026
+**Current feature:** 0G - executable native iOS foundation (**In progress**)
+**Current substep:** Xcode project, shell, and backend status
 **Next planned feature:** 0G - executable native iOS foundation
 **Rule:** One feature, and one substep within that feature, may be in progress.
 
@@ -79,7 +79,7 @@ blocker until macOS/Xcode is available, but it must not be silently skipped.
 | 0D | View approved native Ocean Sky components and synthetic states without implying unfinished product behaviour. | Debug-only Android showcase, installable APK, accessibility tests, viewing instructions, and matching iOS component guidance pass. No product action, permission, or sensitive data is introduced. | **Complete** |
 | 0E | Confirm the product, adult-only pilot, zero-spend boundary, and future cloud direction. | The working product-name decision, first-pilot audience, provisional quality gates, POPIA/cross-border assumptions, local recovery direction, and zero-cost boundary are recorded and approved before real-user data or any cloud deployment. | **Complete** |
 | 0F | Complete the zero-spend local delivery foundation. | OpenAPI/versioning, formatting, secret and dependency scanning, migration checks, privacy-safe observability, health, local recovery, and environment isolation pass locally and through available no-charge CI. No cloud resource, Terraform apply, paid provider, or other billable service is introduced. | **Complete** |
-| 0G | Establish an executable native iOS foundation. | A macOS/Xcode build path runs the Swift/SwiftUI Ocean Sky shell, non-sensitive backend status, debug showcase equivalents, accessibility checks, tests, and CI without claiming unimplemented product behaviour. | Planned |
+| 0G | Establish an executable native iOS foundation. | A macOS/Xcode build path runs the Swift/SwiftUI Ocean Sky shell, non-sensitive backend status, debug showcase equivalents, accessibility checks, tests, and CI without claiming unimplemented product behaviour. | **In progress** |
 
 #### 0E decision summary
 
@@ -142,6 +142,55 @@ additive/breaking-change rules. Resolved dependencies are locked, the shipped
 dependency set has no OSV findings, repository/secret/safe-log/isolation checks
 pass, and public-only CI uses immutable action and scanner revisions. Local
 recovery is documented without adding a hosted environment or backup.
+
+#### 0G proposal - native iOS foundation only
+
+**Outcome and scope:** Add a checked-in native Swift/SwiftUI app under `ios/`
+with an iOS 17 deployment target. It will mirror the existing foundation
+boundary: an Ocean Sky five-tab shell, a truthful non-sensitive development
+backend status on Home, unavailable copy for unfinished destinations, and
+debug-only synthetic showcase equivalents. It adds no account, permission,
+location, map, notification, background mode, provider, storage, real data, or
+safety action.
+
+Work remains sequential inside 0G: first the Xcode project, shell, and backend
+status; then debug-only showcase equivalents; then accessibility, tests, CI,
+and close-out. Only one substep may be active. Approval of 0G does not approve
+later identity or location features.
+
+**Acceptance and negative checks:** A standard public GitHub-hosted macOS
+runner builds Debug and Release configurations and runs unit and current
+simulator UI tests using stable installed Xcode. The project declares iOS 17;
+the iOS 17 simulator boundary must be executed when the runner provides it or
+remain an explicit blocker rather than an inferred pass. Tests cover checking,
+available, malformed/error, unavailable, and retry status; five-tab and
+unavailable-state truthfulness; debug-showcase release exclusion; VoiceOver
+labels/values, Dynamic Type reflow, and 44 pt controls. Release networking has
+no cleartext exception, logs contain no response bodies or sensitive values,
+and no sensitive entitlement or permission string exists.
+
+**Design, alternatives, and rollback:** Use SwiftUI `TabView`, structured
+concurrency, an observable main-actor status model, and a small protocol-backed
+`URLSession` client so network behavior is replaceable in tests. Debug launch
+configuration may select synthetic showcase states; Release must compile them
+out. The workflow uses only a standard macOS runner and skips private
+repositories, preserving the ZAR 0 boundary. A cross-platform framework, paid
+Mac service, copied Android layout, generated live-feature simulation, and
+unverified hand-authored release are rejected. Rollback is repository-only.
+
+**Effects and sanity-check:** Privacy and consent do not change because the
+status endpoint is operational and no personal data exists. Security is limited
+to a debug-only local-network exception; battery impact is one foreground
+status request with a short timeout. Reliability gains explicit loading,
+failure, and retry states; accessibility is part of each substep. The team
+should confirm that public standard macOS CI is acceptable as the executable
+Xcode path and that CI-first development is acceptable while interactive iOS
+viewing remains unavailable on this Windows machine. Approval confirmed both
+points on 15 November 2026.
+
+**Progress:** Approved on 15 November 2026. The Xcode project, Ocean Sky shell,
+and backend-status substep is in progress. Debug showcase equivalents and final
+accessibility/UI verification have not started.
 
 ### Native mobile UI exploration
 
@@ -309,6 +358,7 @@ sensitive permission, member data, map, push, location, or safety behaviour.
 | UI4.2 | Eleven new and forty-eight cumulative Compose tests passed; Care and Safety truthfulness, accessibility, screenshots, builds, lint, release exclusion, and CI verified. |
 | UI4.3 | Twelve targeted Compose tests passed; History/privacy truthfulness, grant and revocation boundaries, accessibility, all six screenshots, builds, lint, and release exclusion verified. |
 
-Feature 0F is **Complete** and no feature is active. Feature 0G is next but has
-not been proposed or approved; executable iOS verification remains blocked by
-macOS/Xcode. No cloud resource or real-user data is authorised.
+Feature 0F is **Complete**. Feature 0G is **In progress**, with only its Xcode
+project, shell, and backend-status substep active. Public standard macOS CI is
+the executable Xcode path; interactive iOS viewing remains unavailable on this
+Windows machine. No cloud resource or real-user data is authorised.

@@ -6,7 +6,7 @@ end_of_line = lf
 insert_final_newline = true
 trim_trailing_whitespace = true
 
-[*.{java,kt,kts,gradle,groovy,xml,sql,ps1}]
+[*.{java,kt,kts,swift,gradle,groovy,xml,plist,xcscheme,sql,ps1}]
 indent_style = space
 indent_size = 4
 

@@ -80,9 +80,11 @@ local commands remain authoritative.
 
 The backend/local-services foundation, Android Ocean Sky shell, and debug UI
 exploration through UI4 and delivery foundations through 0F are complete. No
-feature is active; 0G is next in the roadmap but has not been proposed or
-approved, and executable iOS work remains blocked until macOS/Xcode is
-available. Identity, real product features, iOS, and AWS remain unimplemented.
+other feature is active; 0G is in progress one substep at a time, beginning with
+the Xcode project, Ocean Sky shell, and backend status. Public standard macOS CI
+is its executable path, while interactive iOS viewing remains unavailable on
+this Windows machine. Identity, real product features, and AWS remain
+unimplemented.
 The spending ceiling is ZAR 0; cloud resources, paid services, and trials that
 can become billable are outside the approved boundary. See
 `docs/FEATURE_ROADMAP.md` for the single current status and delivery order.
