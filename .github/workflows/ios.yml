@@ -135,15 +135,25 @@ jobs:
           runtime_id="com.apple.CoreSimulator.SimRuntime.iOS-17-5"
           device_type="com.apple.CoreSimulator.SimDeviceType.iPhone-15"
           simulator_id="$(xcrun simctl create 'Kinly iPhone 15 iOS 17.5' "$device_type" "$runtime_id")"
+          test_log="$RUNNER_TEMP/ios-17-test.log"
 
+          set +e
           xcodebuild test \
+            -quiet \
             -project ios/Kinly.xcodeproj \
             -scheme Kinly \
             -configuration Debug \
             -destination "platform=iOS Simulator,id=${simulator_id}" \
             -derivedDataPath "$derived_data" \
             -resultBundlePath "$result_bundle" \
-            CODE_SIGNING_ALLOWED=NO
+            CODE_SIGNING_ALLOWED=NO 2>&1 | tee "$test_log"
+          test_status="${PIPESTATUS[0]}"
+          set -e
+          if [[ "$test_status" -ne 0 ]]; then
+            error_summary="$(tail -n 24 "$test_log" | tr '\n' ' ' | sed 's/%/%25/g; s/\r/%0D/g')"
+            echo "::error title=iOS 17.5 boundary verification failed::${error_summary}"
+            exit "$test_status"
+          fi
 
       - name: Upload iOS 17 UI evidence
         if: always()
