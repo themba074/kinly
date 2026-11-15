@@ -1,15 +1,7 @@
 import XCTest
 
 final class KinlyUITests: XCTestCase {
-    override func setUpWithError() throws {
-        continueAfterFailure = false
-        XCUIDevice.shared.orientation = .portrait
-    }
-
-    override func tearDownWithError() throws {
-        XCUIDevice.shared.orientation = .portrait
-    }
-
+    @MainActor
     func testPrimaryScreensExposeAccessibleNavigationAndNestedPlaces() {
         let app = launchApp()
 
@@ -52,6 +44,7 @@ final class KinlyUITests: XCTestCase {
         keepScreenshot(app, named: "Places-nested-portrait")
     }
 
+    @MainActor
     func testDebugShowcaseIsClearlySyntheticAndNavigable() {
         let app = launchApp(arguments: ["--kinly-ui-showcase"])
 
@@ -87,6 +80,7 @@ final class KinlyUITests: XCTestCase {
         }
     }
 
+    @MainActor
     func testAccessibilityXXXLReflowsAndRotatesWithoutLosingContent() {
         let app = launchApp(arguments: [
             "--kinly-ui-showcase",
@@ -103,13 +97,17 @@ final class KinlyUITests: XCTestCase {
         keepScreenshot(app, named: "Showcase-accessibility-XXXL-landscape")
     }
 
+    @MainActor
     private func launchApp(arguments: [String] = []) -> XCUIApplication {
+        continueAfterFailure = false
+        XCUIDevice.shared.orientation = .portrait
         let app = XCUIApplication()
         app.launchArguments = arguments
         app.launch()
         return app
     }
 
+    @MainActor
     private func assertMinimumTargetSize(
         _ element: XCUIElement,
         named name: String,
@@ -120,6 +118,7 @@ final class KinlyUITests: XCTestCase {
         XCTAssertGreaterThanOrEqual(element.frame.height, 44, "\(name) height", file: file, line: line)
     }
 
+    @MainActor
     private func keepScreenshot(_ app: XCUIApplication, named name: String) {
         let attachment = XCTAttachment(screenshot: app.screenshot())
         attachment.name = name
