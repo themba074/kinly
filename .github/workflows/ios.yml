@@ -98,3 +98,47 @@ jobs:
           path: ${{ runner.temp }}/KinlyTests.xcresult
           if-no-files-found: warn
           retention-days: 14
+
+  ios-17-boundary:
+    if: github.event.repository.private == false
+    runs-on: macos-15
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: Install the official iOS 17.5 simulator runtime
+        shell: bash
+        run: |
+          set -euo pipefail
+          export DEVELOPER_DIR=/Applications/Xcode_16.2.app/Contents/Developer
+          xcodebuild -version
+          xcodebuild -downloadPlatform iOS -buildVersion 17.5
+          xcrun simctl list runtimes
+
+      - name: Verify on the iOS 17.5 deployment boundary
+        shell: bash
+        run: |
+          set -euo pipefail
+          export DEVELOPER_DIR=/Applications/Xcode_16.2.app/Contents/Developer
+          derived_data="$RUNNER_TEMP/KinlyIOS17DerivedData"
+          result_bundle="$RUNNER_TEMP/KinlyIOS17Tests.xcresult"
+          runtime_id="com.apple.CoreSimulator.SimRuntime.iOS-17-5"
+          device_type="com.apple.CoreSimulator.SimDeviceType.iPhone-15"
+          simulator_id="$(xcrun simctl create 'Kinly iPhone 15 iOS 17.5' "$device_type" "$runtime_id")"
+
+          xcodebuild test \
+            -project ios/Kinly.xcodeproj \
+            -scheme Kinly \
+            -configuration Debug \
+            -destination "platform=iOS Simulator,id=${simulator_id}" \
+            -derivedDataPath "$derived_data" \
+            -resultBundlePath "$result_bundle" \
+            CODE_SIGNING_ALLOWED=NO
+
+      - name: Upload iOS 17 UI evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: kinly-ios-17-ui-evidence
+          path: ${{ runner.temp }}/KinlyIOS17Tests.xcresult
+          if-no-files-found: warn
+          retention-days: 14
