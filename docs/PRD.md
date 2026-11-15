@@ -195,8 +195,16 @@ dialler for emergency services. MVP Kinly does not claim to dispatch responders.
 
 - Collect samples using adaptive, platform-compliant policies.
 - Upload offline batches with unique sample IDs and device timestamps.
+- Default Home to an all-circles map containing each unique person the viewer
+  is currently authorised to see across their active circles, with an optional
+  circle filter. Overlapping membership must never create duplicate people or
+  broaden an action's audience.
 - Display latest authorised location, accuracy radius, source timestamp, and a
   freshness label.
+- Remove or re-authorise affected map state immediately when membership or a
+  sharing grant changes. Paused or revoked sharing must not leave a live marker
+  or reveal a last-known position unless that separate display remains
+  explicitly authorised and truthfully labelled.
 - Treat samples as duplicated, delayed, or out of order until validated.
 - Apply approximate sharing on the server before returning coordinates.
 - Avoid exposing raw coordinates through logs, analytics, support tooling, or

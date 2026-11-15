@@ -26,6 +26,7 @@ jobs:
         run: |
           set -euo pipefail
           xcodebuild -version
+          derived_data="$RUNNER_TEMP/KinlyDerivedData"
 
           xcodebuild \
             -project ios/Kinly.xcodeproj \
@@ -50,6 +51,7 @@ jobs:
             -scheme Kinly \
             -configuration Debug \
             -destination "platform=iOS Simulator,id=${simulator_id}" \
+            -derivedDataPath "$derived_data" \
             CODE_SIGNING_ALLOWED=NO
 
           xcodebuild build \
@@ -57,4 +59,12 @@ jobs:
             -scheme Kinly \
             -configuration Release \
             -destination "generic/platform=iOS Simulator" \
+            -derivedDataPath "$derived_data" \
             CODE_SIGNING_ALLOWED=NO
+
+          release_binary="$derived_data/Build/Products/Release-iphonesimulator/Kinly.app/Kinly"
+          test -f "$release_binary"
+          if strings "$release_binary" | grep -F "Synthetic preview only"; then
+            echo "Debug showcase copy leaked into the Release binary" >&2
+            exit 1
+          fi

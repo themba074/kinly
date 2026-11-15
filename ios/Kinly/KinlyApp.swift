@@ -16,7 +16,20 @@ struct KinlyApp: App {
 
     var body: some Scene {
         WindowGroup {
+            appRoot
+        }
+    }
+
+    @ViewBuilder
+    private var appRoot: some View {
+#if DEBUG
+        if ProcessInfo.processInfo.arguments.contains("--kinly-ui-showcase") {
+            DebugShowcaseView()
+        } else {
             KinlyRootView(statusModel: statusModel)
         }
+#else
+        KinlyRootView(statusModel: statusModel)
+#endif
     }
 }

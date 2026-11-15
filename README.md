@@ -46,7 +46,10 @@ hides platform-specific behavior.
 - `docs/DESIGN_SYSTEM.md`: approved Ocean Sky visual direction
 - `docs/FEATURE_ROADMAP.md`: the single gated delivery plan, current boundary,
   and completed-foundation record
-- `docs/mockups/kinly-selected-ui.png`: canonical five-tab UI concept
+- `docs/mockups/kinly-map-first-ocean-sky-v2.png`: canonical map-first Ocean
+  Sky UI concept with four primary tabs and Places opened from Home
+- `docs/mockups/kinly-selected-ui.png`: superseded five-tab Ocean Sky concept,
+  retained for design history
 - `docs/decisions/`: architecture decision records as decisions are approved
 - `AGENTS.md`: working agreement for human and AI contributors
 

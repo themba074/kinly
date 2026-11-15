@@ -3,7 +3,7 @@
 **Status:** Active delivery plan  
 **Last updated:** 15 November 2026
 **Current feature:** 0G - executable native iOS foundation (**In progress**)
-**Current substep:** None; shell/backend-status substep is complete
+**Current substep:** Debug-showcase equivalents and four-tab navigation
 **Next planned feature:** 0G - executable native iOS foundation
 **Rule:** One feature, and one substep within that feature, may be in progress.
 
@@ -147,11 +147,18 @@ recovery is documented without adding a hosted environment or backup.
 
 **Outcome and scope:** Add a checked-in native Swift/SwiftUI app under `ios/`
 with an iOS 17 deployment target. It will mirror the existing foundation
-boundary: an Ocean Sky five-tab shell, a truthful non-sensitive development
+boundary: an Ocean Sky shell, a truthful non-sensitive development
 backend status on Home, unavailable copy for unfinished destinations, and
 debug-only synthetic showcase equivalents. It adds no account, permission,
 location, map, notification, background mode, provider, storage, real data, or
 safety action.
+
+The approved 15 November 2026 design amendment changes the future primary
+navigation to Home, Safety, History, and Settings, with Places opened from a
+labelled Home action. The already verified five-tab shell remains historical
+0G evidence. Its four-tab navigation refactor is approved as a design and
+roadmap amendment but has not started and is not permission to add a map or
+product action inside 0G.
 
 Work remains sequential inside 0G: first the Xcode project, shell, and backend
 status; then debug-only showcase equivalents; then accessibility, tests, CI,
@@ -163,8 +170,8 @@ runner builds Debug and Release configurations and runs unit and current
 simulator UI tests using stable installed Xcode. The project declares iOS 17;
 the iOS 17 simulator boundary must be executed when the runner provides it or
 remain an explicit blocker rather than an inferred pass. Tests cover checking,
-available, malformed/error, unavailable, and retry status; five-tab and
-unavailable-state truthfulness; debug-showcase release exclusion; VoiceOver
+available, malformed/error, unavailable, and retry status; primary-navigation
+and unavailable-state truthfulness; debug-showcase release exclusion; VoiceOver
 labels/values, Dynamic Type reflow, and 44 pt controls. Release networking has
 no cleartext exception, logs contain no response bodies or sensitive values,
 and no sensitive entitlement or permission string exists.
@@ -188,12 +195,21 @@ Xcode path and that CI-first development is acceptable while interactive iOS
 viewing remains unavailable on this Windows machine. Approval confirmed both
 points on 15 November 2026.
 
-**Progress:** Approved on 15 November 2026. The iOS 17 Xcode project, Ocean Sky
-five-tab shell, and backend-status substep is complete. Xcode 26.6 built the
-Debug test host and Release app on a public standard macOS runner; all seven
-parser/model tests passed on an iPhone 17 Pro simulator. Debug showcase
-equivalents are next but have not started; final accessibility/UI verification
-also remains pending.
+**Progress:** Approved on 15 November 2026. The iOS 17 Xcode project, original
+five-tab Ocean Sky shell, and backend-status substep is complete. Xcode 26.6
+built the Debug test host and Release app on a public standard macOS runner;
+all seven parser/model tests passed on an iPhone 17 Pro simulator. A
+documentation-only amendment subsequently approved the four-tab map-first
+direction and nested Places navigation. Debug showcase equivalents and the
+navigation refinement are now in progress; executable macOS CI and final
+accessibility/UI verification remain pending. No map was started.
+
+**Active substep:** The debug-showcase equivalents and four-tab navigation
+substep was approved and started on 15 November 2026. It is limited to native
+SwiftUI synthetic states, nested unavailable Places navigation, compile-time
+Debug isolation, accessibility, tests, and documentation. It adds no map,
+coordinate, permission, account, storage, notification, product mutation, or
+emergency action.
 
 ### Native mobile UI exploration
 
@@ -264,9 +280,59 @@ they would imply unapproved providers, retention, and backend behaviour.
 | 3C | Choose the maps, geocoding, and routing provider boundary. | ADR covers privacy, South African coverage, data location, SDK/server data flow, rate limits, cost, offline/degraded behaviour, replacement, and test strategy before map-dependent production UI begins. | Planned |
 | 3D | Share and view one authorised foreground location. | Validated, idempotent, order-safe ingestion; authorised latest read; approved retention and server approximation; Android/iOS contextual permission and map/card states; freshness and uncertainty; and cross-circle/consent denial tests pass. | Planned |
 | 3E | Buffer and ingest location while temporarily offline. | Batch limits, local encryption decision, retry, duplicate, order, invalid sample, consent change, reboot, logout deletion, and retention tests pass on the backend and both clients. | Planned |
-| 3F | Receive live latest-location updates. | WebSocket subscription authorization, reconnect, revoke, order, backpressure, stale fallback, client lifecycle, and safe-log tests pass. | Planned |
+| 3F | Receive live authorised member updates across all of the viewer's circles. | Home defaults to All circles, returns each authorised person once across overlapping memberships, supports optional circle filtering, and passes WebSocket authorization, audience isolation, reconnect, revoke, order, backpressure, stale/offline fallback, accessibility, client lifecycle, and safe-log tests. | Planned |
 | 3G | Collect background location on Android using an approved adaptive policy. | Proposal is approved first; physical-device tests cover foreground service, Doze, reboot, restriction, low power, offline, revoke, kill switch, and measured battery/data use. | Planned |
 | 3H | Collect background location on iOS using an approved adaptive policy. | Proposal is approved first; physical-device tests cover authorization changes, relaunch, reduced accuracy, low power, offline, revoke, kill switch, and measured battery/data use. | Planned |
+
+#### 3F scope amendment - all-circles Home map
+
+**Approval boundary:** The user approved this roadmap scope amendment and the
+related Ocean Sky design-baseline amendment on 15 November 2026. Feature 3F
+remains **Planned**. This approval does not start 3F, bypass 0G or Features 1A
+through 3E, select a map provider, or approve implementation when 3F is reached.
+
+**Outcome and scope:** Home will default to an **All circles** map showing every
+unique person whose current location the viewer is authorised to access through
+at least one active shared circle. An optional circle filter narrows the view.
+Overlapping membership produces one person and one current marker, with only
+the shared-circle context the viewer may know. Places is no longer a primary
+tab; a labelled Places action on Home opens the Places screen and back
+navigation returns to the prior Home state.
+
+The all-circles view does not combine consent grants, expose unauthorised
+members, or silently target all circles. Check-ins, places, journeys, and
+safety actions require their own explicit audience. Paused or revoked sharing
+does not leave a live marker or silently substitute a last-known position.
+
+**Acceptance and negative checks:** Backend and both native clients cover a
+single authorised person, multiple circles, overlapping membership, one-circle
+grants, server-side approximate sharing, precise sharing, stale and offline
+state, delayed and out-of-order updates, and optional filtering. Tests prove
+deduplication by subject, cross-circle and non-member denial, subject-consent
+denial, immediate membership removal, pause, expiry, revocation, cache and
+WebSocket re-authorization, and no expansion from client-supplied circle or
+member identifiers. Map bounds, clustering, cached UI, logs, analytics,
+screenshots, and accessibility text must not leak a hidden position. A
+screen-reader-accessible non-map member list, large text, non-colour state
+labels, and native back behaviour are required.
+
+**Design and alternatives:** The server derives the authorised membership set,
+authorises each subject and purpose, applies precision, and deduplicates before
+returning the view. A selected-circle-only map was rejected because it requires
+repeated switching. An unfiltered combined map was rejected because it obscures
+context and audience. A separate all-circles destination was rejected because
+it duplicates Home and adds navigation clutter. The approved design uses one
+map-first Home, an All circles default, optional filters, four primary tabs,
+and nested Places navigation.
+
+**Effects and sanity-check:** The broader display increases the sensitivity of
+one screen and the impact of an authorization or cache defect, so negative
+access tests, bounded responses, immediate revocation, privacy-safe telemetry,
+and a threat-model update are mandatory. It does not justify faster location
+collection or more polling; battery and data policy remain adaptive. Marker
+density, clustering without leakage, map-provider cost, South African coverage,
+and degraded/offline behaviour must be validated after 3C selects the provider.
+No cloud resource or spend is approved.
 
 ### Phase 4 - Notifications
 

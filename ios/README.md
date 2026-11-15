@@ -1,9 +1,10 @@
 # Kinly iOS
 
-The native SwiftUI foundation mirrors the current Android walking-skeleton
-boundary: an Ocean Sky five-tab shell and a truthful, non-sensitive development
-backend status. It contains no identity, permission, location, notification,
-background, or safety feature.
+The native SwiftUI foundation uses the approved Ocean Sky four-tab shell:
+Home, Safety, History, and Settings. A labelled Home control opens the
+unavailable Places screen. Home also shows a truthful, non-sensitive
+development backend status. The app contains no identity, permission,
+location, map, notification, background, or safety feature.
 
 ## Build and test
 
@@ -20,6 +21,11 @@ xcodebuild test \
 Open `ios/Kinly.xcodeproj` in Xcode to run the app interactively. This Windows
 workspace cannot launch an iOS simulator, so the public standard macOS workflow
 is the executable verification path.
+
+To open the synthetic UI showcase in a Debug run, add the launch argument
+`--kinly-ui-showcase`. The showcase covers the approved Home, sharing, circle,
+Places, care/Safety, and history/privacy states without live data or product
+actions. Its code and launch route are compiled out of Release builds.
 
 Debug builds may call the local development readiness endpoint at
 `http://localhost:8080/actuator/health/readiness`. Only the Debug plist permits

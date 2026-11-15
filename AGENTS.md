@@ -24,7 +24,8 @@ summarizes how an agent must work; it does not replace either specification.
 - APIs: versioned REST for commands and ordinary reads; WebSockets for live
   member updates; HTTPS batch ingestion for location samples
 - Visual direction: Ocean Sky. Use `docs/DESIGN_SYSTEM.md` and the canonical
-  `docs/mockups/kinly-selected-ui.png` concept as the design baseline.
+  `docs/mockups/kinly-map-first-ocean-sky-v2.png` concept as the design
+  baseline.
 
 Do not introduce a new language, framework, cloud, database, message broker, or
 cross-platform mobile framework without an approved architecture decision
