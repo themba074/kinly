@@ -1,10 +1,10 @@
 # Kinly Feature Roadmap
 
 **Status:** Active delivery plan  
-**Last updated:** 15 November 2026
-**Current feature:** None; 0G is **Complete**
+**Last updated:** 16 November 2026
+**Current feature:** None; 1A is **Complete**
 **Current substep:** None
-**Next planned feature:** 1A - identity provider, sign-in, recovery, and key-management boundary
+**Next planned feature:** 1B - register or sign in and retrieve the user's minimal profile
 **Rule:** One feature, and one substep within that feature, may be in progress.
 
 This is Kinly's single delivery-planning document. The PRD defines what the
@@ -303,7 +303,7 @@ they would imply unapproved providers, retention, and backend behaviour.
 
 | ID | Feature outcome | Completion gate | Status |
 |---|---|---|---|
-| 1A | Choose the identity provider, sign-in methods, recovery, and key-management boundary. | ADR and identity threat model are approved. | Planned |
+| 1A | Choose the identity provider, sign-in methods, recovery, and key-management boundary. | ADR and identity threat model are approved. | **Complete** |
 | 1B | Register or sign in and retrieve the authenticated user's minimal profile. | Approved email/phone ownership verification, backend token validation, `/api/v1/me`, Android and iOS onboarding/sign-in, cancellation, expiry, recovery, secure storage, safe logs, rate limits, and invalid-token tests pass. | Planned |
 | 1C | List and revoke a user's sessions/devices and manage push tokens. | Device registration is idempotent; the owner can list bounded non-sensitive device/session metadata and revoke access; token rotation, removal, ownership denial, cache invalidation, logout cleanup, and sensitive-log tests pass. No notification is sent yet. | Planned |
 
@@ -472,7 +472,8 @@ sensitive permission, member data, map, push, location, or safety behaviour.
 | UI4.2 | Eleven new and forty-eight cumulative Compose tests passed; Care and Safety truthfulness, accessibility, screenshots, builds, lint, release exclusion, and CI verified. |
 | UI4.3 | Twelve targeted Compose tests passed; History/privacy truthfulness, grant and revocation boundaries, accessibility, all six screenshots, builds, lint, and release exclusion verified. |
 
-Features 0A through 0G and UI1 through UI4 are **Complete**. No feature or
-substep is active. Feature 1A is next and requires its own proposal and explicit
-approval. Interactive VoiceOver and physical-device review remain future
-verification work. No cloud resource or real-user data is authorised.
+Features 0A through 0G, UI1 through UI4, and 1A are **Complete**. The team
+approved ADR 0003 and the identity threat model on 16 November 2026. Feature
+1B is next and requires its own proposal and approval. No provider resource
+or real-user data is authorised. Interactive VoiceOver and physical-device
+review remain future verification work.

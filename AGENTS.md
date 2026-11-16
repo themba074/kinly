@@ -218,11 +218,12 @@ Create an ADR under `docs/decisions/` before changing any of the following:
 ## Current Phase
 
 Kinly is a walking skeleton built one approved slice at a time. Features 0A
-through 0G and UI1 through UI4 are complete. No feature or substep is active.
+through 0G, UI1 through UI4, and 1A are complete. ADR 0003 and the identity
+threat model are approved. No feature or substep is active; 1B is next and
+requires its own proposal and explicit approval.
 The four-tab Ocean Sky iOS foundation passed its current and iOS 17.5 simulator
 CI checks. Interactive VoiceOver and physical-device review remain unverified.
-Feature 1A is next and requires its own proposal and explicit approval. No
-cloud deployment or real identity, circle, consent, location, notification,
+No cloud deployment or real identity, circle, consent, location, notification,
 or safety feature exists.
 
 `docs/FEATURE_ROADMAP.md` is the single delivery plan. Keep only one feature and
