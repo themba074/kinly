@@ -87,8 +87,10 @@ Feature 1A identity decisions are complete. The iOS 17 Xcode project,
 four-tab Ocean Sky shell, backend status, and debug showcase pass accessibility,
 UI, Release, and actual iOS 17.5 simulator checks with retained screenshot
 evidence. Interactive VoiceOver and physical-device review remain unverified.
-ADR 0003 and the identity threat model are approved; Feature 1B requires its
-own proposal. Identity, real product features, and AWS remain unimplemented.
+ADR 0003 and the identity threat model are approved. Feature 1B local
+synthetic preparation is in progress; managed-provider verification remains
+gated by the ZAR 0 boundary. Real identity, product features, and AWS remain
+unimplemented.
 The spending ceiling is ZAR 0; cloud resources, paid services, and trials that
 can become billable are outside the approved boundary. See
 `docs/FEATURE_ROADMAP.md` for the single current status and delivery order.

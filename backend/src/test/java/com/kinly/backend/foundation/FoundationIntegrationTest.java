@@ -59,7 +59,12 @@ class FoundationIntegrationTest {
                 Integer.class);
 
         assertThat(postgisExtensionCount).isEqualTo(1);
-        assertThat(migrationCount).isEqualTo(1);
+        assertThat(migrationCount).isEqualTo(2);
+        Integer identityTableCount = jdbcTemplate.queryForObject(
+                "SELECT COUNT(*) FROM information_schema.tables "
+                        + "WHERE table_schema = 'public' AND table_name = 'identity_account'",
+                Integer.class);
+        assertThat(identityTableCount).isEqualTo(1);
         assertThat(healthEndpoint.health().getStatus()).isEqualTo(Status.UP);
     }
 }

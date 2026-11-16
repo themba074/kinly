@@ -2,8 +2,8 @@
 
 **Status:** Active delivery plan  
 **Last updated:** 16 November 2026
-**Current feature:** None; 1A is **Complete**
-**Current substep:** None
+**Current feature:** 1B - register or sign in and retrieve the user's minimal profile (**In progress**)
+**Current substep:** Local synthetic contract, threat checks, and account schema
 **Next planned feature:** 1B - register or sign in and retrieve the user's minimal profile
 **Rule:** One feature, and one substep within that feature, may be in progress.
 
@@ -304,7 +304,7 @@ they would imply unapproved providers, retention, and backend behaviour.
 | ID | Feature outcome | Completion gate | Status |
 |---|---|---|---|
 | 1A | Choose the identity provider, sign-in methods, recovery, and key-management boundary. | ADR and identity threat model are approved. | **Complete** |
-| 1B | Register or sign in and retrieve the authenticated user's minimal profile. | Approved email/phone ownership verification, backend token validation, `/api/v1/me`, Android and iOS onboarding/sign-in, cancellation, expiry, recovery, secure storage, safe logs, rate limits, and invalid-token tests pass. | Planned |
+| 1B | Register or sign in and retrieve the authenticated user's minimal profile. | Approved email/phone ownership verification, backend token validation, `/api/v1/me`, Android and iOS onboarding/sign-in, cancellation, expiry, recovery, secure storage, safe logs, rate limits, and invalid-token tests pass. | **In progress** |
 | 1C | List and revoke a user's sessions/devices and manage push tokens. | Device registration is idempotent; the owner can list bounded non-sensitive device/session metadata and revoke access; token rotation, removal, ownership denial, cache invalidation, logout cleanup, and sensitive-log tests pass. No notification is sent yet. | Planned |
 
 ### Phase 2 - Circles and consent
@@ -474,6 +474,7 @@ sensitive permission, member data, map, push, location, or safety behaviour.
 
 Features 0A through 0G, UI1 through UI4, and 1A are **Complete**. The team
 approved ADR 0003 and the identity threat model on 16 November 2026. Feature
-1B is next and requires its own proposal and approval. No provider resource
-or real-user data is authorised. Interactive VoiceOver and physical-device
-review remain future verification work.
+1B local synthetic steps 1-3 were approved on 16 November 2026 and are in
+progress. Managed-provider verification remains gated by ADR 0002; no
+provider resource or real-user data is authorised. Interactive VoiceOver and
+physical-device review remain future verification work.
