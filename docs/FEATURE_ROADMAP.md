@@ -3,7 +3,7 @@
 **Status:** Active delivery plan  
 **Last updated:** 16 November 2026
 **Current feature:** 1B - register or sign in and retrieve the user's minimal profile (**In progress**)
-**Current substep:** Local synthetic contract, threat checks, and account schema
+**Current substep:** Backend Identity application service and `/api/v1/me` API
 **Next planned feature:** 1B - register or sign in and retrieve the user's minimal profile
 **Rule:** One feature, and one substep within that feature, may be in progress.
 
@@ -478,3 +478,13 @@ approved ADR 0003 and the identity threat model on 16 November 2026. Feature
 progress. Managed-provider verification remains gated by ADR 0002; no
 provider resource or real-user data is authorised. Interactive VoiceOver and
 physical-device review remain future verification work.
+
+The first 1B substep has a draft `/me` contract and synthetic threat cases in
+`docs/proposals/1b-me-contract-draft.md`, plus the V2 account migration and an
+identity-key integration assertion. The full Docker-backed backend suite passed
+on 16 November 2026 (five tests, no failures), confirming that the migration
+allows the same email across distinct provider subjects while enforcing issuer
+and subject uniqueness. Repository formatting, secret, safe-log, and local
+isolation checks passed. The published OpenAPI contract remains foundation-only
+because `/me` is not implemented. Backend Identity behavior is the sole active
+substep; no provider resource or real-user data has been created.

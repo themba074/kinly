@@ -1,12 +1,15 @@
 package com.kinly.backend.foundation;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+import java.util.UUID;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.health.actuate.endpoint.HealthEndpoint;
 import org.springframework.boot.health.contributor.Status;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.DynamicPropertyRegistry;
 import org.springframework.test.context.DynamicPropertySource;
@@ -66,6 +69,34 @@ class FoundationIntegrationTest {
                 Integer.class);
         assertThat(identityTableCount).isEqualTo(1);
         assertThat(healthEndpoint.health().getStatus()).isEqualTo(Status.UP);
+    }
+
+    @Test
+    void identityMigrationKeysOwnershipByIssuerAndSubjectRatherThanEmail() {
+        UUID firstId = UUID.fromString("00000000-0000-4000-8000-000000000101");
+        UUID secondId = UUID.fromString("00000000-0000-4000-8000-000000000102");
+        String insert = "INSERT INTO identity_account "
+                + "(id, issuer, provider_subject, verified_email, created_at, updated_at) "
+                + "VALUES (?, ?, ?, ?, now(), now())";
+
+        try {
+            jdbcTemplate.update(insert, firstId, "https://issuer.example.invalid", "subject-one",
+                    "adult-one@example.invalid");
+            jdbcTemplate.update(insert, secondId, "https://issuer.example.invalid", "subject-two",
+                    "adult-one@example.invalid");
+
+            assertThatThrownBy(() -> jdbcTemplate.update(insert, UUID.randomUUID(),
+                    "https://issuer.example.invalid", "subject-one",
+                    "another-adult@example.invalid"))
+                    .isInstanceOf(DataIntegrityViolationException.class);
+
+            Integer rows = jdbcTemplate.queryForObject(
+                    "SELECT COUNT(*) FROM identity_account WHERE verified_email = ?",
+                    Integer.class, "adult-one@example.invalid");
+            assertThat(rows).isEqualTo(2);
+        } finally {
+            jdbcTemplate.update("DELETE FROM identity_account WHERE id IN (?, ?)", firstId, secondId);
+        }
     }
 }
 
