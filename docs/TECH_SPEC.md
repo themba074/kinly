@@ -188,6 +188,14 @@ Every sensitive request follows this order:
 Circle IDs and subject IDs supplied by a client are selectors, never proof of
 access. A circle administrator has no implicit override of an adult's grant.
 
+The all-circles Home read derives the viewer's active memberships on the
+server; a client-supplied circle list is never an authorization shortcut. For
+each candidate subject, the Location module evaluates the applicable active
+grant before returning a location, applies the permitted precision, and then
+deduplicates by subject. The response may describe only shared-circle context
+the viewer is already entitled to know. A filter narrows this authorised set;
+it cannot expand it.
+
 ### Server-side approximation
 
 Approximate mode must transform the stored precise point before it leaves the

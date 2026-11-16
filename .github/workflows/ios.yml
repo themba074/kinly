@@ -26,6 +26,8 @@ jobs:
         run: |
           set -euo pipefail
           xcodebuild -version
+          derived_data="$RUNNER_TEMP/KinlyDerivedData"
+          result_bundle="$RUNNER_TEMP/KinlyTests.xcresult"
 
           xcodebuild \
             -project ios/Kinly.xcodeproj \
@@ -45,16 +47,129 @@ jobs:
                 '
           )"
 
+          test_log="$RUNNER_TEMP/ios-current-test.log"
+          set +e
           xcodebuild test \
+            -quiet \
             -project ios/Kinly.xcodeproj \
             -scheme Kinly \
             -configuration Debug \
             -destination "platform=iOS Simulator,id=${simulator_id}" \
-            CODE_SIGNING_ALLOWED=NO
+            -derivedDataPath "$derived_data" \
+            -resultBundlePath "$result_bundle" \
+            CODE_SIGNING_ALLOWED=NO 2>&1 | tee "$test_log"
+          test_status="${PIPESTATUS[0]}"
+          set -e
+          if [[ "$test_status" -ne 0 ]]; then
+            error_summary="$(tail -n 24 "$test_log" | tr '\n' ' ' | sed 's/%/%25/g; s/\r/%0D/g')"
+            echo "::error title=Current iOS verification failed::${error_summary}"
+            exit "$test_status"
+          fi
 
           xcodebuild build \
             -project ios/Kinly.xcodeproj \
             -scheme Kinly \
             -configuration Release \
             -destination "generic/platform=iOS Simulator" \
+            -derivedDataPath "$derived_data" \
             CODE_SIGNING_ALLOWED=NO
+
+          release_binary="$derived_data/Build/Products/Release-iphonesimulator/Kinly.app/Kinly"
+          test -f "$release_binary"
+          if strings "$release_binary" | grep -F "Synthetic preview only"; then
+            echo "Debug showcase copy leaked into the Release binary" >&2
+            exit 1
+          fi
+
+          release_plist="$derived_data/Build/Products/Release-iphonesimulator/Kinly.app/Info.plist"
+          test -f "$release_plist"
+          if /usr/libexec/PlistBuddy -c "Print :NSAppTransportSecurity" "$release_plist" >/dev/null 2>&1; then
+            echo "Release contains an App Transport Security exception" >&2
+            exit 1
+          fi
+          if /usr/libexec/PlistBuddy -c "Print :NSLocationWhenInUseUsageDescription" "$release_plist" >/dev/null 2>&1; then
+            echo "Release contains an unapproved location permission description" >&2
+            exit 1
+          fi
+          if find ios -name "*.entitlements" -print -quit | grep -q .; then
+            echo "An unreviewed entitlement file exists" >&2
+            exit 1
+          fi
+          if grep -R -E "print\\(|os_log\\(|Logger\\(" ios/Kinly --include="*.swift"; then
+            echo "App source contains an unreviewed logging call" >&2
+            exit 1
+          fi
+
+      - name: Upload iOS UI evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: kinly-ios-ui-evidence
+          path: ${{ runner.temp }}/KinlyTests.xcresult
+          if-no-files-found: warn
+          retention-days: 14
+
+  ios-17-boundary:
+    if: github.event.repository.private == false
+    runs-on: macos-15
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: Install the official iOS 17.5 simulator runtime
+        shell: bash
+        run: |
+          set -euo pipefail
+          sudo xcode-select -s /Applications/Xcode_16.2.app/Contents/Developer
+          sudo xcodebuild -runFirstLaunch
+          xcodebuild -version
+          xcrun simctl list >/dev/null
+          download_log="$RUNNER_TEMP/ios-17-download.log"
+          set +e
+          xcodebuild -downloadPlatform iOS -buildVersion 17.5 2>&1 | tee "$download_log"
+          download_status="${PIPESTATUS[0]}"
+          set -e
+          if [[ "$download_status" -ne 0 ]]; then
+            error_summary="$(tail -n 12 "$download_log" | tr '\n' ' ' | sed 's/%/%25/g; s/\r/%0D/g')"
+            echo "::error title=Official iOS 17.5 runtime download failed::${error_summary}"
+            exit "$download_status"
+          fi
+          xcrun simctl list runtimes
+
+      - name: Verify on the iOS 17.5 deployment boundary
+        shell: bash
+        run: |
+          set -euo pipefail
+          export DEVELOPER_DIR=/Applications/Xcode_16.2.app/Contents/Developer
+          derived_data="$RUNNER_TEMP/KinlyIOS17DerivedData"
+          result_bundle="$RUNNER_TEMP/KinlyIOS17Tests.xcresult"
+          runtime_id="com.apple.CoreSimulator.SimRuntime.iOS-17-5"
+          device_type="com.apple.CoreSimulator.SimDeviceType.iPhone-15"
+          simulator_id="$(xcrun simctl create 'Kinly iPhone 15 iOS 17.5' "$device_type" "$runtime_id")"
+          test_log="$RUNNER_TEMP/ios-17-test.log"
+
+          set +e
+          xcodebuild test \
+            -quiet \
+            -project ios/Kinly.xcodeproj \
+            -scheme Kinly \
+            -configuration Debug \
+            -destination "platform=iOS Simulator,id=${simulator_id}" \
+            -derivedDataPath "$derived_data" \
+            -resultBundlePath "$result_bundle" \
+            CODE_SIGNING_ALLOWED=NO 2>&1 | tee "$test_log"
+          test_status="${PIPESTATUS[0]}"
+          set -e
+          if [[ "$test_status" -ne 0 ]]; then
+            error_summary="$(tail -n 24 "$test_log" | tr '\n' ' ' | sed 's/%/%25/g; s/\r/%0D/g')"
+            echo "::error title=iOS 17.5 boundary verification failed::${error_summary}"
+            exit "$test_status"
+          fi
+
+      - name: Upload iOS 17 UI evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: kinly-ios-17-ui-evidence
+          path: ${{ runner.temp }}/KinlyIOS17Tests.xcresult
+          if-no-files-found: warn
+          retention-days: 14

@@ -1,8 +1,7 @@
 import SwiftUI
 
-private enum Destination: String, CaseIterable, Identifiable {
+enum PrimaryDestination: String, CaseIterable, Identifiable {
     case home = "Home"
-    case places = "Places"
     case safety = "Safety"
     case history = "History"
     case settings = "Settings"
@@ -11,23 +10,17 @@ private enum Destination: String, CaseIterable, Identifiable {
 
     var symbol: String {
         switch self {
-        case .home:
-            "house.fill"
-        case .places:
-            "mappin.and.ellipse"
-        case .safety:
-            "shield.checkered"
-        case .history:
-            "clock.arrow.circlepath"
-        case .settings:
-            "gearshape.fill"
+        case .home: "house.fill"
+        case .safety: "shield.checkered"
+        case .history: "clock.arrow.circlepath"
+        case .settings: "gearshape.fill"
         }
     }
 }
 
 struct KinlyRootView: View {
     @ObservedObject var statusModel: BackendStatusModel
-    @State private var selection = Destination.home
+    @State private var selection = PrimaryDestination.home
 
     var body: some View {
         TabView(selection: $selection) {
@@ -36,14 +29,17 @@ struct KinlyRootView: View {
                     .kinlyNavigationTitle()
             }
             .tabItem {
-                Label(Destination.home.rawValue, systemImage: Destination.home.symbol)
+                Label(PrimaryDestination.home.rawValue, systemImage: PrimaryDestination.home.symbol)
             }
-            .tag(Destination.home)
+            .tag(PrimaryDestination.home)
 
-            ForEach(Destination.allCases.filter { $0 != .home }) { destination in
+            ForEach(PrimaryDestination.allCases.filter { $0 != .home }) { destination in
                 NavigationStack {
-                    UnavailableDestinationView(destination: destination)
-                        .kinlyNavigationTitle()
+                    UnavailableDestinationView(
+                        title: destination.rawValue,
+                        symbol: destination.symbol
+                    )
+                    .kinlyNavigationTitle()
                 }
                 .tabItem {
                     Label(destination.rawValue, systemImage: destination.symbol)
@@ -65,12 +61,30 @@ private struct HomeView: View {
                     Text("Care starts with connection")
                         .font(.title.bold())
                         .foregroundStyle(Color.kinlyOcean900)
+                        .accessibilityAddTraits(.isHeader)
+                        .accessibilityIdentifier("home_heading")
                     Text(
                         "This early build checks only whether Kinly's development service is ready."
                     )
                     .font(.body)
                     .foregroundStyle(Color.kinlyInk600)
                 }
+
+                NavigationLink {
+                    UnavailableDestinationView(
+                        title: "Places",
+                        symbol: "mappin.and.ellipse"
+                    )
+                    .navigationTitle("Places")
+                    .navigationBarTitleDisplayMode(.inline)
+                } label: {
+                    Label("Open Places", systemImage: "mappin.and.ellipse")
+                        .frame(maxWidth: .infinity, minHeight: 44)
+                }
+                .buttonStyle(.bordered)
+                .tint(.kinlyOcean700)
+                .accessibilityHint("Opens the unavailable Places screen")
+                .accessibilityIdentifier("home_places_button")
 
                 BackendStatusCard(statusModel: statusModel)
 
@@ -82,6 +96,7 @@ private struct HomeView: View {
                 )
                 .font(.subheadline)
                 .foregroundStyle(Color.kinlyInk600)
+                .accessibilityIdentifier("home_privacy_note")
             }
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding(24)
@@ -93,7 +108,7 @@ private struct HomeView: View {
     }
 }
 
-private struct BackendStatusCard: View {
+struct BackendStatusCard: View {
     @ObservedObject var statusModel: BackendStatusModel
 
     var body: some View {
@@ -106,9 +121,7 @@ private struct BackendStatusCard: View {
 
             if statusModel.status == .unavailable {
                 Button {
-                    Task {
-                        await statusModel.refresh()
-                    }
+                    Task { await statusModel.refresh() }
                 } label: {
                     Label("Retry", systemImage: "arrow.clockwise")
                         .frame(maxWidth: .infinity, minHeight: 44)
@@ -129,6 +142,7 @@ private struct BackendStatusCard: View {
         .accessibilityElement(children: .contain)
         .accessibilityLabel("Kinly service status")
         .accessibilityValue(statusModel.status.accessibilityValue)
+        .accessibilityIdentifier("backend_status_card")
     }
 
     @ViewBuilder
@@ -182,26 +196,24 @@ private struct BackendStatusCard: View {
 
     private var statusBackground: Color {
         switch statusModel.status {
-        case .checking:
-            .kinlySky100
-        case .available:
-            .kinlyFresh100
-        case .unavailable:
-            .kinlyDanger100
+        case .checking: .kinlySky100
+        case .available: .kinlyFresh100
+        case .unavailable: .kinlyDanger100
         }
     }
 }
 
-private struct UnavailableDestinationView: View {
-    let destination: Destination
+struct UnavailableDestinationView: View {
+    let title: String
+    let symbol: String
 
     var body: some View {
         VStack(spacing: 16) {
-            Image(systemName: destination.symbol)
+            Image(systemName: symbol)
                 .font(.system(size: 44))
                 .foregroundStyle(Color.kinlyOcean700)
                 .accessibilityHidden(true)
-            Text(destination.rawValue)
+            Text(title)
                 .font(.title2.bold())
                 .foregroundStyle(Color.kinlyOcean900)
             Text(
@@ -214,10 +226,11 @@ private struct UnavailableDestinationView: View {
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Color.kinlySky50)
         .accessibilityElement(children: .combine)
+        .accessibilityIdentifier("unavailable_\(title.lowercased())")
     }
 }
 
-private extension View {
+extension View {
     func kinlyNavigationTitle() -> some View {
         navigationTitle("Kinly")
             .navigationBarTitleDisplayMode(.inline)
@@ -231,15 +244,18 @@ private extension View {
     }
 }
 
-private extension Color {
+extension Color {
     static let kinlyOcean900 = Color(red: 0.04, green: 0.16, blue: 0.27)
     static let kinlyOcean700 = Color(red: 0.04, green: 0.35, blue: 0.52)
+    static let kinlySky500 = Color(red: 0.15, green: 0.66, blue: 0.91)
     static let kinlySky50 = Color(red: 0.96, green: 0.98, blue: 1.00)
     static let kinlySky100 = Color(red: 0.87, green: 0.95, blue: 0.99)
     static let kinlyInk600 = Color(red: 0.32, green: 0.40, blue: 0.48)
     static let kinlyBorder = Color(red: 0.84, green: 0.89, blue: 0.93)
     static let kinlyFresh600 = Color(red: 0.08, green: 0.60, blue: 0.45)
     static let kinlyFresh100 = Color(red: 0.86, green: 0.97, blue: 0.93)
+    static let kinlyStale600 = Color(red: 0.72, green: 0.47, blue: 0.12)
+    static let kinlyStale100 = Color(red: 1.00, green: 0.95, blue: 0.81)
     static let kinlyDanger600 = Color(red: 0.85, green: 0.25, blue: 0.20)
     static let kinlyDanger100 = Color(red: 0.99, green: 0.90, blue: 0.88)
 }

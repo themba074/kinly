@@ -2,9 +2,9 @@
 
 **Status:** Active delivery plan  
 **Last updated:** 15 November 2026
-**Current feature:** 0G - executable native iOS foundation (**In progress**)
-**Current substep:** None; shell/backend-status substep is complete
-**Next planned feature:** 0G - executable native iOS foundation
+**Current feature:** None; 0G is **Complete**
+**Current substep:** None
+**Next planned feature:** 1A - identity provider, sign-in, recovery, and key-management boundary
 **Rule:** One feature, and one substep within that feature, may be in progress.
 
 This is Kinly's single delivery-planning document. The PRD defines what the
@@ -79,7 +79,7 @@ blocker until macOS/Xcode is available, but it must not be silently skipped.
 | 0D | View approved native Ocean Sky components and synthetic states without implying unfinished product behaviour. | Debug-only Android showcase, installable APK, accessibility tests, viewing instructions, and matching iOS component guidance pass. No product action, permission, or sensitive data is introduced. | **Complete** |
 | 0E | Confirm the product, adult-only pilot, zero-spend boundary, and future cloud direction. | The working product-name decision, first-pilot audience, provisional quality gates, POPIA/cross-border assumptions, local recovery direction, and zero-cost boundary are recorded and approved before real-user data or any cloud deployment. | **Complete** |
 | 0F | Complete the zero-spend local delivery foundation. | OpenAPI/versioning, formatting, secret and dependency scanning, migration checks, privacy-safe observability, health, local recovery, and environment isolation pass locally and through available no-charge CI. No cloud resource, Terraform apply, paid provider, or other billable service is introduced. | **Complete** |
-| 0G | Establish an executable native iOS foundation. | A macOS/Xcode build path runs the Swift/SwiftUI Ocean Sky shell, non-sensitive backend status, debug showcase equivalents, accessibility checks, tests, and CI without claiming unimplemented product behaviour. | **In progress** |
+| 0G | Establish an executable native iOS foundation. | A macOS/Xcode build path runs the Swift/SwiftUI Ocean Sky shell, non-sensitive backend status, debug showcase equivalents, accessibility checks, tests, and CI without claiming unimplemented product behaviour. | **Complete** |
 
 #### 0E decision summary
 
@@ -147,11 +147,18 @@ recovery is documented without adding a hosted environment or backup.
 
 **Outcome and scope:** Add a checked-in native Swift/SwiftUI app under `ios/`
 with an iOS 17 deployment target. It will mirror the existing foundation
-boundary: an Ocean Sky five-tab shell, a truthful non-sensitive development
+boundary: an Ocean Sky shell, a truthful non-sensitive development
 backend status on Home, unavailable copy for unfinished destinations, and
 debug-only synthetic showcase equivalents. It adds no account, permission,
 location, map, notification, background mode, provider, storage, real data, or
 safety action.
+
+The approved 15 November 2026 design amendment changes the future primary
+navigation to Home, Safety, History, and Settings, with Places opened from a
+labelled Home action. The already verified five-tab shell remains historical
+0G evidence. Its four-tab navigation refactor is approved as a design and
+roadmap amendment but has not started and is not permission to add a map or
+product action inside 0G.
 
 Work remains sequential inside 0G: first the Xcode project, shell, and backend
 status; then debug-only showcase equivalents; then accessibility, tests, CI,
@@ -163,8 +170,8 @@ runner builds Debug and Release configurations and runs unit and current
 simulator UI tests using stable installed Xcode. The project declares iOS 17;
 the iOS 17 simulator boundary must be executed when the runner provides it or
 remain an explicit blocker rather than an inferred pass. Tests cover checking,
-available, malformed/error, unavailable, and retry status; five-tab and
-unavailable-state truthfulness; debug-showcase release exclusion; VoiceOver
+available, malformed/error, unavailable, and retry status; primary-navigation
+and unavailable-state truthfulness; debug-showcase release exclusion; VoiceOver
 labels/values, Dynamic Type reflow, and 44 pt controls. Release networking has
 no cleartext exception, logs contain no response bodies or sensitive values,
 and no sensitive entitlement or permission string exists.
@@ -188,12 +195,66 @@ Xcode path and that CI-first development is acceptable while interactive iOS
 viewing remains unavailable on this Windows machine. Approval confirmed both
 points on 15 November 2026.
 
-**Progress:** Approved on 15 November 2026. The iOS 17 Xcode project, Ocean Sky
-five-tab shell, and backend-status substep is complete. Xcode 26.6 built the
-Debug test host and Release app on a public standard macOS runner; all seven
-parser/model tests passed on an iPhone 17 Pro simulator. Debug showcase
-equivalents are next but have not started; final accessibility/UI verification
-also remains pending.
+**Progress:** Approved on 15 November 2026. The iOS 17 Xcode project, original
+five-tab Ocean Sky shell, and backend-status substep is complete. Xcode 26.6
+built the Debug test host and Release app on a public standard macOS runner;
+all seven parser/model tests passed on an iPhone 17 Pro simulator. A
+documentation-only amendment subsequently approved the four-tab map-first
+direction and nested Places navigation. The debug showcase equivalents and
+navigation refinement were complete before the final verification below. No
+map was started.
+
+**Completed debug-showcase/navigation substep:** Approved, started, and
+completed on 15 November 2026. The primary shell now has Home, Safety, History,
+and Settings tabs, with a labelled Home control opening the unavailable Places
+screen. Debug-only SwiftUI states cover Home, sharing, circles, Places, care and
+Safety, and history/privacy without live product behaviour. Thirteen unit/UI
+tests passed on public macOS CI, including all showcase routes, nested Places,
+privacy-critical copy, and accessibility text size. Debug and Release builds
+passed, and the Release-binary guard found no synthetic-showcase copy. The
+repository guardrails also passed. The runner verified the iOS 17 deployment
+target but used its current available simulator; execution on an iOS 17
+simulator remains explicit final-close-out evidence when available. No map,
+coordinate, permission, account, storage, notification, product mutation, or
+emergency action was added. Evidence: GitHub Actions run `43712102836`.
+
+**Final substep record:** Final accessibility/UI verification and 0G close-out
+were approved and started on 15 November 2026. The scope is limited to
+executable accessibility, target-size, Dynamic Type, orientation, navigation,
+synthetic screenshot, Release-boundary, CI, and documentation evidence. It
+adds no product behaviour or sensitive permission. Feature 0G may close only
+if every gate passes; unavailable iOS 17 simulator execution remains an
+explicit blocker rather than an inferred pass.
+
+**Verification progress and blocker:** Public GitHub Actions run `43737492458`
+passed the expanded Swift 6 verification job on `macos-26`. All thirteen
+unit/UI test methods passed, including accessibility-tree labels and values,
+focus-order geometry, 44-point controls, accessibility XXXL reflow,
+portrait/landscape rotation, all four primary destinations, nested Places,
+and every synthetic showcase topic. Fourteen retained screenshots are stored
+in `.xcresult` artifact `14171007875`. Debug and Release builds passed, and
+automated guards found no showcase copy in Release, Release cleartext
+exception, location permission string, entitlement file, or unreviewed app
+logging call. Repository guardrails passed in run `43737492482`.
+
+The initial iOS 17.5 boundary job was cancelled before setup with no runner
+allocated because GitHub has retired the standard `macos-14` label that
+provided Xcode 15.4 and iOS 17.5. The unallocatable job was removed rather than
+leave CI permanently unhealthy. Run `43737492458`, job `132883205742`,
+records the cancellation. This was superseded by the following verification.
+
+**0G close-out:** The approved final substep completed on 15 November 2026.
+Apple's official component command installed iOS 17.5 on a public `macos-15`
+runner after Xcode first-launch and CoreSimulator initialization. A Swift 6
+main-actor correction to the UI test methods allowed the same thirteen test
+methods to pass on the actual iOS 17.5 simulator and on the current `macos-26`
+simulator. Both jobs and their `.xcresult` uploads passed in GitHub Actions run
+`43741876218`; repository guardrails passed in run `43741876184`. The current
+job also passed Debug/Release builds and the Release privacy/isolation guards.
+No product data, location permission, map, notification, or emergency action
+was added. Manual VoiceOver speech and visual review on a physical device or
+interactive Mac remain unverified; automated tests cover accessibility labels,
+values, target geometry, large text, rotation, and retained screenshots.
 
 ### Native mobile UI exploration
 
@@ -264,9 +325,59 @@ they would imply unapproved providers, retention, and backend behaviour.
 | 3C | Choose the maps, geocoding, and routing provider boundary. | ADR covers privacy, South African coverage, data location, SDK/server data flow, rate limits, cost, offline/degraded behaviour, replacement, and test strategy before map-dependent production UI begins. | Planned |
 | 3D | Share and view one authorised foreground location. | Validated, idempotent, order-safe ingestion; authorised latest read; approved retention and server approximation; Android/iOS contextual permission and map/card states; freshness and uncertainty; and cross-circle/consent denial tests pass. | Planned |
 | 3E | Buffer and ingest location while temporarily offline. | Batch limits, local encryption decision, retry, duplicate, order, invalid sample, consent change, reboot, logout deletion, and retention tests pass on the backend and both clients. | Planned |
-| 3F | Receive live latest-location updates. | WebSocket subscription authorization, reconnect, revoke, order, backpressure, stale fallback, client lifecycle, and safe-log tests pass. | Planned |
+| 3F | Receive live authorised member updates across all of the viewer's circles. | Home defaults to All circles, returns each authorised person once across overlapping memberships, supports optional circle filtering, and passes WebSocket authorization, audience isolation, reconnect, revoke, order, backpressure, stale/offline fallback, accessibility, client lifecycle, and safe-log tests. | Planned |
 | 3G | Collect background location on Android using an approved adaptive policy. | Proposal is approved first; physical-device tests cover foreground service, Doze, reboot, restriction, low power, offline, revoke, kill switch, and measured battery/data use. | Planned |
 | 3H | Collect background location on iOS using an approved adaptive policy. | Proposal is approved first; physical-device tests cover authorization changes, relaunch, reduced accuracy, low power, offline, revoke, kill switch, and measured battery/data use. | Planned |
+
+#### 3F scope amendment - all-circles Home map
+
+**Approval boundary:** The user approved this roadmap scope amendment and the
+related Ocean Sky design-baseline amendment on 15 November 2026. Feature 3F
+remains **Planned**. This approval does not start 3F, bypass 0G or Features 1A
+through 3E, select a map provider, or approve implementation when 3F is reached.
+
+**Outcome and scope:** Home will default to an **All circles** map showing every
+unique person whose current location the viewer is authorised to access through
+at least one active shared circle. An optional circle filter narrows the view.
+Overlapping membership produces one person and one current marker, with only
+the shared-circle context the viewer may know. Places is no longer a primary
+tab; a labelled Places action on Home opens the Places screen and back
+navigation returns to the prior Home state.
+
+The all-circles view does not combine consent grants, expose unauthorised
+members, or silently target all circles. Check-ins, places, journeys, and
+safety actions require their own explicit audience. Paused or revoked sharing
+does not leave a live marker or silently substitute a last-known position.
+
+**Acceptance and negative checks:** Backend and both native clients cover a
+single authorised person, multiple circles, overlapping membership, one-circle
+grants, server-side approximate sharing, precise sharing, stale and offline
+state, delayed and out-of-order updates, and optional filtering. Tests prove
+deduplication by subject, cross-circle and non-member denial, subject-consent
+denial, immediate membership removal, pause, expiry, revocation, cache and
+WebSocket re-authorization, and no expansion from client-supplied circle or
+member identifiers. Map bounds, clustering, cached UI, logs, analytics,
+screenshots, and accessibility text must not leak a hidden position. A
+screen-reader-accessible non-map member list, large text, non-colour state
+labels, and native back behaviour are required.
+
+**Design and alternatives:** The server derives the authorised membership set,
+authorises each subject and purpose, applies precision, and deduplicates before
+returning the view. A selected-circle-only map was rejected because it requires
+repeated switching. An unfiltered combined map was rejected because it obscures
+context and audience. A separate all-circles destination was rejected because
+it duplicates Home and adds navigation clutter. The approved design uses one
+map-first Home, an All circles default, optional filters, four primary tabs,
+and nested Places navigation.
+
+**Effects and sanity-check:** The broader display increases the sensitivity of
+one screen and the impact of an authorization or cache defect, so negative
+access tests, bounded responses, immediate revocation, privacy-safe telemetry,
+and a threat-model update are mandatory. It does not justify faster location
+collection or more polling; battery and data policy remain adaptive. Marker
+density, clustering without leakage, map-provider cost, South African coverage,
+and degraded/offline behaviour must be validated after 3C selects the provider.
+No cloud resource or spend is approved.
 
 ### Phase 4 - Notifications
 
@@ -361,9 +472,7 @@ sensitive permission, member data, map, push, location, or safety behaviour.
 | UI4.2 | Eleven new and forty-eight cumulative Compose tests passed; Care and Safety truthfulness, accessibility, screenshots, builds, lint, release exclusion, and CI verified. |
 | UI4.3 | Twelve targeted Compose tests passed; History/privacy truthfulness, grant and revocation boundaries, accessibility, all six screenshots, builds, lint, and release exclusion verified. |
 
-Feature 0F is **Complete**. Feature 0G is **In progress**, with only its Xcode
-project, shell, and backend-status substep complete. No 0G substep is currently
-active; debug showcase equivalents are next and require a separate start.
-Public standard macOS CI is the executable Xcode path; interactive iOS viewing
-remains unavailable on this Windows machine. No cloud resource or real-user
-data is authorised.
+Features 0A through 0G and UI1 through UI4 are **Complete**. No feature or
+substep is active. Feature 1A is next and requires its own proposal and explicit
+approval. Interactive VoiceOver and physical-device review remain future
+verification work. No cloud resource or real-user data is authorised.

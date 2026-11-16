@@ -28,6 +28,20 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
+               BlueprintIdentifier = "E10000000000000000000003"
+               BuildableName = "KinlyUITests.xctest"
+               BlueprintName = "KinlyUITests"
+               ReferencedContainer = "container:Kinly.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "NO"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
                BlueprintIdentifier = "E10000000000000000000002"
                BuildableName = "KinlyTests.xctest"
                BlueprintName = "KinlyTests"
@@ -50,6 +64,17 @@
                BlueprintIdentifier = "E10000000000000000000002"
                BuildableName = "KinlyTests.xctest"
                BlueprintName = "KinlyTests"
+               ReferencedContainer = "container:Kinly.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO"
+            parallelizable = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "E10000000000000000000003"
+               BuildableName = "KinlyUITests.xctest"
+               BlueprintName = "KinlyUITests"
                ReferencedContainer = "container:Kinly.xcodeproj">
             </BuildableReference>
          </TestableReference>

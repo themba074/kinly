@@ -12,10 +12,13 @@ interface should feel clear, trustworthy, and humane rather than clinical,
 surveillant, or alarm-driven.
 
 The canonical concept is
-[`mockups/kinly-selected-ui.png`](mockups/kinly-selected-ui.png). It establishes
-the visual hierarchy and feature language, but it is not a pixel-perfect
-implementation specification. Native Android and iOS components must preserve
-platform behaviour and accessibility.
+[`mockups/kinly-map-first-ocean-sky-v2.png`](mockups/kinly-map-first-ocean-sky-v2.png).
+It establishes the map-first Home hierarchy, soft-aqua care action, four-tab
+navigation, and feature language, but it is not a pixel-perfect implementation
+specification. Native Android and iOS components must preserve platform
+behaviour and accessibility. The earlier
+[`mockups/kinly-selected-ui.png`](mockups/kinly-selected-ui.png) concept is
+retained as superseded design history.
 
 ## 2. Core principles
 
@@ -88,13 +91,22 @@ Recommended hierarchy:
   radius scale rather than arbitrary values.
 - Primary actions are filled ocean blue or sky blue. Secondary actions use a
   bordered or light-blue surface.
-- The five primary destinations are Home, Places, Safety, History, and Settings.
+- The four primary destinations are Home, Safety, History, and Settings.
+- Places is a secondary screen opened by the clearly labelled Places action on
+  Home. Back navigation returns to Home and preserves the prior map and circle
+  filter state where the platform lifecycle allows.
 - Safety may receive visual emphasis, but it must not trigger SOS from a single
   navigation tap.
 
 ## 6. Map and member state
 
 - Keep the map visually quiet so member markers and uncertainty remain clear.
+- Home defaults to **All circles** and provides an optional circle filter. It
+  shows each unique person only once and only when the viewer is currently
+  authorised through at least one active shared circle and sharing grant.
+- An all-circles view never silently broadens a check-in, place, journey, or
+  safety audience. Actions that need an audience require an explicit person or
+  circle selection.
 - A member marker must have a distinct selected, stale, approximate, paused,
   and offline state.
 - Always show the source timestamp or freshness label near location detail.
@@ -153,7 +165,8 @@ controls. The initial mapping is:
 | Shared role | Android | iOS |
 | --- | --- | --- |
 | App structure | Material 3 `Scaffold` | SwiftUI view hierarchy with safe areas |
-| Five destinations | Material 3 `NavigationBar` | SwiftUI `TabView` |
+| Four primary destinations | Material 3 `NavigationBar` | SwiftUI `TabView` |
+| Places from Home | Native navigation from a labelled Home action | Native navigation from a labelled Home action |
 | Primary action | Filled Material 3 `Button` | Prominent SwiftUI `Button` |
 | Secondary action | Material 3 `OutlinedButton` | Bordered SwiftUI `Button` |
 | State surface | Bordered Material 3 `Card` | Rounded SwiftUI surface with a subtle border |
