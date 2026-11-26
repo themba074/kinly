@@ -223,7 +223,8 @@ threat model are approved. Feature 1B local synthetic preparation is in
 progress; its local backend `/api/v1/me` work package passed 21 Docker-backed
 tests on 26 November 2026. Android local sign-in passed its unit, lint, build,
 and 65-test connected Pixel 8 verification on 27 November 2026; iOS local
-sign-in is the next work package.
+sign-in is now the active work package, with its macOS/Xcode verification still
+pending.
 Managed-provider verification remains gated by ADR 0002.
 The four-tab Ocean Sky iOS foundation passed its current and iOS 17.5 simulator
 CI checks. Interactive VoiceOver and physical-device review remain unverified.

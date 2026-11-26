@@ -2,9 +2,13 @@
 
 The native SwiftUI foundation uses the approved Ocean Sky four-tab shell:
 Home, Safety, History, and Settings. A labelled Home control opens the
-unavailable Places screen. Home also shows a truthful, non-sensitive
-development backend status. The app contains no identity, permission,
-location, map, notification, background, or safety feature.
+unavailable Places screen. Home shows truthful backend and sign-in status.
+The local identity work package uses the system browser with authorization code
+and PKCE, exact redirect/state validation, Keychain-backed session storage, and
+`/api/v1/me` profile confirmation when provider settings are supplied. Empty
+settings keep sign-in visibly unavailable. Sign-in does not join a circle,
+request location permission, collect location, register push, or implement
+safety behaviour.
 
 ## Build and test
 
@@ -31,6 +35,12 @@ Debug builds may call the local development readiness endpoint at
 `http://localhost:8080/actuator/health/readiness`. Only the Debug plist permits
 that localhost exception. Release uses the deliberately invalid HTTPS host
 `kinly.invalid` until a deployed environment is separately approved.
+
+Provider settings are Gradle-free Info.plist values for an approved environment:
+`KinlyAuthIssuer`, `KinlyAuthAuthorizeURL`, `KinlyAuthTokenURL`,
+`KinlyAuthClientID`, and `KinlyAuthMeURL`. No provider credentials, real
+accounts, access tokens, or callback secrets belong in source control, fixtures,
+screenshots, or logs.
 
 The approved minimum deployment target is iOS 17. The support policy and device
 matrix are recorded in

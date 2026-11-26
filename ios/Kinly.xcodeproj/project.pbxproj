@@ -13,11 +13,13 @@
 		B10000000000000000000004 /* BackendStatusModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000004 /* BackendStatusModel.swift */; };
 		B10000000000000000000005 /* KinlyRootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000005 /* KinlyRootView.swift */; };
 		B10000000000000000000006 /* AppConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000006 /* AppConfiguration.swift */; };
+		B10000000000000000000011 /* Authentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000011 /* Authentication.swift */; };
 		B10000000000000000000009 /* BackendHealthParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000009 /* BackendHealthParserTests.swift */; };
 		B1000000000000000000000A /* BackendStatusModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000000000000000000000A /* BackendStatusModelTests.swift */; };
 		B1000000000000000000000B /* DebugShowcase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000000000000000000000D /* DebugShowcase.swift */; };
 		B1000000000000000000000C /* NavigationAndShowcaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000000000000000000000E /* NavigationAndShowcaseTests.swift */; };
 		B1000000000000000000000D /* KinlyUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000000000000000000000F /* KinlyUITests.swift */; };
+		B1000000000000000000000E /* AuthenticationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000012 /* AuthenticationTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +48,7 @@
 		A10000000000000000000006 /* AppConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfiguration.swift; sourceTree = "<group>"; };
 		A10000000000000000000007 /* Info-Debug.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info-Debug.plist"; sourceTree = "<group>"; };
 		A10000000000000000000008 /* Info-Release.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info-Release.plist"; sourceTree = "<group>"; };
+		A10000000000000000000011 /* Authentication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Authentication.swift; sourceTree = "<group>"; };
 		A10000000000000000000009 /* BackendHealthParserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackendHealthParserTests.swift; sourceTree = "<group>"; };
 		A1000000000000000000000A /* BackendStatusModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackendStatusModelTests.swift; sourceTree = "<group>"; };
 		A1000000000000000000000B /* Kinly.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Kinly.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -53,6 +56,7 @@
 		A1000000000000000000000D /* DebugShowcase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugShowcase.swift; sourceTree = "<group>"; };
 		A1000000000000000000000E /* NavigationAndShowcaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationAndShowcaseTests.swift; sourceTree = "<group>"; };
 		A1000000000000000000000F /* KinlyUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KinlyUITests.swift; sourceTree = "<group>"; };
+		A10000000000000000000012 /* AuthenticationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationTests.swift; sourceTree = "<group>"; };
 		A10000000000000000000010 /* KinlyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KinlyUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -96,6 +100,7 @@
 			children = (
 				A10000000000000000000001 /* KinlyApp.swift */,
 				A10000000000000000000006 /* AppConfiguration.swift */,
+				A10000000000000000000011 /* Authentication.swift */,
 				A10000000000000000000002 /* BackendStatus.swift */,
 				A10000000000000000000003 /* BackendStatusClient.swift */,
 				A10000000000000000000004 /* BackendStatusModel.swift */,
@@ -113,6 +118,7 @@
 				A10000000000000000000009 /* BackendHealthParserTests.swift */,
 				A1000000000000000000000A /* BackendStatusModelTests.swift */,
 				A1000000000000000000000E /* NavigationAndShowcaseTests.swift */,
+				A10000000000000000000012 /* AuthenticationTests.swift */,
 			);
 			path = KinlyTests;
 			sourceTree = "<group>";
@@ -270,6 +276,7 @@
 				B10000000000000000000005 /* KinlyRootView.swift in Sources */,
 				B1000000000000000000000B /* DebugShowcase.swift in Sources */,
 				B10000000000000000000001 /* KinlyApp.swift in Sources */,
+				B10000000000000000000011 /* Authentication.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -280,6 +287,7 @@
 				B10000000000000000000009 /* BackendHealthParserTests.swift in Sources */,
 				B1000000000000000000000A /* BackendStatusModelTests.swift in Sources */,
 				B1000000000000000000000C /* NavigationAndShowcaseTests.swift in Sources */,
+				B1000000000000000000000E /* AuthenticationTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

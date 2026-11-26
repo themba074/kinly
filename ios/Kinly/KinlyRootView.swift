@@ -20,12 +20,13 @@ enum PrimaryDestination: String, CaseIterable, Identifiable {
 
 struct KinlyRootView: View {
     @ObservedObject var statusModel: BackendStatusModel
+    @ObservedObject var authModel: AuthModel
     @State private var selection = PrimaryDestination.home
 
     var body: some View {
         TabView(selection: $selection) {
             NavigationStack {
-                HomeView(statusModel: statusModel)
+                HomeView(statusModel: statusModel, authModel: authModel)
                     .kinlyNavigationTitle()
             }
             .tabItem {
@@ -53,6 +54,7 @@ struct KinlyRootView: View {
 
 private struct HomeView: View {
     @ObservedObject var statusModel: BackendStatusModel
+    @ObservedObject var authModel: AuthModel
 
     var body: some View {
         ScrollView {
@@ -86,13 +88,15 @@ private struct HomeView: View {
                 .accessibilityHint("Opens the unavailable Places screen")
                 .accessibilityIdentifier("home_places_button")
 
+                AuthStatusCard(authModel: authModel)
+
                 BackendStatusCard(statusModel: statusModel)
 
                 Divider()
                     .overlay(Color.kinlyBorder)
 
                 Text(
-                    "No account, member, location, notification, or safety data is used in this build."
+                    "Signing in does not join a circle or start location sharing. Member, location, notification, and safety features are not available in this build."
                 )
                 .font(.subheadline)
                 .foregroundStyle(Color.kinlyInk600)
@@ -104,6 +108,106 @@ private struct HomeView: View {
         .background(Color.kinlySky50)
         .task {
             await statusModel.refresh()
+            await authModel.restore()
+        }
+    }
+}
+
+struct AuthStatusCard: View {
+    @ObservedObject var authModel: AuthModel
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 16) {
+            Text("Your Kinly account")
+                .font(.title2.weight(.semibold))
+                .foregroundStyle(Color.kinlyOcean900)
+
+            statusContent
+        }
+        .padding(20)
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .background(background)
+        .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
+        .overlay {
+            RoundedRectangle(cornerRadius: 20, style: .continuous)
+                .stroke(Color.kinlyBorder, lineWidth: 1)
+        }
+        .accessibilityElement(children: .contain)
+        .accessibilityLabel("Kinly sign-in status")
+        .accessibilityValue(authModel.state.accessibilityValue)
+        .accessibilityIdentifier("auth_status_card")
+    }
+
+    @ViewBuilder
+    private var statusContent: some View {
+        switch authModel.state {
+        case .checking:
+            HStack(spacing: 12) {
+                ProgressView()
+                    .tint(.kinlyOcean700)
+                    .accessibilityLabel("Checking sign-in")
+                authText(title: "Checking sign-in", detail: "This usually takes only a moment.")
+            }
+        case .notConfigured:
+            authText(title: "Sign-in unavailable", detail: "This local build has no identity provider configured.")
+        case .signedOut:
+            authText(title: "Signed out", detail: "Sign in to confirm your minimal Kinly profile.")
+            Button("Sign in") { authModel.signIn() }
+                .buttonStyle(.borderedProminent)
+                .tint(.kinlyOcean700)
+                .frame(minHeight: 44)
+                .accessibilityIdentifier("sign_in_button")
+        case .openingBrowser:
+            authText(title: "Opening sign-in", detail: "Complete sign-in in the system browser, then return to Kinly.")
+        case let .signedIn(name):
+            authText(title: "Signed in", detail: "Profile confirmed for \(name).")
+            Button("Sign out") { authModel.logout() }
+                .buttonStyle(.bordered)
+                .tint(.kinlyOcean700)
+                .frame(minHeight: 44)
+                .accessibilityIdentifier("sign_out_button")
+        case .cancelled:
+            authText(title: "Sign-in cancelled", detail: "No session was created.")
+            retryButton
+        case .expired:
+            authText(title: "Session expired", detail: "Sign in again to confirm access.")
+            retryButton
+        case .offline:
+            authText(title: "You appear to be offline", detail: "Connect to the internet and try again.")
+            retryButton
+        case .unavailable:
+            authText(title: "Sign-in unavailable", detail: "Kinly could not confirm the identity service.")
+            retryButton
+        case .failed:
+            authText(title: "Sign-in failed", detail: "Kinly could not complete sign-in. Try again.")
+            retryButton
+        }
+    }
+
+    private var retryButton: some View {
+        Button("Try again") { authModel.signIn() }
+            .buttonStyle(.borderedProminent)
+            .tint(.kinlyOcean700)
+            .frame(minHeight: 44)
+            .accessibilityIdentifier("sign_in_retry_button")
+    }
+
+    private func authText(title: String, detail: String) -> some View {
+        VStack(alignment: .leading, spacing: 4) {
+            Text(title)
+                .font(.headline)
+                .foregroundStyle(Color.kinlyOcean900)
+            Text(detail)
+                .font(.subheadline)
+                .foregroundStyle(Color.kinlyInk600)
+        }
+    }
+
+    private var background: Color {
+        switch authModel.state {
+        case .signedIn: .kinlyFresh100
+        case .unavailable, .failed, .expired: .kinlyDanger100
+        default: .kinlySky100
         }
     }
 }

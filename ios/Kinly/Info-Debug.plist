@@ -18,8 +18,27 @@
     <string>$(MARKETING_VERSION)</string>
     <key>CFBundleVersion</key>
     <string>$(CURRENT_PROJECT_VERSION)</string>
+    <key>CFBundleURLTypes</key>
+    <array>
+        <dict>
+            <key>CFBundleURLSchemes</key>
+            <array>
+                <string>com.kinly.app</string>
+            </array>
+        </dict>
+    </array>
     <key>KinlyBackendReadinessURL</key>
     <string>http://localhost:8080/actuator/health/readiness</string>
+    <key>KinlyAuthIssuer</key>
+    <string></string>
+    <key>KinlyAuthAuthorizeURL</key>
+    <string></string>
+    <key>KinlyAuthTokenURL</key>
+    <string></string>
+    <key>KinlyAuthClientID</key>
+    <string></string>
+    <key>KinlyAuthMeURL</key>
+    <string>http://localhost:8080/api/v1/me</string>
     <key>LSRequiresIPhoneOS</key>
     <true/>
     <key>NSAppTransportSecurity</key>

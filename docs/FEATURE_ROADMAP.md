@@ -505,7 +505,9 @@ redirect checking, Keystore-backed session storage, signed-out, cancelled,
 expired, offline, unavailable, and signed-in states, and the authenticated Home
 status card. On 27 November 2026, Android unit tests, lint, debug/release
 builds, and 65 connected Pixel 8 tests passed with no failures or skips. iOS
-local sign-in is now the next active work package.
+local sign-in is now the active work package; its implementation is present,
+with macOS/Xcode CI still required for compile, simulator, accessibility, and
+release-boundary verification because this Windows workspace cannot run Xcode.
 Provider provisioning, hosted registration and recovery, real key rotation and
 revocation checks, and end-to-end mobile verification remain gated by ADR 0002.
 No provider resource or real-user data has been created.

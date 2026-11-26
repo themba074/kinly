@@ -71,3 +71,10 @@ offline, unavailable, expiry, logout, and not-configured states remain honest;
 the slice does not join circles, request location permission, or start sharing.
 The iOS adapter and provider-backed recovery/revocation verification remain
 open and gated by ADR 0002.
+
+The iOS local work package now mirrors the Android boundary with
+`ASWebAuthenticationSession`, S256 PKCE, generated state and nonce, exact
+custom-scheme callback validation, Keychain storage, and `/api/v1/me` profile
+confirmation. Its unit and simulator checks require the public macOS/Xcode CI
+workflow; this Windows workspace cannot execute them locally. No provider
+resource or real account is used.

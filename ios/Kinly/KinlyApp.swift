@@ -4,6 +4,7 @@ import SwiftUI
 @MainActor
 struct KinlyApp: App {
     @StateObject private var statusModel: BackendStatusModel
+    @StateObject private var authModel: AuthModel
 
     init() {
         let client = URLSessionBackendStatusClient(
@@ -11,6 +12,11 @@ struct KinlyApp: App {
         )
         _statusModel = StateObject(
             wrappedValue: BackendStatusModel(client: client)
+        )
+        _authModel = StateObject(
+            wrappedValue: AuthModel(
+                repository: IOSAuthRepository(configuration: AuthConfiguration.from())
+            )
         )
     }
 
@@ -26,10 +32,10 @@ struct KinlyApp: App {
         if ProcessInfo.processInfo.arguments.contains("--kinly-ui-showcase") {
             DebugShowcaseView()
         } else {
-            KinlyRootView(statusModel: statusModel)
+            KinlyRootView(statusModel: statusModel, authModel: authModel)
         }
 #else
-        KinlyRootView(statusModel: statusModel)
+        KinlyRootView(statusModel: statusModel, authModel: authModel)
 #endif
     }
 }

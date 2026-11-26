@@ -16,9 +16,14 @@ final class KinlyUITests: XCTestCase {
 
         let heading = app.descendants(matching: .any)["home_heading"]
         let placesButton = app.buttons["home_places_button"]
+        let authCard = app.descendants(matching: .any)["auth_status_card"]
         let statusCard = app.descendants(matching: .any)["backend_status_card"]
         XCTAssertTrue(heading.waitForExistence(timeout: 5))
         XCTAssertTrue(placesButton.waitForExistence(timeout: 5))
+        XCTAssertTrue(authCard.waitForExistence(timeout: 5))
+        XCTAssertEqual(authCard.label, "Kinly sign-in status")
+        XCTAssertTrue(app.staticTexts["Sign-in unavailable"].waitForExistence(timeout: 5))
+        XCTAssertFalse(app.buttons["Sign in"].exists)
         XCTAssertTrue(statusCard.waitForExistence(timeout: 5))
         XCTAssertEqual(statusCard.label, "Kinly service status")
         XCTAssertFalse((statusCard.value as? String ?? "").isEmpty)
