@@ -1,11 +1,10 @@
 # Feature 1B local `/me` contract draft
 
-**Status:** Design for approved local synthetic implementation; the endpoint is not implemented yet  
+**Status:** Implemented for local synthetic backend verification; provider integration remains gated
 **Date:** 2026-11-16
 
-This draft defines the first 1B substep. The published
-`contracts/openapi.json` remains foundation-only until the endpoint and its
-security checks exist. The client sends a provider access token with
+This draft began the first 1B substep. The implemented endpoint is described
+in `contracts/openapi.json`. The client sends a provider access token with
 `openid email` scopes in the
 `Authorization: Bearer` header. It sends no account ID, provider subject,
 email, or circle selector in the path, query, or body. A first valid sign-in
@@ -40,11 +39,11 @@ in a shared cache.
 
 | Status | Code | Meaning |
 | --- | --- | --- |
-| 401 | `AUTHENTICATION_REQUIRED` | Missing, malformed, forged, expired, wrong-issuer, wrong-client, or wrong-token-use token. |
+| 401 | `AUTHENTICATION_REQUIRED` | Missing, malformed, forged, expired, wrong-issuer, wrong-client, wrong-token-use, or unverifiable signing-key token. |
 | 403 | `ACCOUNT_UNVERIFIED` | Valid identity lacks a verified email. |
 | 403 | `ACCOUNT_DISABLED` | The server-owned account or session is disabled or revoked. |
 | 429 | `RATE_LIMITED` | Bounded abuse control; a retry delay may be supplied. |
-| 503 | `IDENTITY_UNAVAILABLE` | Required provider keys or session state cannot be verified. |
+| 503 | `IDENTITY_UNAVAILABLE` | Provider userInfo or rate-limit state cannot be verified. |
 
 Errors contain only `code` and a safe generic `message`; they never echo a
 token, email, subject, identifier, or provider response. Network failure is a
@@ -73,6 +72,11 @@ local test material only. The fixtures must cover:
 No case creates a circle or sharing grant. Cross-circle and subject-consent
 denial become executable when those modules exist; identity alone must never
 imply either permission.
+
+Local backend validation uses synthetic token claims and local signing keys.
+The default backend configuration fails closed. Cognito pool provisioning,
+registration, recovery, real JWKS/userInfo, and mobile-to-backend verification
+remain gated by ADR 0002.
 
 Provider claim source: [Amazon Cognito userInfo endpoint](https://docs.aws.amazon.com/cognito/latest/developerguide/userinfo-endpoint.html)
 and [access-token verification](https://docs.aws.amazon.com/cognito/latest/developerguide/amazon-cognito-user-pools-using-tokens-verifying-a-jwt.html).

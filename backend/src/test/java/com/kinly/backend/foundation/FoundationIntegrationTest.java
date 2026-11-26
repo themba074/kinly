@@ -7,10 +7,12 @@ import java.util.UUID;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.webmvc.test.autoconfigure.AutoConfigureMockMvc;
 import org.springframework.boot.health.actuate.endpoint.HealthEndpoint;
 import org.springframework.boot.health.contributor.Status;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.context.DynamicPropertyRegistry;
 import org.springframework.test.context.DynamicPropertySource;
 import org.testcontainers.containers.GenericContainer;
@@ -18,9 +20,13 @@ import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 import org.testcontainers.postgresql.PostgreSQLContainer;
 import org.testcontainers.utility.DockerImageName;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @Testcontainers
 @SpringBootTest
+@AutoConfigureMockMvc
 class FoundationIntegrationTest {
 
     private static final DockerImageName POSTGIS_IMAGE = DockerImageName
@@ -51,6 +57,9 @@ class FoundationIntegrationTest {
 
     @Autowired
     HealthEndpoint healthEndpoint;
+
+    @Autowired
+    MockMvc mvc;
 
     @Test
     void startsWithPostgisMigrationAndHealthyDependencies() {
@@ -97,6 +106,13 @@ class FoundationIntegrationTest {
         } finally {
             jdbcTemplate.update("DELETE FROM identity_account WHERE id IN (?, ?)", firstId, secondId);
         }
+    }
+
+    @Test
+    void unconfiguredProviderRejectsProfileAccess() throws Exception {
+        mvc.perform(get("/api/v1/me").header("Authorization", "Bearer synthetic-unconfigured"))
+                .andExpect(status().isUnauthorized())
+                .andExpect(jsonPath("$.code").value("AUTHENTICATION_REQUIRED"));
     }
 }
 

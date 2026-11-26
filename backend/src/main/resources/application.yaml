@@ -42,3 +42,10 @@ server:
     include-stacktrace: never
   shutdown: graceful
 
+kinly:
+  identity:
+    issuer: ${KINLY_IDENTITY_ISSUER:}
+    jwks-uri: ${KINLY_IDENTITY_JWKS_URI:}
+    client-ids: ${KINLY_IDENTITY_CLIENT_IDS:}
+    userinfo-uri: ${KINLY_IDENTITY_USERINFO_URI:}
+

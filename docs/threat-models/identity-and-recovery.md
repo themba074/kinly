@@ -50,3 +50,11 @@ nonce, and PKCE verifier, plus cancellation, offline state, secure token
 cleanup, and lifecycle return. Provider recovery, email delivery, session
 reset, and real mobile-to-backend behavior remain gated by ADR 0002 and must
 not be marked verified using synthetic fixtures.
+
+The local 1B backend validates JWT signature, issuer, client, token use,
+scope, and expiry; calls userInfo for a matching subject and verified email;
+denies disabled accounts; and uses a bounded Redis-backed rate limit. Synthetic
+tests cover forged and wrong-claim tokens, mismatched userInfo, provider
+failure, cross-account selection, and rate exhaustion. Provider-side
+revocation, recovery after reset, hosted login, and key rotation still need
+verification against the approved provider before the feature can close.

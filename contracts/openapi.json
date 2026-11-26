@@ -3,7 +3,7 @@
   "info": {
     "title": "Kinly API",
     "version": "0.1.0",
-    "description": "Contract foundation for Kinly's versioned product API. No product operations are implemented yet. Operational actuator endpoints are intentionally outside this contract."
+    "description": "Versioned Kinly product API. Only the local synthetic identity profile read is implemented. Operational actuator endpoints are outside this contract."
   },
   "servers": [
     {
@@ -11,8 +11,94 @@
       "description": "Local development only"
     }
   ],
-  "paths": {},
-  "x-kinly-contract-state": "foundation-only",
+  "paths": {
+    "/me": {
+      "get": {
+        "operationId": "getMyProfile",
+        "summary": "Read the authenticated adult's minimal profile",
+        "security": [{ "bearerAccessToken": [] }],
+        "responses": {
+          "200": {
+            "description": "The caller's minimal profile",
+            "headers": {
+              "Cache-Control": { "schema": { "type": "string", "const": "no-store" } }
+            },
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/MinimalProfile" }
+              }
+            }
+          },
+          "401": { "$ref": "#/components/responses/AuthenticationRequired" },
+          "403": { "$ref": "#/components/responses/AccessDenied" },
+          "429": { "$ref": "#/components/responses/RateLimited" },
+          "503": { "$ref": "#/components/responses/IdentityUnavailable" }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "bearerAccessToken": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    },
+    "schemas": {
+      "MinimalProfile": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "verifiedEmail"],
+        "properties": {
+          "id": { "type": "string", "format": "uuid" },
+          "verifiedEmail": { "type": "string", "format": "email" },
+          "displayName": { "type": ["string", "null"], "maxLength": 120 }
+        }
+      },
+      "SafeError": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["code", "message"],
+        "properties": {
+          "code": {
+            "type": "string",
+            "enum": ["AUTHENTICATION_REQUIRED", "ACCOUNT_UNVERIFIED", "ACCOUNT_DISABLED",
+              "RATE_LIMITED", "IDENTITY_UNAVAILABLE"]
+          },
+          "message": { "type": "string" }
+        }
+      }
+    },
+    "responses": {
+      "AuthenticationRequired": {
+        "description": "Authentication is missing or invalid",
+        "content": {
+          "application/json": { "schema": { "$ref": "#/components/schemas/SafeError" } }
+        }
+      },
+      "AccessDenied": {
+        "description": "Email is unverified or the account/session is disabled",
+        "content": {
+          "application/json": { "schema": { "$ref": "#/components/schemas/SafeError" } }
+        }
+      },
+      "RateLimited": {
+        "description": "Rate limit exceeded",
+        "headers": { "Retry-After": { "schema": { "type": "string" } } },
+        "content": {
+          "application/json": { "schema": { "$ref": "#/components/schemas/SafeError" } }
+        }
+      },
+      "IdentityUnavailable": {
+        "description": "Provider userInfo or rate-limit state unavailable",
+        "content": {
+          "application/json": { "schema": { "$ref": "#/components/schemas/SafeError" } }
+        }
+      }
+    }
+  },
+  "x-kinly-contract-state": "local-synthetic-identity",
   "x-kinly-versioning": {
     "basePath": "/api/v1",
     "compatibleChanges": "Additive fields and operations may remain in v1 when existing clients continue to work.",

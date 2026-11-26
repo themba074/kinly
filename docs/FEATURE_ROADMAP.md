@@ -1,9 +1,9 @@
 # Kinly Feature Roadmap
 
 **Status:** Active delivery plan  
-**Last updated:** 16 November 2026
+**Last updated:** 26 November 2026
 **Current feature:** 1B - register or sign in and retrieve the user's minimal profile (**In progress**)
-**Current substep:** Backend Identity application service and `/api/v1/me` API
+**Current substep:** Android local sign-in adapter and honest authentication states
 **Next planned feature:** 1B - register or sign in and retrieve the user's minimal profile
 **Rule:** One feature, and one substep within that feature, may be in progress.
 
@@ -479,12 +479,15 @@ progress. Managed-provider verification remains gated by ADR 0002; no
 provider resource or real-user data is authorised. Interactive VoiceOver and
 physical-device review remain future verification work.
 
-The first 1B substep has a draft `/me` contract and synthetic threat cases in
-`docs/proposals/1b-me-contract-draft.md`, plus the V2 account migration and an
-identity-key integration assertion. The full Docker-backed backend suite passed
-on 16 November 2026 (five tests, no failures), confirming that the migration
-allows the same email across distinct provider subjects while enforcing issuer
-and subject uniqueness. Repository formatting, secret, safe-log, and local
-isolation checks passed. The published OpenAPI contract remains foundation-only
-because `/me` is not implemented. Backend Identity behavior is the sole active
-substep; no provider resource or real-user data has been created.
+The first 1B substep established the account migration, synthetic threat cases,
+and the `/me` contract. The second substep implemented the local backend
+Identity service, JWT and userInfo validation, Redis-backed rate limit, and
+`GET /api/v1/me`. On 26 November 2026, the full Docker-backed backend suite
+passed (21 tests, no failures or skips), including signature and claim
+rejection, userInfo mismatch and outage, account separation, concurrent first
+sign-in, disabled account, rate exhaustion, and the OpenAPI contract. The
+repository guardrails and pinned OSV dependency scan passed. Android local
+sign-in is the sole active substep.
+Provider provisioning, hosted registration and recovery, real key rotation and
+revocation checks, and end-to-end mobile verification remain gated by ADR 0002.
+No provider resource or real-user data has been created.
