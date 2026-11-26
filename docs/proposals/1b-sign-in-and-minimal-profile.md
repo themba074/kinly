@@ -1,6 +1,6 @@
 # Feature 1B proposal - sign-in and minimal profile
 
-**Status:** Approved for local synthetic steps 1-3; managed-provider verification remains gated  
+**Status:** Approved for local synthetic work packages; managed-provider verification remains gated
 **Date:** 2026-11-16  
 **Roadmap ID:** 1B
 
@@ -16,7 +16,7 @@ This feature does not add circles, location, push tokens, permissions, maps,
 or real-user pilot access. Device inventory and push-token ownership remain
 Feature 1C. The first-pilot age and POPIA checks remain launch gates.
 
-## Proposed sequential implementation
+## Proposed implementation work packages
 
 1. Define the `/api/v1/me` request/response and error contract, minimal
    profile fields, synthetic identity fixtures, and a threat-model test matrix.
@@ -35,6 +35,10 @@ Feature 1C. The first-pilot age and POPIA checks remain launch gates.
    previously verified email, session handling after reset, and the full
    mobile-to-backend path against the approved provider configuration.
 5. Update API, runbook, threat model, and status documentation with results.
+
+Packages 2 and 3 may proceed independently once their inputs are available.
+Package 4 remains gated by the approved provider and spending boundary; it is
+not authorised by this proposal or by the work-package amendment.
 
 ## Acceptance and negative checks
 
@@ -96,6 +100,6 @@ before the managed-provider verification. Rollback removes the new endpoint
 and mobile entry points through a reviewed code change; an applied migration
 is never edited or destructively reversed.
 
-The team approved local synthetic steps 1-3 on 16 November 2026. This does
+The team approved the local synthetic work packages on 16 November 2026. This does
 not authorize Cognito provisioning or real email delivery. The feature remains
 in progress until every completion gate can be verified.

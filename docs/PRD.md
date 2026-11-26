@@ -370,7 +370,9 @@ not evidence that the phase is complete.
 The phases above describe product sequencing, not implementation batch size.
 `docs/FEATURE_ROADMAP.md` groups them into reviewable features that are
 separately proposed, approved, implemented, tested, and closed. Only one feature
-and one sequential substep within it may be in progress at a time.
+may be in progress at a time. Its backend, Android, iOS, integration, and
+documentation work packages may proceed in parallel when their dependencies
+allow, while each package retains its own acceptance and security evidence.
 
 ## 11. Risks and mitigations
 

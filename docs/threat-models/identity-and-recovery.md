@@ -42,10 +42,10 @@ pilot. No threat control here authorizes sharing without an active grant.
 ## Feature 1B local test matrix
 
 The proposed `/me` contract and synthetic cases are recorded in
-`docs/proposals/1b-me-contract-draft.md`. Backend substep 2 must test invalid
+`docs/proposals/1b-me-contract-draft.md`. The backend work package must test invalid
 signature, issuer, client/audience, token use, expiry, unknown key, unverified
 email, disabled account, revoked session, concurrent first sign-in, and
-cross-account selection. Mobile substep 3 must test altered redirect, state,
+cross-account selection. The mobile work package must test altered redirect, state,
 nonce, and PKCE verifier, plus cancellation, offline state, secure token
 cleanup, and lifecycle return. Provider recovery, email delivery, session
 reset, and real mobile-to-backend behavior remain gated by ADR 0002 and must

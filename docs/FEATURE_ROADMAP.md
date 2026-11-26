@@ -3,9 +3,9 @@
 **Status:** Active delivery plan  
 **Last updated:** 27 November 2026
 **Current feature:** 1B - register or sign in and retrieve the user's minimal profile (**In progress**)
-**Current substep:** iOS local sign-in adapter and honest authentication states
+**Current work package:** iOS local sign-in adapter and honest authentication states
 **Next planned feature:** 1B - register or sign in and retrieve the user's minimal profile
-**Rule:** One feature, and one substep within that feature, may be in progress.
+**Rule:** One feature may be in progress; its approved work packages may proceed in parallel when dependencies allow.
 
 This is Kinly's single delivery-planning document. The PRD defines what the
 product must do, the technical specification defines how the system is shaped,
@@ -27,17 +27,27 @@ execution order below unless the user explicitly amends the roadmap.
 
 Features group closely related work so routine backend, Android, and iOS tasks
 do not become dozens of artificial roadmap entries. Work inside an approved
-feature still happens sequentially:
+feature is tracked as bounded work packages:
 
 1. contract, threat model, and schema when needed;
 2. backend domain and API behaviour;
-3. Android behaviour;
-4. iOS behaviour; and
-5. end-to-end verification and documentation.
+3. Android and iOS behaviour;
+4. integration, end-to-end verification, and documentation.
 
-Only one of those substeps may be active at a time. A feature may omit substeps
-that do not apply. Commits and reviews should remain small even when they belong
-to the same feature.
+These packages may proceed in parallel once the feature proposal is approved and
+their dependencies are satisfied. A feature may omit packages that do not apply.
+Commits and reviews should remain small even when they belong to the same
+feature, and no package may bypass authorization, consent, spending, or ADR
+gates.
+
+### 1.1 Delivery-process amendment — 27 November 2026
+
+The user approved replacing the one-active-sequential-substep rule with one
+active-feature and bounded work packages. This reduces approval and documentation
+overhead between backend, Android, and iOS work without weakening package-level
+tests, security evidence, or the final Definition of Done. It does not create a
+new feature, change execution order, authorize provider provisioning, or permit
+cloud spending.
 
 Before implementation, every feature proposal must state:
 
@@ -454,8 +464,11 @@ must not be added to a nearby feature as “small extras”:
 ## 5. Current boundary and completed foundation
 
 The production boundary is still the Java/Spring Boot and local-services
-foundation plus the native Android readiness shell. It has no authentication,
-sensitive permission, member data, map, push, location, or safety behaviour.
+foundation plus the native Android and iOS clients. Local 1B preparation now
+includes a provider-configurable Android sign-in adapter and synthetic
+`/api/v1/me` confirmation, but no identity provider is provisioned and no
+real-user authentication is available. There is still no sensitive permission,
+member data, map, push, location, or safety behaviour.
 
 | Feature | Close-out evidence |
 |---|---|
@@ -474,13 +487,13 @@ sensitive permission, member data, map, push, location, or safety behaviour.
 
 Features 0A through 0G, UI1 through UI4, and 1A are **Complete**. The team
 approved ADR 0003 and the identity threat model on 16 November 2026. Feature
-1B local synthetic steps 1-3 were approved on 16 November 2026 and are in
-progress. Managed-provider verification remains gated by ADR 0002; no
+1B local synthetic work packages were approved on 16 November 2026 and remain
+in progress. Managed-provider verification remains gated by ADR 0002; no
 provider resource or real-user data is authorised. Interactive VoiceOver and
 physical-device review remain future verification work.
 
-The first 1B substep established the account migration, synthetic threat cases,
-and the `/me` contract. The second substep implemented the local backend
+The first 1B work package established the account migration, synthetic threat
+cases, and the `/me` contract. The second work package implemented the local backend
 Identity service, JWT and userInfo validation, Redis-backed rate limit, and
 `GET /api/v1/me`. On 26 November 2026, the full Docker-backed backend suite
 passed (21 tests, no failures or skips), including signature and claim
@@ -492,7 +505,7 @@ redirect checking, Keystore-backed session storage, signed-out, cancelled,
 expired, offline, unavailable, and signed-in states, and the authenticated Home
 status card. On 27 November 2026, Android unit tests, lint, debug/release
 builds, and 65 connected Pixel 8 tests passed with no failures or skips. iOS
-local sign-in is now the sole active substep.
+local sign-in is now the next active work package.
 Provider provisioning, hosted registration and recovery, real key rotation and
 revocation checks, and end-to-end mobile verification remain gated by ADR 0002.
 No provider resource or real-user data has been created.

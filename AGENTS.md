@@ -220,10 +220,10 @@ Create an ADR under `docs/decisions/` before changing any of the following:
 Kinly is a walking skeleton built one approved slice at a time. Features 0A
 through 0G, UI1 through UI4, and 1A are complete. ADR 0003 and the identity
 threat model are approved. Feature 1B local synthetic preparation is in
-progress; its local backend `/api/v1/me` substep passed 21 Docker-backed tests
-on 26 November 2026. Android local sign-in passed its unit, lint, build, and
-65-test connected Pixel 8 verification on 27 November 2026; iOS local sign-in
-is now the active substep.
+progress; its local backend `/api/v1/me` work package passed 21 Docker-backed
+tests on 26 November 2026. Android local sign-in passed its unit, lint, build,
+and 65-test connected Pixel 8 verification on 27 November 2026; iOS local
+sign-in is the next work package.
 Managed-provider verification remains gated by ADR 0002.
 The four-tab Ocean Sky iOS foundation passed its current and iOS 17.5 simulator
 CI checks. Interactive VoiceOver and physical-device review remain unverified.
@@ -231,10 +231,14 @@ No cloud deployment or real identity, circle, consent, location, notification,
 or safety feature exists. The backend identity behavior uses synthetic local
 tests and fails closed without provider configuration.
 
-`docs/FEATURE_ROADMAP.md` is the single delivery plan. Keep only one feature and
-one sequential substep in progress. Each feature needs its own proposal and
-explicit approval; completing one feature does not approve the next. Update its
-state and close-out evidence in the same change that finishes it.
+`docs/FEATURE_ROADMAP.md` is the single delivery plan. Keep only one feature in
+progress. Within that approved feature, use implementation work packages for
+backend, Android, iOS, integration, and documentation as applicable; packages
+may proceed in parallel when dependencies allow. Each package still needs its
+own acceptance evidence, and the feature needs one proposal, explicit approval,
+and final close-out evidence. Completing one feature does not approve the next.
+Update the roadmap state and close-out evidence in the same change that finishes
+the feature.
 
 Treat the roadmap's **Next planned feature** and execution order as binding. Do
 not invent or start an unlisted feature, infer a new feature from “next
