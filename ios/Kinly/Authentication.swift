@@ -387,7 +387,8 @@ final class AuthModel: ObservableObject {
     }
 
     func signIn() {
-        guard repository.beginSignIn { [weak self] result in self?.state = result } else {
+        let started = repository.beginSignIn { [weak self] result in self?.state = result }
+        guard started else {
             state = repository.configuration.isReady ? .failed : .notConfigured
             return
         }
