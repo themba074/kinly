@@ -231,14 +231,14 @@ final class IOSAuthRepository: NSObject, ASWebAuthenticationPresentationContextP
     private let sessions: SessionStoring
     private var authenticationSession: ASWebAuthenticationSession?
     private var pendingRequest: AuthorizationRequest?
-    private var completion: ((AuthState) -> Void)?
+    private var completion: (@MainActor (AuthState) -> Void)?
 
     init(configuration: AuthConfiguration, sessions: SessionStoring = KeychainSessionStore()) {
         self.configuration = configuration
         self.sessions = sessions
     }
 
-    func beginSignIn(completion: @escaping (AuthState) -> Void) -> Bool {
+    func beginSignIn(completion: @escaping @MainActor (AuthState) -> Void) -> Bool {
         guard let request = AuthProtocol.request(configuration: configuration) else { return false }
         pendingRequest = request
         self.completion = completion

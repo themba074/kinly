@@ -36,7 +36,7 @@ Debug builds may call the local development readiness endpoint at
 that localhost exception. Release uses the deliberately invalid HTTPS host
 `kinly.invalid` until a deployed environment is separately approved.
 
-Provider settings are Gradle-free Info.plist values for an approved environment:
+Provider settings are Info.plist values for an approved environment:
 `KinlyAuthIssuer`, `KinlyAuthAuthorizeURL`, `KinlyAuthTokenURL`,
 `KinlyAuthClientID`, and `KinlyAuthMeURL`. No provider credentials, real
 accounts, access tokens, or callback secrets belong in source control, fixtures,
