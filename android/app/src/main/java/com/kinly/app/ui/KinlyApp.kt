@@ -13,6 +13,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.CheckCircle
 import androidx.compose.material.icons.rounded.CloudOff
@@ -56,6 +58,8 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.kinly.app.presentation.BackendStatusUiState
 import com.kinly.app.presentation.BackendStatusViewModel
+import com.kinly.app.presentation.AuthUiState
+import com.kinly.app.presentation.AuthViewModel
 import com.kinly.app.ui.theme.Border
 import com.kinly.app.ui.theme.Danger100
 import com.kinly.app.ui.theme.Danger600
@@ -75,15 +79,31 @@ internal enum class Destination(val label: String, val icon: ImageVector) {
 }
 
 @Composable
-fun KinlyApp(viewModel: BackendStatusViewModel) {
+fun KinlyApp(
+    viewModel: BackendStatusViewModel,
+    authViewModel: AuthViewModel,
+    onSignIn: () -> Unit,
+) {
     val state by viewModel.state.collectAsStateWithLifecycle()
-    KinlyShell(state = state, onRetry = viewModel::refresh)
+    val authState by authViewModel.state.collectAsStateWithLifecycle()
+    KinlyShell(
+        state = state,
+        onRetry = viewModel::refresh,
+        authState = authState,
+        onSignIn = onSignIn,
+        onSignOut = authViewModel::signOut,
+        onAuthRetry = authViewModel::refresh,
+    )
 }
 
 @Composable
 fun KinlyShell(
     state: BackendStatusUiState,
     onRetry: () -> Unit,
+    authState: AuthUiState = AuthUiState.NotConfigured,
+    onSignIn: () -> Unit = {},
+    onSignOut: () -> Unit = {},
+    onAuthRetry: () -> Unit = {},
 ) {
     var destination by remember { mutableStateOf(Destination.Home) }
 
@@ -103,7 +123,14 @@ fun KinlyShell(
                 .padding(innerPadding),
         ) {
             if (destination == Destination.Home) {
-                HomeContent(state = state, onRetry = onRetry)
+                HomeContent(
+                    state = state,
+                    onRetry = onRetry,
+                    authState = authState,
+                    onSignIn = onSignIn,
+                    onSignOut = onSignOut,
+                    onAuthRetry = onAuthRetry,
+                )
             } else {
                 UnavailableDestination(destination = destination)
             }
@@ -140,10 +167,15 @@ internal fun KinlyTopBar() {
 private fun HomeContent(
     state: BackendStatusUiState,
     onRetry: () -> Unit,
+    authState: AuthUiState,
+    onSignIn: () -> Unit,
+    onSignOut: () -> Unit,
+    onAuthRetry: () -> Unit,
 ) {
     Column(
         modifier = Modifier
             .fillMaxSize()
+            .verticalScroll(rememberScrollState())
             .padding(horizontal = 24.dp, vertical = 16.dp),
         verticalArrangement = Arrangement.spacedBy(24.dp),
     ) {
@@ -162,14 +194,78 @@ private fun HomeContent(
         }
 
         BackendStatusCard(state = state, onRetry = onRetry)
+        AuthStatusCard(
+            state = authState,
+            onSignIn = onSignIn,
+            onSignOut = onSignOut,
+            onRetry = onAuthRetry,
+        )
 
         HorizontalDivider(color = Border)
 
         Text(
-            text = "No account, member, location, notification, or safety data is used in this build.",
+            text = "Signing in does not join a circle or start location sharing. Member, location, notification, and safety features are not available in this build.",
             style = MaterialTheme.typography.bodyMedium,
             color = Ink600,
         )
+    }
+}
+
+@Composable
+internal fun AuthStatusCard(
+    state: AuthUiState,
+    onSignIn: () -> Unit,
+    onSignOut: () -> Unit,
+    onRetry: () -> Unit,
+) {
+    val status = when (state) {
+        AuthUiState.Checking -> "Checking sign-in status"
+        AuthUiState.NotConfigured -> "Sign-in not available in this build"
+        AuthUiState.SignedOut -> "Signed out"
+        AuthUiState.OpeningBrowser -> "Opening sign-in"
+        is AuthUiState.SignedIn -> "Signed in"
+        AuthUiState.Cancelled -> "Sign-in cancelled"
+        AuthUiState.Expired -> "Session expired"
+        AuthUiState.Offline -> "Offline, sign-in status not confirmed"
+        AuthUiState.Unavailable -> "Sign-in service unavailable"
+        AuthUiState.Failed -> "Sign-in failed"
+    }
+    Card(
+        modifier = Modifier.fillMaxWidth().semantics {
+            contentDescription = "Kinly sign-in status"
+            stateDescription = status
+        },
+        shape = RoundedCornerShape(20.dp),
+        colors = CardDefaults.cardColors(containerColor = Sky100),
+        border = BorderStroke(1.dp, Border),
+    ) {
+        Column(
+            modifier = Modifier.padding(24.dp),
+            verticalArrangement = Arrangement.spacedBy(12.dp),
+        ) {
+            Text("Account", style = MaterialTheme.typography.titleLarge, color = Ocean900)
+            Text(status, style = MaterialTheme.typography.bodyLarge, color = Ocean900)
+            when (state) {
+                AuthUiState.SignedOut, AuthUiState.Cancelled, AuthUiState.Expired,
+                AuthUiState.Failed -> Button(
+                    onClick = onSignIn,
+                    modifier = Modifier.fillMaxWidth().height(48.dp),
+                ) { Text("Sign in") }
+                is AuthUiState.SignedIn -> {
+                    state.displayName?.let { Text(it, color = Ink600) }
+                    Button(
+                        onClick = onSignOut,
+                        modifier = Modifier.fillMaxWidth().height(48.dp),
+                    ) { Text("Sign out on this device") }
+                }
+                AuthUiState.Offline, AuthUiState.Unavailable -> Button(
+                    onClick = onRetry,
+                    modifier = Modifier.fillMaxWidth().height(48.dp),
+                ) { Text("Retry sign-in status") }
+                AuthUiState.Checking, AuthUiState.OpeningBrowser,
+                AuthUiState.NotConfigured -> Unit
+            }
+        }
     }
 }
 

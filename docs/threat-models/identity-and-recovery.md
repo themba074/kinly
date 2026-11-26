@@ -58,3 +58,16 @@ tests cover forged and wrong-claim tokens, mismatched userInfo, provider
 failure, cross-account selection, and rate exhaustion. Provider-side
 revocation, recovery after reset, hosted login, and key rotation still need
 verification against the approved provider before the feature can close.
+
+Android local sign-in verification completed on 27 November 2026 without a
+provider account or resource. The AppAuth adapter uses the system browser and
+authorization-code flow with S256 PKCE, generated state and nonce, and an exact
+redirect URI; altered state, client, request, and redirect callbacks are
+rejected before token exchange. Session tokens are encrypted with an
+Android-Keystore AES-GCM key, and logout or expiry clears the stored session.
+Unit, instrumentation, accessibility, lint, debug/release build, and 65-test
+connected Pixel 8 checks passed with no failures or skips. Cancellation,
+offline, unavailable, expiry, logout, and not-configured states remain honest;
+the slice does not join circles, request location permission, or start sharing.
+The iOS adapter and provider-backed recovery/revocation verification remain
+open and gated by ADR 0002.

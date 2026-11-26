@@ -221,7 +221,9 @@ Kinly is a walking skeleton built one approved slice at a time. Features 0A
 through 0G, UI1 through UI4, and 1A are complete. ADR 0003 and the identity
 threat model are approved. Feature 1B local synthetic preparation is in
 progress; its local backend `/api/v1/me` substep passed 21 Docker-backed tests
-on 26 November 2026. Android local sign-in is the active substep.
+on 26 November 2026. Android local sign-in passed its unit, lint, build, and
+65-test connected Pixel 8 verification on 27 November 2026; iOS local sign-in
+is now the active substep.
 Managed-provider verification remains gated by ADR 0002.
 The four-tab Ocean Sky iOS foundation passed its current and iOS 17.5 simulator
 CI checks. Interactive VoiceOver and physical-device review remain unverified.

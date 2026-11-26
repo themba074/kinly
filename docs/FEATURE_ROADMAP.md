@@ -1,9 +1,9 @@
 # Kinly Feature Roadmap
 
 **Status:** Active delivery plan  
-**Last updated:** 26 November 2026
+**Last updated:** 27 November 2026
 **Current feature:** 1B - register or sign in and retrieve the user's minimal profile (**In progress**)
-**Current substep:** Android local sign-in adapter and honest authentication states
+**Current substep:** iOS local sign-in adapter and honest authentication states
 **Next planned feature:** 1B - register or sign in and retrieve the user's minimal profile
 **Rule:** One feature, and one substep within that feature, may be in progress.
 
@@ -487,7 +487,12 @@ passed (21 tests, no failures or skips), including signature and claim
 rejection, userInfo mismatch and outage, account separation, concurrent first
 sign-in, disabled account, rate exhaustion, and the OpenAPI contract. The
 repository guardrails and pinned OSV dependency scan passed. Android local
-sign-in is the sole active substep.
+sign-in then added the system-browser authorization-code flow with PKCE, exact
+redirect checking, Keystore-backed session storage, signed-out, cancelled,
+expired, offline, unavailable, and signed-in states, and the authenticated Home
+status card. On 27 November 2026, Android unit tests, lint, debug/release
+builds, and 65 connected Pixel 8 tests passed with no failures or skips. iOS
+local sign-in is now the sole active substep.
 Provider provisioning, hosted registration and recovery, real key rotation and
 revocation checks, and end-to-end mobile verification remain gated by ADR 0002.
 No provider resource or real-user data has been created.

@@ -102,6 +102,23 @@ sources. Release manifests do not contain a showcase launcher or activity.
 
 ## Feature boundary
 
-This app does not authenticate, request sensitive permissions, collect or show
-location, register for push, store member data, or implement safety behaviour.
+The local Android slice includes a provider-configured sign-in adapter using the
+system browser, authorization code with PKCE, an exact app redirect, and a
+minimal `/api/v1/me` profile confirmation. Provider settings are empty by
+default, so an ordinary local build truthfully shows sign-in as unavailable.
+When configured, access tokens are held through an Android Keystore-backed
+encrypted session store and are cleared on logout or expiry. Sign-in does not
+join a circle, request location permission, collect location, register push, or
+implement safety behaviour.
+
+The provider settings are supplied only as Gradle properties for an approved
+environment:
+
+- `KINLY_AUTH_ISSUER`
+- `KINLY_AUTH_AUTHORIZE_URL`
+- `KINLY_AUTH_TOKEN_URL`
+- `KINLY_AUTH_CLIENT_ID`
+
+No provider credentials, real account, or token belongs in source control,
+fixtures, screenshots, or logs.
 The non-Home tabs explicitly state that they are unavailable.

@@ -7,6 +7,8 @@ plugins {
 val debugReadinessUrl = providers.gradleProperty("KINLY_BACKEND_READINESS_URL")
     .orElse("http://10.0.2.2:8080/actuator/health/readiness")
     .get()
+fun authProperty(name: String) = providers.gradleProperty(name).orElse("").get()
+fun quoted(value: String) = "\"" + value.replace("\\", "\\\\").replace("\"", "\\\"") + "\""
 
 android {
     namespace = "com.kinly.app"
@@ -14,6 +16,7 @@ android {
 
     defaultConfig {
         applicationId = "com.kinly.app"
+        manifestPlaceholders["appAuthRedirectScheme"] = "com.kinly.app"
         minSdk = 26
         targetSdk = 36
         versionCode = 1
@@ -24,6 +27,11 @@ android {
 
     buildTypes {
         debug {
+            buildConfigField("String", "AUTH_ISSUER", quoted(authProperty("KINLY_AUTH_ISSUER")))
+            buildConfigField("String", "AUTH_AUTHORIZE_URL", quoted(authProperty("KINLY_AUTH_AUTHORIZE_URL")))
+            buildConfigField("String", "AUTH_TOKEN_URL", quoted(authProperty("KINLY_AUTH_TOKEN_URL")))
+            buildConfigField("String", "AUTH_CLIENT_ID", quoted(authProperty("KINLY_AUTH_CLIENT_ID")))
+            buildConfigField("String", "AUTH_ME_URL", quoted("http://10.0.2.2:8080/api/v1/me"))
             buildConfigField(
                 "String",
                 "BACKEND_READINESS_URL",
@@ -31,6 +39,8 @@ android {
             )
         }
         release {
+            listOf("AUTH_ISSUER", "AUTH_AUTHORIZE_URL", "AUTH_TOKEN_URL", "AUTH_CLIENT_ID", "AUTH_ME_URL")
+                .forEach { field -> buildConfigField("String", field, quoted("")) }
             isMinifyEnabled = false
             buildConfigField(
                 "String",
@@ -71,6 +81,7 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.10.0")
     implementation("androidx.lifecycle:lifecycle-runtime-compose:2.10.0")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.10.2")
+    implementation("net.openid:appauth:0.11.1")
     implementation(composeBom)
     implementation("androidx.compose.ui:ui")
     implementation("androidx.compose.ui:ui-tooling-preview")
