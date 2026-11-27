@@ -145,6 +145,8 @@ jobs:
           runtime_id="com.apple.CoreSimulator.SimRuntime.iOS-17-5"
           device_type="com.apple.CoreSimulator.SimDeviceType.iPhone-15"
           simulator_id="$(xcrun simctl create 'Kinly iPhone 15 iOS 17.5' "$device_type" "$runtime_id")"
+          xcrun simctl boot "$simulator_id" 2>/dev/null || true
+          xcrun simctl bootstatus "$simulator_id" -b
           test_log="$RUNNER_TEMP/ios-17-test.log"
 
           set +e
