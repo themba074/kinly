@@ -120,7 +120,7 @@ final class KeychainSessionStore: SessionStoring {
         SecItemDelete(baseQuery as CFDictionary)
         var query = baseQuery
         query[kSecValueData as String] = data
-        query[kSecAttrAccessible as String] = kSecAttrAccessibleWhenUnlockedThisDeviceOnly
+        query[kSecAttrAccessible as String] = kSecAttrAccessibleAfterFirstUnlockThisDeviceOnly
         SecItemAdd(query as CFDictionary, nil)
     }
 
