@@ -52,7 +52,10 @@ final class AuthenticationTests: XCTestCase {
 
     @MainActor
     func testKeychainSessionStoreRoundTripsAndClears() {
-        let store = KeychainSessionStore()
+        let store = KeychainSessionStore(
+            service: "com.kinly.app.tests.auth.\(UUID().uuidString)",
+            account: "access-token"
+        )
         let session = StoredSession(accessToken: "synthetic-token", expiresAt: Date().addingTimeInterval(3600))
         store.clear()
         store.save(session)

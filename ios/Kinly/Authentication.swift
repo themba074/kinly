@@ -102,12 +102,17 @@ protocol SessionStoring {
 
 @MainActor
 final class KeychainSessionStore: SessionStoring {
-    private let service = "com.kinly.app.auth.session"
-    private let account = "access-token"
+    private let service: String
+    private let account: String
+
+    init(service: String = "com.kinly.app.auth.session", account: String = "access-token") {
+        self.service = service
+        self.account = account
+    }
 
     func load() -> StoredSession? {
         var query = baseQuery
-        query[kSecReturnData as String] = true
+        query[kSecReturnData as String] = kCFBooleanTrue as Any
         query[kSecMatchLimit as String] = kSecMatchLimitOne
         var result: AnyObject?
         guard SecItemCopyMatching(query as CFDictionary, &result) == errSecSuccess,
@@ -121,7 +126,13 @@ final class KeychainSessionStore: SessionStoring {
         var query = baseQuery
         query[kSecValueData as String] = data
         query[kSecAttrAccessible as String] = kSecAttrAccessibleAfterFirstUnlockThisDeviceOnly
-        SecItemAdd(query as CFDictionary, nil)
+        let status = SecItemAdd(query as CFDictionary, nil)
+        if status == errSecDuplicateItem {
+            SecItemUpdate(
+                baseQuery as CFDictionary,
+                [kSecValueData as String: data] as CFDictionary
+            )
+        }
     }
 
     func clear() {
