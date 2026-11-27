@@ -51,7 +51,7 @@ final class AuthenticationTests: XCTestCase {
     }
 
     @MainActor
-    func testKeychainSessionStoreRoundTripsAndClears() {
+    func testKeychainSessionStoreRoundTrips() {
         let store = KeychainSessionStore(
             service: "com.kinly.app.tests.auth.\(UUID().uuidString)",
             account: "access-token"
@@ -65,6 +65,16 @@ final class AuthenticationTests: XCTestCase {
         }
         XCTAssertEqual(loaded.accessToken, session.accessToken)
         XCTAssertEqual(loaded.expiresAt.timeIntervalSince(session.expiresAt), 0, accuracy: 1)
+    }
+
+    @MainActor
+    func testKeychainSessionStoreClears() {
+        let store = KeychainSessionStore(
+            service: "com.kinly.app.tests.auth.\(UUID().uuidString)",
+            account: "access-token"
+        )
+        let session = StoredSession(accessToken: "synthetic-token", expiresAt: Date().addingTimeInterval(3600))
+        store.save(session)
         store.clear()
         XCTAssertNil(store.load())
     }
