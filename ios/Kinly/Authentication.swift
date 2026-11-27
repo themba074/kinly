@@ -144,6 +144,7 @@ final class KeychainSessionStore: SessionStoring {
             kSecClass as String: kSecClassGenericPassword,
             kSecAttrService as String: service,
             kSecAttrAccount as String: account,
+            kSecUseDataProtectionKeychain as String: kCFBooleanTrue as Any,
         ]
     }
 }
