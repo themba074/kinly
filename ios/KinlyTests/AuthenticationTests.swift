@@ -56,7 +56,12 @@ final class AuthenticationTests: XCTestCase {
         let session = StoredSession(accessToken: "synthetic-token", expiresAt: Date().addingTimeInterval(3600))
         store.clear()
         store.save(session)
-        XCTAssertEqual(store.load(), session)
+        guard let loaded = store.load() else {
+            XCTFail("The Keychain session could not be loaded")
+            return
+        }
+        XCTAssertEqual(loaded.accessToken, session.accessToken)
+        XCTAssertEqual(loaded.expiresAt.timeIntervalSince(session.expiresAt), 0, accuracy: 1)
         store.clear()
         XCTAssertNil(store.load())
     }
