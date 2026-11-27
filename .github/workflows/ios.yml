@@ -147,6 +147,7 @@ jobs:
           simulator_id="$(xcrun simctl create 'Kinly iPhone 15 iOS 17.5' "$device_type" "$runtime_id")"
           xcrun simctl boot "$simulator_id" 2>/dev/null || true
           xcrun simctl bootstatus "$simulator_id" -b
+          xcrun simctl list devices "$runtime_id" | grep -F "$simulator_id"
           test_log="$RUNNER_TEMP/ios-17-test.log"
 
           set +e
@@ -155,7 +156,7 @@ jobs:
             -project ios/Kinly.xcodeproj \
             -scheme Kinly \
             -configuration Debug \
-            -destination "platform=iOS Simulator,id=${simulator_id}" \
+            -destination "platform=iOS Simulator,name=Kinly iPhone 15 iOS 17.5,OS=17.5" \
             -derivedDataPath "$derived_data" \
             -resultBundlePath "$result_bundle" \
             CODE_SIGNING_ALLOWED=NO 2>&1 | tee "$test_log"
